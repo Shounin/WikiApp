@@ -14,17 +14,17 @@ namespace WikiApp.Controllers
 			return View();
 		} 
 		
-		public ActionResult About() 
+		public ActionResult AllSubtitles() 
 		{ 
-			ViewBag.Message = "Your application description page.";
+			ViewBag.Message = "List of all subtitles.";
 
 			return View();
 		}
 
-		public ActionResult Contact()
+		public ActionResult AddSubtitle()
 		{
           
-			ViewBag.Message = "Your contact page.";
+			ViewBag.Message = "Your website to add subtitles.";
 
 			return View();
 		}
