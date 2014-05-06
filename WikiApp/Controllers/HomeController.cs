@@ -34,5 +34,12 @@ namespace WikiApp.Controllers
 
             return View();
         }
+        public ActionResult About()
+        {
+
+            ViewBag.Message = "About the site";
+
+            return View();
+        }
 	}
 }
