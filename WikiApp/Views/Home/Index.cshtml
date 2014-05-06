@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Forsida";
 }
-
+<script type="text/javascript" src="/Scripts/tabScript.js"></script>
 <div class="jumbotron">
     <form class="form-search">
         <input type="text" class="input-medium search-query">
@@ -10,16 +10,36 @@
 </div>
 
 <div class="row">
-    <h3> Vinsælasta efnið </h3>
-    <table class="table table-hover">
+    <div class="col-lg-12">
+        <ul id="tabs">
+            <li><a href="#top10Movies">Vinsælustu Myndir</a></li>
+            <li><a href="#newestMovies">Nýjustu Myndir</a></li>
+            <li><a href="#top10Shows">Vinsælustu Þættir</a></li>
+            <li><a href="#newestShows">Nýjustu Þættir</a></li>
+        </ul>
 
-            <tr>
-                <td> Airplaine </td>
-                <td> 275 Likes</td>
-            </tr>
-            <tr>
-                <td> Gravity </td>
-                <td> 213 Likes</td>
-            </tr>
-        </table>
+        <div class="tabContent" id="top10Movies">
+            <h3>Vinsælustu Myndir</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur urna quis mauris iaculis eleifend. Integer pretium dolor sed ante congue, id eleifend est lacinia. Donec at bibendum leo. Aenean aliquet vitae ante nec pretium. Nullam interdum risus id fermentum fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc aliquam turpis metus, id tristique est iaculis eget. Suspendisse quis nisi in quam sollicitudin vestibulum. Morbi pellentesque arcu at magna congue, ac cursus lacus cursus. Quisque velit orci, vestibulum et lacus sed, convallis laoreet magna.</p>
+            <p>In venenatis euismod purus at laoreet. Cras rhoncus risus ut consectetur lobortis. Integer est diam, vestibulum quis lacinia et, dictum id turpis. Morbi mi augue, facilisis vitae tempor at, porttitor ac lectus. Sed sed magna tempor, congue lacus at, porta nibh. Cras fermentum ac orci scelerisque consequat. Proin pellentesque euismod augue, quis viverra tortor porta et. Sed semper rutrum eleifend. Pellentesque lobortis leo vitae lorem sagittis, consectetur interdum felis sodales. Nulla condimentum, enim sed dictum tincidunt, mi sapien tincidunt sapien, a imperdiet sapien risus ac arcu. Donec posuere risus at dolor aliquet, in accumsan lacus cursus.</p>
+        </div>
+
+        <div class="tabContent" id="newestMovies">
+            <h3>Nýjustu Myndir</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur urna quis mauris iaculis eleifend. Integer pretium dolor sed ante congue, id eleifend est lacinia. Donec at bibendum leo. Aenean aliquet vitae ante nec pretium. Nullam interdum risus id fermentum fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc aliquam turpis metus, id tristique est iaculis eget. Suspendisse quis nisi in quam sollicitudin vestibulum. Morbi pellentesque arcu at magna congue, ac cursus lacus cursus. Quisque velit orci, vestibulum et lacus sed, convallis laoreet magna.</p>
+            <p>Morbi luctus augue ut erat viverra fermentum. Nunc dictum suscipit justo, a feugiat mauris suscipit ut. Nam vel turpis semper, pulvinar enim nec, lacinia orci. Quisque mollis purus ac ornare lacinia. Pellentesque molestie, sem vel aliquam pretium, diam ante interdum urna, a tincidunt nunc elit at augue. Ut tincidunt, purus at eleifend rhoncus, nunc velit rhoncus turpis, ut feugiat lacus lacus at diam. Nulla vehicula sit amet lacus a hendrerit. Nunc eu nisl magna.</p>
+            </div>
+
+        <div class="tabContent" id="top10Shows">
+            <h3>Vinsælustu Þættir</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur urna quis mauris iaculis eleifend. Integer pretium dolor sed ante congue, id eleifend est lacinia. Donec at bibendum leo. Aenean aliquet vitae ante nec pretium. Nullam interdum risus id fermentum fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc aliquam turpis metus, id tristique est iaculis eget. Suspendisse quis nisi in quam sollicitudin vestibulum. Morbi pellentesque arcu at magna congue, ac cursus lacus cursus. Quisque velit orci, vestibulum et lacus sed, convallis laoreet magna.</p>
+            <p>In venenatis euismod purus at laoreet. Cras rhoncus risus ut consectetur lobortis. Integer est diam, vestibulum quis lacinia et, dictum id turpis. Morbi mi augue, facilisis vitae tempor at, porttitor ac lectus. Sed sed magna tempor, congue lacus at, porta nibh. Cras fermentum ac orci scelerisque consequat. Proin pellentesque euismod augue, quis viverra tortor porta et. Sed semper rutrum eleifend. Pellentesque lobortis leo vitae lorem sagittis, consectetur interdum felis sodales. Nulla condimentum, enim sed dictum tincidunt, mi sapien tincidunt sapien, a imperdiet sapien risus ac arcu. Donec posuere risus at dolor aliquet, in accumsan lacus cursus.</p>
+            Donec laoreet mollis leo. Curabitur quis dui rutrum, vehicula odio quis, tincidunt justo. Aenean a euismod nisi, tincidunt accumsan arcu. Integer gravida malesuada diam, sed dictum urna aliquam ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris id orci sit amet tellus tristique congue sed sit amet dolor. Vestibulum sagittis metus quis arcu sagittis rutrum. Mauris tortor nibh, pulvinar sit amet est porttitor, bibendum egestas orci. Quisque eget faucibus nisl. Duis non mauris congue, mattis dui a, aliquam turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam arcu dolor, laoreet eget imperdiet nec, egestas quis dui. Fusce quis neque vel risus feugiat scelerisque quis quis magna. Donec non sapien tempus, feugiat velit quis, venenatis purus. Proin consequat elit et ipsum fermentum, at molestie felis iaculis.
+        </div>
+
+        <div class="tabContent" id="newestShows">
+            <h3>Nýjustu Þættir</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur urna quis mauris iaculis eleifend. Integer pretium dolor sed ante congue, id eleifend est lacinia. Donec at bibendum leo. Aenean aliquet vitae ante nec pretium. Nullam interdum risus id fermentum fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc aliquam turpis metus, id tristique est iaculis eget. Suspendisse quis nisi in quam sollicitudin vestibulum. Morbi pellentesque arcu at magna congue, ac cursus lacus cursus. Quisque velit orci, vestibulum et lacus sed, convallis laoreet magna.</p>
+            </div>
+    </div>
 </div>
