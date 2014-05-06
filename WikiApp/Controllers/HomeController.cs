@@ -22,6 +22,7 @@ namespace WikiApp.Controllers
 
 		public ActionResult Contact()
 		{
+            // prufa.
 			ViewBag.Message = "Your contact page.";
 
 			return View();
