@@ -14,6 +14,7 @@ namespace WikiApp.Controllers
 			return View();
 		} // stuð
 		//mikið stuð.
+        // Þetta er fail á comment stöðlunum! Ég er brjálaður,... programming rules madafacka.
 		public ActionResult About() //halló allir saman!
 		{ //blessuð sjálf.
 			ViewBag.Message = "Your application description page.";
