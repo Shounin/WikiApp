@@ -8,7 +8,7 @@ namespace WikiApp.Controllers
 {
 	public class HomeController : Controller
 	{
-		public ActionResult Index() //This is the index
+		public ActionResult Index() //Marteinn ég nenni þessu ekki
 		{
 			return View();
 		}
