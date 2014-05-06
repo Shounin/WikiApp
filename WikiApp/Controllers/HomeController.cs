@@ -12,7 +12,7 @@ namespace WikiApp.Controllers
 		public ActionResult Index() 
 		{
 			return View();
-		}
+		} // stuð
 
 		public ActionResult About() //halló allir saman!
 		{ //blessuð sjálf.
