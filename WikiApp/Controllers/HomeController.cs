@@ -8,15 +8,14 @@ namespace WikiApp.Controllers
 {
 	public class HomeController : Controller
 	{
-        // Marteinn ég nenni þessu ekki.
+       
 		public ActionResult Index() 
 		{
 			return View();
-		} // stuð
-		//mikið stuð.
-        // Þetta er fail á comment stöðlunum! Ég er brjálaður,... programming rules madafacka.
-		public ActionResult About() //halló allir saman!
-		{ //blessuð sjálf.
+		} 
+		
+		public ActionResult About() 
+		{ 
 			ViewBag.Message = "Your application description page.";
 
 			return View();
@@ -24,7 +23,7 @@ namespace WikiApp.Controllers
 
 		public ActionResult Contact()
 		{
-            // prufa.
+          
 			ViewBag.Message = "Your contact page.";
 
 			return View();
