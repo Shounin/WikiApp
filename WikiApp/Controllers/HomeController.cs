@@ -13,7 +13,7 @@ namespace WikiApp.Controllers
 			return View();
 		}
 
-		public ActionResult About()
+		public ActionResult About() //halló allir saman!
 		{
 			ViewBag.Message = "Your application description page.";
 
