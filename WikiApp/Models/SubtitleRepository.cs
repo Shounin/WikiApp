@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WikiApp.Models
 {
-    public class Upvote
+    public class SubtitleRepository
     {
     }
 }
