@@ -83,3 +83,8 @@ div.tabContent {
 div.tabContent.hide {
     display: none; 
 }
+
+.Logo {
+    width: 4em;
+    height: 4em;
+}
