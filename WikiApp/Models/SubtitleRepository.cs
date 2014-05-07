@@ -7,5 +7,6 @@ namespace WikiApp.Models
 {
     public class SubtitleRepository
     {
+
     }
 }
