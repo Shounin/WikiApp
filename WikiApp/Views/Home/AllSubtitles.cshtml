@@ -3,5 +3,47 @@
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+<script type="text/javascript" src="/Scripts/tabScript.js"></script>
 
-<p>Use this area to provide additional information.</p>
+<div class="jumbotron">
+    <form class="form-search">
+        <input type="text" class="input-medium search-query">
+        <button type="submit" class="btn">Search</button>
+    </form>
+    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <ul id="tabs">
+            <li><a href="#A">A</a></li>
+            <li><a href="#B">B</a></li>
+            <li><a href="#C">C</a></li>
+            <li><a href="#D">D</a></li>
+        </ul>
+
+        <div class="tabContent" id="A">
+            <h3>Titlar sem byrja a: A</h3>
+            <p>Anaconda</p>
+            <p>Another Teen movie</p>
+        </div>
+
+        <div class="tabContent" id="B">
+            <h3>Titlar sem byrja a: B</h3>
+            <p>Batman</p>
+           
+        </div>
+
+        <div class="tabContent" id="C">
+            <h3>Titlar sem byrja a: C</h3>
+            <p>Children of the Corn</p>
+
+        </div>
+    </div>
+</div>
+
+
+
+
