@@ -40,3 +40,8 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+/* Er ad reyna ad breyta search bar*/
+div.btn{
+    color:red;
+}
