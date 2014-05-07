@@ -40,3 +40,7 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+.Logo {
+    height: 35em;
+    width: 35em;
+}
