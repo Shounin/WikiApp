@@ -30,7 +30,7 @@ namespace WikiApp.DAL
                 },
                 
             };
-            subtitles.ForEach(s => context.SubtitleFile.Add(s));
+            subtitles.ForEach(s => context.SubtitleFiles.Add(s));
             context.SaveChanges();
         }
     }

@@ -17,7 +17,7 @@ namespace WikiApp.DAL
 
         }
 
-        public DbSet<SubtitleFile> SubtitleFile { get; set; }
+        public DbSet<SubtitleFile> SubtitleFiles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
