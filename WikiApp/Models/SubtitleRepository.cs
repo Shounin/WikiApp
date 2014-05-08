@@ -10,15 +10,15 @@ namespace WikiApp.Models
     {
         SubtitleContext m_db = new SubtitleContext();
 
-       /* public IEnumerable<SubtitleFile> GetAllSubtitles()
+        public IEnumerable<SubtitleFile> GetAllSubtitles()
         {
             var resault = (from s in m_db.SubtitleFiles
-                           orderby s.subtitleID descending
+                           orderby s.ID descending
                            select s);
             return resault;
           
         }
-        */
+        
 
     }
 }

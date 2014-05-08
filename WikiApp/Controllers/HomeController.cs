@@ -12,38 +12,43 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
 
-        SubtitleContext repo = new SubtitleContext();
+        SubtitleRepository repo = new SubtitleRepository();
+        //SubtitleContext repo = new SubtitleContext();
 		public ActionResult Index() 
 		{
-            /*
+            
             //Bætt við aukalega!!!!
+            
             IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
-                                                  orderby item.subtitleID descending
+                                                  orderby item.ID descending
                                                   select item).Take(3);
 			return View(subtitle);
-             */
+            
 
             /*
             var subtitles = new List<SubtitleFile>
             {
                 new SubtitleFile{
                     name = "Armageddon",
-                    category = "Action"
+                    category = "Action",
+                    dateInserted = "03.03.2014"
                 },    
                 new SubtitleFile{
                     name = "Gravity",
-                    category = "Drama"
+                    category = "Drama",
+                    dateInserted = "04.03.2014"
                 },         
                 new SubtitleFile{
                     name = "Hungergames",
-                    category = "Drama"
+                    category = "Drama",
+                    dateInserted = "21.03.2014"
                 }
                 
             };
             subtitles.ForEach(s => repo.SubtitleFiles.Add(s));
             repo.SaveChanges();
-             */ 
             return View();
+             */ 
 		} 
 		
 		public ActionResult AllSubtitles() 
