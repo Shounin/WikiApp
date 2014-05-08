@@ -12,7 +12,7 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
 
-        SubtitleRepository repo = new SubtitleRepository();
+        SubtitleContext repo = new SubtitleContext();
 		public ActionResult Index() 
 		{
             /*
@@ -21,6 +21,27 @@ namespace WikiApp.Controllers
                                                   orderby item.subtitleID descending
                                                   select item).Take(3);
 			return View(subtitle);
+             */
+
+            /*
+            var subtitles = new List<SubtitleFile>
+            {
+                new SubtitleFile{
+                    name = "Armageddon",
+                    category = "Action"
+                },    
+                new SubtitleFile{
+                    name = "Gravity",
+                    category = "Drama"
+                },         
+                new SubtitleFile{
+                    name = "Hungergames",
+                    category = "Drama"
+                }
+                
+            };
+            subtitles.ForEach(s => repo.SubtitleFiles.Add(s));
+            repo.SaveChanges();
              */ 
             return View();
 		} 

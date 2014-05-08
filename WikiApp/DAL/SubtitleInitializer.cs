@@ -16,17 +16,17 @@ namespace WikiApp.DAL
                 new SubtitleFile{
                     name = "Armageddon",
                     category = "Action",
-                    subtitleID  = 1
+                    ID  = 1
                 },    
                 new SubtitleFile{
                     name = "Gravity",
                     category = "Drama",
-                    subtitleID  = 2
+                    ID  = 2
                 },         
                 new SubtitleFile{
                     name = "Hungergames",
                     category = "Drama",
-                    subtitleID  = 3
+                    ID  = 3
                 }
                 
             };
