@@ -27,7 +27,7 @@ namespace WikiApp.DAL
                     name = "Hungergames",
                     category = "Drama",
                     subtitleID  = 3
-                },
+                }
                 
             };
             subtitles.ForEach(s => context.SubtitleFiles.Add(s));
