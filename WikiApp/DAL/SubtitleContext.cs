@@ -12,16 +12,18 @@ namespace WikiApp.DAL
 {
     public class SubtitleContext : DbContext
     {
+        /*
         public SubtitleContext() : base("SubtitleContext")
         {
 
         }
-
+        */
         public DbSet<SubtitleFile> SubtitleFiles { get; set; }
-
+        /*
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove <PluralizingTableNameConvention>();
         }
+         */
     }
 }
