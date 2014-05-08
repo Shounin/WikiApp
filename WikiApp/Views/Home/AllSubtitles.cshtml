@@ -22,8 +22,12 @@
             <li><a href="#B">B</a></li>
             <li><a href="#C">C</a></li>
             <li><a href="#D">D</a></li>
-            <li><a href="#D"></a></li>
+            @for(int i = 0; i < 26; i++)
+            {
+                <li><a href=#i>i</a></li>
+            }
         </ul>
+
 
         <div class="tabContent" id="A">
             <h3>Titlar sem byrja a: A</h3>
