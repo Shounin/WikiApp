@@ -15,18 +15,16 @@
 
 
 
+
 <div class="row">
     <div class="col-lg-12">
         <ul id="tabs">
-            <li><a href="#A">A</a></li>
-            <li><a href="#B">B</a></li>
-            <li><a href="#C">C</a></li>
-            <li><a href="#D">D</a></li>
-            @for(int i = 0; i < 26; i++)
+            @for(char i = 'A'; i <= 'Z'; i++)
             {
-                <li><a href=#i>i</a></li>
+                <li><a href=#@i>@i</a></li>
             }
         </ul>
+
 
 
         <div class="tabContent" id="A">
@@ -41,9 +39,10 @@
            
         </div>
 
-        <div class="tabContent" id="C">
-            <h3>Titlar sem byrja a: C</h3>
-            <p>Children of the Corn</p>
+        <div class="tabContent" id="H">
+            <h3>Titlar sem byrja a: H</h3>
+            <p>Herdís hin Hræðilega</p>
+            <p>Herdís segir brandara</p>
 
         </div>
     </div>
