@@ -1,17 +1,22 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Bæta við skjátexta";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="jumbotron">
+    <p>Athuga hvort að texti sé til</p>
+    <form class="form-search">
+        <input type="text" class="input-medium search-query">
+        <button type="submit" class="btn">Leita</button>
+    </form>
+</div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="inputNafnSkjals" class="col-sm-2 control-label">Nafn skjals</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputNafnSkjals">
+        </div>
+    </div>
+
+    <label for="inputEmail3" class="col-sm-2 control-label">Flokkur</label>
+    <select class="form-control input-sm">Kvikmynd</select>
