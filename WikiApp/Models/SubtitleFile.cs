@@ -13,6 +13,7 @@ namespace WikiApp.Models
         public int ID { get; set; }
         public string name { get; set; }
         public string category { get; set; }
+        //public DateTime dateInserted { get; set; }
     }
 }
 
