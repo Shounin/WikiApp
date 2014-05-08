@@ -95,3 +95,9 @@ div.tabContent.hide {
 form.form-search {
     width: 100%;
 }
+
+h2 {
+    text-indent: -4em;
+    padding-top: 0.5em;
+    padding-bottom: 1.5em;
+}
