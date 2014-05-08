@@ -1,9 +1,10 @@
 ﻿var tabLinks = new Array();
 var contentDivs = new Array();
 
+// Code shamelessly stolen from http://www.elated.com/articles/javascript-tabs/ .
 function init() {
 
-    // Grab the tab links and content divs from the page
+    // Grab the tab links and content divs from the page.
     var tabListItems = document.getElementById('tabs').childNodes;
     for (var i = 0; i < tabListItems.length; i++) {
         if (tabListItems[i].nodeName == "LI") {
@@ -15,7 +16,7 @@ function init() {
     }
 
     // Assign onclick events to the tab links, and
-    // highlight the first tab
+    // highlight the first tab.
     var i = 0;
 
     for (var id in tabLinks) {
@@ -25,7 +26,7 @@ function init() {
         i++;
     }
 
-    // Hide all content divs except the first
+    // Hide all content divs except the first.
     var i = 0;
 
     for (var id in contentDivs) {
@@ -49,7 +50,7 @@ function showTab() {
         }
     }
 
-    // Stop the browser following the link
+    // Stop the browser following the link.
     return false;
 }
 

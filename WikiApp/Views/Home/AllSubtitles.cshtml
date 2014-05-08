@@ -1,33 +1,52 @@
 ﻿@{
     ViewBag.Title = "All Subtitles";
 }
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
+
 <script type="text/javascript" src="/Scripts/tabScript.js"></script>
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
+
 
 <div class="jumbotron">
     <form class="form-search">
         <input type="text" class="input-medium search-query">
-        <button type="submit" class="btn">Search</button>
+        <button type="submit" class="btn-primary">Search</button>
     </form>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>
-
 
 
 <div class="row">
     <div class="col-lg-12">
         <ul id="tabs">
-            <li><a href="#A">A</a></li>
-            <li><a href="#B">B</a></li>
-            <li><a href="#C">C</a></li>
-            <li><a href="#D">D</a></li>
+            @for(char i = 'A'; i <= 'Z'; i++)
+            {
+                <li><a href=#@i>@i</a></li>
+            }
         </ul>
+
+       
 
         <div class="tabContent" id="A">
             <h3>Titlar sem byrja a: A</h3>
             <p>Anaconda</p>
             <p>Another Teen movie</p>
+          <!-- <table>
+               <tr>
+                    <th>Nafn</th>
+                   <th>Likes</th>
+                   <th>Flokkur</th>
+                   <th>Sótt</th>
+                   <th>Sett inn</th>
+               </tr>
+               <tr>
+                   <td>Anaconda</td>
+                   <td>223</td>
+                   <td>Hasar</td>
+                   <td>10</td>
+                   <td></td>
+               </tr>
+           </table>-->
         </div>
 
         <div class="tabContent" id="B">
@@ -36,9 +55,10 @@
            
         </div>
 
-        <div class="tabContent" id="C">
-            <h3>Titlar sem byrja a: C</h3>
-            <p>Children of the Corn</p>
+        <div class="tabContent" id="D">
+            <h3>Titlar sem byrja a: H</h3>
+            <p>Herdís hin Hræðilega</p>
+            <p>Herdís segir brandara</p>
 
         </div>
     </div>
