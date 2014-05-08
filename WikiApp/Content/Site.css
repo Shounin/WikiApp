@@ -97,7 +97,11 @@ form.form-search {
 }
 
 h2 {
-    text-indent: -4em;
+    
     padding-top: 0.5em;
     padding-bottom: 1.5em;
+}
+
+div.col-sm-10 {
+    padding-bottom: 0.3em;
 }

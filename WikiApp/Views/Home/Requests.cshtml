@@ -5,6 +5,70 @@
 
 <h2>Requests</h2>
 
-<script type="text/javascript" src="/Scripts/tabScript.js"></script>
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
 
+<div class="row">
+    <div class="col-lg-12">
+        <ul id="tabs">
+            @for (char i = 'A'; i <= 'Z'; i++)
+            {
+                <li><a href=#@i>@i</a></li>
+            }
+        </ul>
+    </div>
+    <table style="width:600px">
+        <tr>
+            <th>Nafn</th>
+            <th>Likes</th>
+            <th>Flokkur</th>
+            <th>Sótt</th>
+            <th>Sett inn</th>
+        </tr>
+        <tr>
+            <td>Anaconda</td>
+            <td>223</td>
+            <td>Hasar</td>
+            <td>10</td>
+            <td>Timasetning</td>
+        </tr>
+    </table>
+
+</div>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <h2>Bæta við beiðni</h2>
+        <!--Nafn skjals-->
+        <label for="inputNafnSkjals" class="col-sm-2 control-label">Nafn skjals</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputNafnSkjals">
+        </div>
+        
+        <!--Flokkur-->
+        <label for="inputFlokkur" class="col-sm-2 control-label">Flokkur</label>
+        <div class ="col-sm-10">
+            <select class="form-control input-sm">
+                <option value="Kvikmyndir">--Velja tegund--</option>
+                <option value="Kvikmyndir">Spennumyndir</option>
+                <option value="Kvikmyndir">Ævintýramyndir</option>
+                <option value="Kvikmyndir">Rómantík</option>
+                <option value="Kvikmyndir">Gamanmyndir</option>
+                <option value="Kvikmyndir">Barnaefni</option>
+                <option value="Kvikmyndir">Þættir</option>
+            </select>
+        </div>
+    
+        <!--Slóð-->
+        <label for="inputSlod" class="col-sm-2 control-label">Slóð</label>
+        <div class="col-sm-10">
+             <input type="email" class="form-control" id="inputSlod">
+        </div>
+   
+
+        <!--Submit takki-->
+        <label for="ContactInfoSubmit" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <input type="submit" value="Senda" size="25" id="ContactInfoSubmit" />
+        </div>
+    </div>
+
+</form>
