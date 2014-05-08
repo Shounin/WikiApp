@@ -14,13 +14,14 @@ namespace WikiApp.Controllers
 
         SubtitleRepository repo = new SubtitleRepository();
 		public ActionResult Index() 
-		{/*
+		{
+            /*
             //Bætt við aukalega!!!!
             IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
-                                                  orderby item.name descending
+                                                  orderby item.subtitleID descending
                                                   select item).Take(3);
 			return View(subtitle);
-          */
+             */ 
             return View();
 		} 
 		
