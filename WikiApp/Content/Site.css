@@ -81,6 +81,7 @@ div.tabContent {
     border: 1px solid #c9c3ba; 
     padding: 0.5em; 
     background-color: #4e5d6c;
+    padding-bottom: 1em;
 }
 
 div.tabContent.hide {
@@ -99,9 +100,14 @@ form.form-search {
 h2 {
     
     padding-top: 0.5em;
-    padding-bottom: 1.5em;
+    padding-bottom: 1em;
 }
 
 div.col-sm-10 {
     padding-bottom: 0.3em;
+}
+
+div#NavbarId {
+    padding-top: 2em;
+    padding-bottom: 2em;
 }
