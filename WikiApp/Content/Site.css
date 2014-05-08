@@ -88,3 +88,7 @@ div.tabContent.hide {
     width: 4em;
     height: 4em;
 }
+
+form.form-search {
+    width: 100%;
+}
