@@ -16,6 +16,23 @@
             }
         </ul>
     </div>
+    <table style="width:600px">
+        <tr>
+            <th>Nafn</th>
+            <th>Likes</th>
+            <th>Flokkur</th>
+            <th>Sótt</th>
+            <th>Sett inn</th>
+        </tr>
+        <tr>
+            <td>Anaconda</td>
+            <td>223</td>
+            <td>Hasar</td>
+            <td>10</td>
+            <td>Timasetning</td>
+        </tr>
+    </table>
+
 </div>
 <form class="form-horizontal" role="form">
     <div class="form-group">
@@ -25,18 +42,24 @@
         <div class="col-sm-10">
             <input type="email" class="form-control" id="inputNafnSkjals">
         </div>
+        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
         
         <!--Flokkur-->
         <label for="inputFlokkur" class="col-sm-2 control-label">Flokkur</label>
         <div class ="col-sm-10">
             <select class="form-control input-sm">Kvikmynd</select>
-    
         </div>
+    
+        <!--Slóð-->
         <label for="inputSlod" class="col-sm-2 control-label">Slóð</label>
         <div class="col-sm-10">
              <input type="email" class="form-control" id="inputSlod">
         </div>
    
-        <script type="text/javascript" src="/Scripts/tabScript.js"></script>
+        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
+
+        <!--Submit takki-->
+        <input type="submit" value="Senda" size="25" />
     </div>
+
 </form>
