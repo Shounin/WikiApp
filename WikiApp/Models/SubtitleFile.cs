@@ -16,6 +16,11 @@ namespace WikiApp.Models
         public string description { get; set; }
         public DateTime dateAdded { get; set; }
         public int upvote { get; set; }
+
+        public SubtitleFile()
+        {
+            dateAdded = DateTime.Now;
+        }
     }
 }
 
