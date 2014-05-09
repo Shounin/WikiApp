@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,13 +19,34 @@ namespace WikiApp.Controllers
             
             //Bætt við aukalega!!!!
             ViewBag.Message = "Tyding.is";
+            //ArrayList<SubtitleFile> subtitle = new ArrayList<SubtitleFile>();
+
+            //Array<IEnumerable<SubtitleFile>> subtitle = new Array<IEnumerable<SubtitleFile>>();
+                
             IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
-                                                  orderby item.ID descending
-                                                  select item).Take(3);
+                                                                   orderby item.ID descending
+                                                                   select item).Take(10);
+           /* subtitle.AddLast((from item in repo.GetAllSubtitles()
+                              orderby item.upvote descending
+                              select item).Take(10));
+
+            */
 			return View(subtitle);
-            
-        } 
-		
+        }
+        [HttpPost]
+        public ActionResult Index(string searchString)
+        {
+            var movies = from m in repo.GetAllSubtitles()
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.name.Contains(searchString));
+            }
+
+            return View(movies);
+        }
+
 		public ActionResult AllSubtitles() 
 		{ 
 			ViewBag.Message = "Listi yfir alla skjátexta.";
