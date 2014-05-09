@@ -1,11 +1,16 @@
 ﻿@model IEnumerable<WikiApp.Models.SubtitleFile>
 @{
-    ViewBag.Title = "Forsida";
+    ViewBag.Title = "Tyding.is";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+<h2>@ViewBag.Title</h2>
+
 <script type="text/javascript" src="/Scripts/tabScript.js"></script>
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
 
-<!--Search takkinn-->>
+<!--Search takkinn-->
 <div class="jumbotron">
     <form class="form-search">
         <input type="text" class="input-medium search-query">
