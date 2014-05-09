@@ -24,32 +24,32 @@ namespace WikiApp.Controllers
                                                   select item).Take(3);
 			return View(subtitle);
             
-
+            
             /*
             var subtitles = new List<SubtitleFile>
             {
                 new SubtitleFile{
                     name = "Armageddon",
-                    category = "Action",
-                    dateInserted = "03.03.2014"
+                    category = "Action"
+                    //dateAdded = new DateTime(2010, 1, 18)
                 },    
                 new SubtitleFile{
                     name = "Gravity",
-                    category = "Drama",
-                    dateInserted = "04.03.2014"
+                    category = "Drama"
+                    //dateAdded = new DateTime(2010, 1, 18)
                 },         
                 new SubtitleFile{
                     name = "Hungergames",
-                    category = "Drama",
-                    dateInserted = "21.03.2014"
+                    category = "Drama"
+                    //dateAdded = new DateTime(2010, 1, 18)
                 }
                 
             };
             subtitles.ForEach(s => repo.SubtitleFiles.Add(s));
-            repo.SaveChanges();
-            return View();
-             */ 
-		} 
+            repo.SaveChanges(); 
+            return View(); */
+             
+        } 
 		
 		public ActionResult AllSubtitles() 
 		{ 
