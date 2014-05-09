@@ -16,34 +16,36 @@
     </form>
 </div>
 
-<form class="form-horizontal" role="form">
-    <div class="form-group">
-        <!--<label for="inputNafnSkjals" class="col-sm-2 control-label">Nafn skjals</label> -->
-        @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputNafnSkjals">
-        </div>
-    </div>
-</form>
 
-
-    <label for="inputEmail3" class="col-sm-2 control-label">Flokkur</label>
-    <select class="form-control input-sm">Kvikmynd</select>
-
-
-<form method="POST" name="email_form_with_php"
+<form method="POST" name="AddSubtitlePhp"
       enctype="multipart/form-data"
       onsubmit="return validateForm()">
     <p>
-        <label for='name'>Name: </label><br>
-        <input type="text" name="name">
+        <label for='name'>Nafn: </label><br>
+        <input type="text" value="name">
     </p>
     <p>
-        <label for='message'>Message:</label> <br>
+        <label for='message'>Lýsing(valkostur):</label> <br>
         <textarea name="message"></textarea>
     </p>
     <p>
-        <label for='uploaded_file'>Select A File To Upload:</label> <br>
+        <label for="inputFlokkur">Flokkur</label>
+        
+        <select class="form-control input-sm">
+            <option value="Kvikmyndir">--Velja tegund--</option>
+            <option value="Kvikmyndir">Barnaefni</option>
+            <option value="Kvikmyndir">Drama</option>
+            <option value="Kvikmyndir">Gamanmyndir</option>
+            <option value="Kvikmyndir">Hryllingsmyndir</option>
+            <option value="Kvikmyndir">Rómantík</option>
+            <option value="Kvikmyndir">Spennumyndir</option>
+            <option value="Kvikmyndir">Þættir</option>
+            <option value="Kvikmyndir">Ævintýramyndir</option>
+        </select>
+        
+    </p>
+    <p>
+        <label for='uploaded_file'>Veldu skrá til að uphala:</label> <br>
         <input type="file" name="uploaded_file">
     </p>
     <input type="submit" value="Submit" name='submit'>
