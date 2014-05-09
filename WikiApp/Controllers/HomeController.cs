@@ -17,16 +17,17 @@ namespace WikiApp.Controllers
 		{
             
             //Bætt við aukalega!!!!
+            ViewBag.Message = "Tyding.is";
             IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
                                                   orderby item.ID descending
                                                   select item).Take(3);
 			return View(subtitle);
-                      
+            
         } 
 		
 		public ActionResult AllSubtitles() 
 		{ 
-			ViewBag.Message = "List of all subtitles.";
+			ViewBag.Message = "Listi yfir alla skjátexta.";
 
 			return View();
 		}

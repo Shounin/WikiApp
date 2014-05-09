@@ -2,16 +2,17 @@
 
 @{
     ViewBag.Title = "Bæta við skjátexta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h2>@ViewBag.Title</h2>
 
 <script type="text/javascript" src="/Scripts/tabScript.js"></script>
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
 
 <div class="jumbotron">
-    <p>Athuga hvort að texti sé til</p>
     <form class="form-search">
         <input type="text" class="input-medium search-query">
-        <button type="submit" class="btn">Leita</button>
+        <button type="submit" class="btn-primary">Leita</button>
     </form>
 </div>
 
@@ -28,3 +29,22 @@
 
     <label for="inputEmail3" class="col-sm-2 control-label">Flokkur</label>
     <select class="form-control input-sm">Kvikmynd</select>
+
+
+<form method="POST" name="email_form_with_php"
+      enctype="multipart/form-data"
+      onsubmit="return validateForm()">
+    <p>
+        <label for='name'>Name: </label><br>
+        <input type="text" name="name">
+    </p>
+    <p>
+        <label for='message'>Message:</label> <br>
+        <textarea name="message"></textarea>
+    </p>
+    <p>
+        <label for='uploaded_file'>Select A File To Upload:</label> <br>
+        <input type="file" name="uploaded_file">
+    </p>
+    <input type="submit" value="Submit" name='submit'>
+</form>
