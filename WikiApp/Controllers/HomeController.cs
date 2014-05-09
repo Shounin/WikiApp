@@ -13,42 +13,15 @@ namespace WikiApp.Controllers
 	{
 
         SubtitleRepository repo = new SubtitleRepository();
-        //SubtitleContext repo = new SubtitleContext();
 		public ActionResult Index() 
 		{
             
             //Bætt við aukalega!!!!
-            
             IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
                                                   orderby item.ID descending
                                                   select item).Take(3);
 			return View(subtitle);
-            
-            
-            /*
-            var subtitles = new List<SubtitleFile>
-            {
-                new SubtitleFile{
-                    name = "Armageddon",
-                    category = "Action"
-                    //dateAdded = new DateTime(2010, 1, 18)
-                },    
-                new SubtitleFile{
-                    name = "Gravity",
-                    category = "Drama"
-                    //dateAdded = new DateTime(2010, 1, 18)
-                },         
-                new SubtitleFile{
-                    name = "Hungergames",
-                    category = "Drama"
-                    //dateAdded = new DateTime(2010, 1, 18)
-                }
-                
-            };
-            subtitles.ForEach(s => repo.SubtitleFiles.Add(s));
-            repo.SaveChanges(); 
-            return View(); */
-             
+                      
         } 
 		
 		public ActionResult AllSubtitles() 
@@ -58,12 +31,27 @@ namespace WikiApp.Controllers
 			return View();
 		}
 
+        // Add a new SubtitleFile to the database //
 		public ActionResult AddSubtitle()
 		{
           
-			ViewBag.Message = "Your website to add subtitles.";
+			//ViewBag.Message = "Your website to add subtitles.";
 
-			return View();
+			return View(new SubtitleFile());
+		}
+        
+        // Add new SubtitleFile to 
+        [HttpPost]
+        public ActionResult AddSubtitle(FormCollection form)
+        {
+
+            SubtitleFile item = new SubtitleFile();
+            UpdateModel(item);
+            repo.AddSubtitle(item);
+            repo.Save();
+			//ViewBag.Message = "Your website to add subtitles.";
+
+			return RedirectToAction("Index");
 		}
         public ActionResult Requests()
         {

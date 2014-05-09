@@ -1,4 +1,6 @@
-﻿@{
+﻿@model WikiApp.Models.SubtitleFile
+
+@{
     ViewBag.Title = "Bæta við skjátexta";
 }
 
@@ -15,7 +17,8 @@
 
 <form class="form-horizontal" role="form">
     <div class="form-group">
-        <label for="inputNafnSkjals" class="col-sm-2 control-label">Nafn skjals</label>
+        <!--<label for="inputNafnSkjals" class="col-sm-2 control-label">Nafn skjals</label> -->
+        @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
         <div class="col-sm-10">
             <input type="email" class="form-control" id="inputNafnSkjals">
         </div>
