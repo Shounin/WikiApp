@@ -22,13 +22,14 @@ namespace WikiApp.Models
         public void AddSubtitle(SubtitleFile s)
         {
             m_db.SubtitleFiles.Add(s);
-            m_db.SaveChanges();
+            //m_db.SaveChanges();
+            Save();
         }
 
         public void Save()
         {
             m_db.SaveChanges();
         }
-
+        
     }
 }
