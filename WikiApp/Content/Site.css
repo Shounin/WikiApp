@@ -111,3 +111,16 @@ div#NavbarId {
     padding-top: 2em;
     padding-bottom: 2em;
 }
+Table.Thetable {
+
+    width: 100%;
+    padding: 15px;
+    border: 1px solid red;
+}
+#Variables{
+    font-size: large;
+    margin:2em;
+    width: 100%;
+    padding: 2em;
+    border: 1px solid yellow;
+}
