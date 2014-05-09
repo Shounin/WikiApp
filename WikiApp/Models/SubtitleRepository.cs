@@ -12,10 +12,10 @@ namespace WikiApp.Models
 
         public IEnumerable<SubtitleFile> GetAllSubtitles()
         {
-            var resault = (from s in m_db.SubtitleFiles
+            var result = (from s in m_db.SubtitleFiles
                            orderby s.ID descending
                            select s);
-            return resault;
+            return result;
           
         }
         
