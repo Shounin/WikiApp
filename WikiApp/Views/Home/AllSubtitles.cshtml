@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
 
 <script type="text/javascript" src="/Scripts/tabScript.js"></script>
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
@@ -11,11 +10,12 @@
 
 <div class="jumbotron">
     <form class="form-search">
-        <input type="text" class="input-medium search-query">
-        <button type="submit" class="btn-primary">Search</button>
+        <input type="text" class="input-medium-search-query">
+        <button type="submit" class="btn-primary">Leita</button>
     </form>
 </div>
 
+<h3>@ViewBag.Message</h3>
 
 <div class="row">
     <div class="col-lg-12">

@@ -93,10 +93,6 @@ div.tabContent.hide {
     height:4em;
 }
 
-form.form-search {
-    width: 25%;
-}
-
 h2 {
     
     padding-top: 0.5em;
@@ -110,6 +106,16 @@ div.col-sm-10 {
 div#NavbarId {
     padding-top: 2em;
     padding-bottom: 2em;
+}
+
+.input-medium-search-query {
+    width: 100%;
+}
+form.form-search {
+    width: 50%;
+}
+div.jumptron {
+    width: 1200px;
 }
 Table.Thetable {
 

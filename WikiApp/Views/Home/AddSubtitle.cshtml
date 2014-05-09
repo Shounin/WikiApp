@@ -9,44 +9,65 @@
 <script type="text/javascript" src="/Scripts/tabScript.js"></script>
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
 
-<div class="jumbotron">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="jumbotron">
     <form class="form-search">
-        <input type="text" class="input-medium search-query">
+        <input type="text" class="input-medium-search-query">
         <button type="submit" class="btn-primary">Leita</button>
     </form>
 </div>
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name)
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
 
-<form method="POST" name="AddSubtitlePhp"
-      enctype="multipart/form-data"
-      onsubmit="return validateForm()">
-    <p>
-        <label for='name'>Nafn: </label><br>
-        <input type="text">
-    </p>
-    <p>
-        <label for='message'>Lýsing(valkostur):</label> <br>
-        <textarea name="message"></textarea>
-    </p>
-    <p>
-        <label for="inputFlokkur">Flokkur</label>
+        <div class="form-group">
+            @Html.LabelFor(model => model.category, new { @class = "control-label col-md-2" })
+
+            <select class="form-control input-sm">
+                <option value="Kvikmyndir">--Velja tegund--</option>
+                <option value="Kvikmyndir">Barnaefni</option>
+                <option value="Kvikmyndir">Drama</option>
+                <option value="Kvikmyndir">Gamanmyndir</option>
+                <option value="Kvikmyndir">Hryllingsmyndir</option>
+                <option value="Kvikmyndir">Rómantík</option>
+                <option value="Kvikmyndir">Spennumyndir</option>
+                <option value="Kvikmyndir">Þættir</option>
+                <option value="Kvikmyndir">Ævintýramyndir</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description)
+                @Html.ValidationMessageFor(model => model.description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
         
-        <select class="form-control input-sm">
-            <option value="Kvikmyndir">--Velja tegund--</option>
-            <option value="Kvikmyndir">Barnaefni</option>
-            <option value="Kvikmyndir">Drama</option>
-            <option value="Kvikmyndir">Gamanmyndir</option>
-            <option value="Kvikmyndir">Hryllingsmyndir</option>
-            <option value="Kvikmyndir">Rómantík</option>
-            <option value="Kvikmyndir">Spennumyndir</option>
-            <option value="Kvikmyndir">Þættir</option>
-            <option value="Kvikmyndir">Ævintýramyndir</option>
-        </select>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
         
-    </p>
-    <p>
-        <label for='uploaded_file'>Veldu skrá til að uphala:</label> <br>
-        <input type="file" name="uploaded_file">
-    </p>
-    <input type="submit" value="Submit" name='submit'>
-</form>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

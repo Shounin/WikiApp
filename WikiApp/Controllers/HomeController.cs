@@ -35,7 +35,6 @@ namespace WikiApp.Controllers
         // Add a new SubtitleFile to the database //
 		public ActionResult AddSubtitle()
 		{
-          
 			//ViewBag.Message = "Your website to add subtitles.";
 
 			return View(new SubtitleFile());
@@ -49,7 +48,7 @@ namespace WikiApp.Controllers
             SubtitleFile item = new SubtitleFile();
             UpdateModel(item);
             repo.AddSubtitle(item);
-            repo.Save();
+            //repo.Save();
 			//ViewBag.Message = "Your website to add subtitles.";
 
 			return RedirectToAction("Index");
