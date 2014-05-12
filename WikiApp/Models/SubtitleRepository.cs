@@ -16,9 +16,16 @@ namespace WikiApp.Models
                            orderby s.ID descending
                            select s);
             return result;
-          
         }
-        
+
+        public IEnumerable<SubtitleComment> GetAllComments()
+        {
+            var result = (from s in m_db.SubtitleComments
+                          orderby s.ID descending
+                          select s);
+            return result;
+        }
+
         public void AddSubtitle(SubtitleFile s)
         {
             m_db.SubtitleFiles.Add(s);
