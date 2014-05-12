@@ -37,6 +37,5 @@ namespace WikiApp.Models
         {
             m_db.SaveChanges();
         }
-        
     }
 }

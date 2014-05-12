@@ -56,24 +56,26 @@ namespace WikiApp.Controllers
 		}
 
         // Add a new SubtitleFile to the database //
+        [HttpGet]
 		public ActionResult AddSubtitle()
 		{
-			//ViewBag.Message = "Your website to add subtitles.";
+            List<SelectListItem> subtitleCategory = new List<SelectListItem>();
+            subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
+            subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
+            subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
+            subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
 
-			return View(new SubtitleFile());
+            ViewData["Categories"] = subtitleCategory;
+
+            return View(new SubtitleFile());
 		}
         
-        // Add new SubtitleFile to 
-//        [HttpPost]
- //       public ActionResult AddSubtitle(FormCollection form)
-  //      {
 
-            
-            //repo.Save();
-			//ViewBag.Message = "Your website to add subtitles.";
-
-	//		return RedirectToAction("Index");
-	//	}
         public ActionResult Requests()
         {
             ViewBag.Message = "Here you can request subtitles.";
@@ -91,6 +93,19 @@ namespace WikiApp.Controllers
         [HttpPost]
         public ActionResult AddSubtitle(HttpPostedFileBase file)
         {
+            List<SelectListItem> subtitleCategory = new List<SelectListItem>();
+            subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
+            subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
+            subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
+            subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+
+            ViewData["Categories"] = subtitleCategory;
+
             if (ModelState.IsValid)
             {
                 if (file == null)
@@ -117,7 +132,14 @@ namespace WikiApp.Controllers
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
                         file.SaveAs(path);
+
+                        SubtitleFile item = new SubtitleFile();
+                        UpdateModel(item);
+                        repo.AddSubtitle(item);
+                        repo.Save();
+
                         ModelState.Clear();
+                        
 
                         ViewBag.Message = "File uploaded successfully";
                     }
