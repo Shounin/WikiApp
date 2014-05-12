@@ -9,8 +9,9 @@ namespace WikiApp.Models
 {
     public class SubtitleComment
     {
-        public int ID;
-        public DateTime dateAdded { get; set; }
-        public int username;
+        public int ID { get; set; }
+        public DateTime commentDate { get; set; }
+        public string username { get; set; }
+        public string commentText { get; set; }
     }
 }
