@@ -54,7 +54,7 @@
             <ul>
                 @foreach (var item in Model)
                 { 
-                    <li>@Html.ActionLink(item.name, "Prufa", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+                    <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
                 }
             </ul>
             </div>
