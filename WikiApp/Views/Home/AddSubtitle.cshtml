@@ -1,4 +1,6 @@
-﻿@{
+﻿@model WikiApp.Models.SubtitleFile
+
+@{
     ViewBag.Title = "Bæta við skjátexta";
 }
 
@@ -119,53 +121,46 @@
     
     <fieldset>
         <legend>Bæta við skrá</legend>
-        <ol>
-            <li class="lifile">
+
+        <div class="form-group">
+
+
+            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name)
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+
+            @Html.LabelFor(model => model.category, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control input-sm">
+                    <option value="Kvikmyndir">--Velja tegund--</option>
+                    <option value="Kvikmyndir">Barnaefni</option>
+                    <option value="Kvikmyndir">Drama</option>
+                    <option value="Kvikmyndir">Gamanmyndir</option>
+                    <option value="Kvikmyndir">Hryllingsmyndir</option>
+                    <option value="Kvikmyndir">Rómantík</option>
+                    <option value="Kvikmyndir">Spennumyndir</option>
+                    <option value="Kvikmyndir">Þættir</option>
+                    <option value="Kvikmyndir">Ævintýramyndir</option>
+                </select>
+            </div>
+
+
+
+            @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description)
+                @Html.ValidationMessageFor(model => model.description)
+            </div>
+            <div class="col-md-10">
                 <input type="file" id="fileToUpload" name="file" />
                 <span class="field-validation-error" id="spanfile"></span>
-            </li>
-        </ol>
-        <input type="submit" id="btnSubmit" value="Upload" />
+                <input type="submit" id="btnSubmit" value="Upload" />
+            </div>
+        </div>
     </fieldset>
 }
 
 
 
-<!-- ÞETTA VIRKAR EKKI, "AN EXPRESSION TREE MAY NOT CONTAIN A DYNAMIC OPERATION, ÉG ER LOST." HINSVEGAR VIRKAR
-       AÐ SETJA INN SRT SKRÁ, VEIT EKKI HVERT HÚN FER EN HÚN SUBMITTAR && ÞAÐ MÁ EINGÖNGU VERA SRT ;)
-
-    GERA REPLACE Á "ATMERKI" OG ACTUALLY ATMERKIÐ
-
-       PASSA AÐ TAKA UT BIL A MILLI ATMERKI OG HTML TIL ÞESS AÐ ÞAÐ KOMI EKKI SYNTAX ERROR.
-   <div class="form-group">
-           ATMERKI Html.LabelFor(model => model.name, new { ATMERKIclass = "control-label col-md-2" })
-           <div class="col-md-10">
-               ATMERKI Html.EditorFor(model => model.name)
-               ATMERKI Html.ValidationMessageFor(model => model.name)
-           </div>
-       </div>
-
-       <div class="form-group">
-           ATMERKI Html.LabelFor(model => model.category, new { ATMERKIclass = "control-label col-md-2" })
-
-           <select class="form-control input-sm">
-               <option value="Kvikmyndir">--Velja tegund--</option>
-               <option value="Kvikmyndir">Barnaefni</option>
-               <option value="Kvikmyndir">Drama</option>
-               <option value="Kvikmyndir">Gamanmyndir</option>
-               <option value="Kvikmyndir">Hryllingsmyndir</option>
-               <option value="Kvikmyndir">Rómantík</option>
-               <option value="Kvikmyndir">Spennumyndir</option>
-               <option value="Kvikmyndir">Þættir</option>
-               <option value="Kvikmyndir">Ævintýramyndir</option>
-           </select>
-       </div>
-
-       <div class="form-group">
-           ATMERKI Html.LabelFor(model => model.description, new { ATMERKI class = "control-label col-md-2" })
-           <div class="col-md-10">
-               ATMERKI Html.EditorFor(model => model.description)
-               ATMERKI Html.ValidationMessageFor(model => model.description)
-           </div>
-       </div>
-       -->
