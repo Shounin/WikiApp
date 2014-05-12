@@ -7,6 +7,10 @@ using System.Web;
 using System.Web.Mvc;
 using WikiApp.DAL;
 using WikiApp.Models;
+using WikiApp.Models.View_Models;
+
+
+
 
 namespace WikiApp.Controllers
 {
@@ -17,22 +21,26 @@ namespace WikiApp.Controllers
          SubtitleContext repo2 = new SubtitleContext();
 		public ActionResult Index() 
 		{
-                       
-           //// //Bætt við aukalega!!!!
-           ViewBag.Message = "Tyding.is";
-           //// //ArrayList<SubtitleFile> subtitle = new ArrayList<SubtitleFile>();
+            SubtitlesVM vm = new SubtitlesVM();
+            vm.allMovies = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
 
-           //Array<IEnumerable<SubtitleFile>> subtitle = new Array<IEnumerable<SubtitleFile>>();
+            vm.allTV = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
+           //// //Bætt við aukalega!!!!
                 
-            IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
-                                                                   orderby item.ID descending
-                                                                   select item).Take(10);
+                
+          //  IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
+            //                                                       orderby item.ID descending
+              //                                                     select item).Take(10);
            /////* subtitle.AddLast((from item in repo.GetAllSubtitles()
            ////                   orderby item.upvote descending
            ////                   select item).Take(10));
 
            //// */
-            return View(subtitle);
+            return View(vm);
         }
         [HttpPost]
         public ActionResult Index(string searchString)

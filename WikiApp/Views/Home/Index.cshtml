@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WikiApp.Models.SubtitleFile>
+﻿@model WikiApp.Models.View_Models.SubtitlesVM
 @{
     ViewBag.Title = "Tyding.is";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -52,7 +52,7 @@
         <div class="tabContent" id="newestMovies">
             <h3>Nýjustu Myndir</h3>
             <ul>
-                @foreach (var item in Model)
+                @foreach (var item in @Model.allMovies)
                 { 
                     <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
                 }
@@ -68,7 +68,12 @@
 
         <div class="tabContent" id="newestShows">
             <h3>Nýjustu Þættir</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur urna quis mauris iaculis eleifend. Integer pretium dolor sed ante congue, id eleifend est lacinia. Donec at bibendum leo. Aenean aliquet vitae ante nec pretium. Nullam interdum risus id fermentum fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc aliquam turpis metus, id tristique est iaculis eget. Suspendisse quis nisi in quam sollicitudin vestibulum. Morbi pellentesque arcu at magna congue, ac cursus lacus cursus. Quisque velit orci, vestibulum et lacus sed, convallis laoreet magna.</p>
-            </div>
+            <ul>
+                @foreach (var item in @Model.allTV)
+                {
+                    <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+                }
+            </ul>
+        </div>
     </div>
 </div>
