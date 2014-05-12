@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace WikiApp.Models
 {
@@ -45,19 +46,33 @@ namespace WikiApp.Models
 
     public class RegisterViewModel
     {
+		[Required]
+		[Display(Name = "Fullt Nafn")]
+		public string FullName { get; set; }
+
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Notandanafn")]
         public string UserName { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+		[Required]
+		[Display(Name = "Netfang")]
+		[DataType(DataType.EmailAddress)]
+		public string Email { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+		[Required]
+		[Display(Name = "Fæðingardagur")]
+		public DateTime BirthDate { get; set; }
+		
+
+		[Required]
+		[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+		[DataType(DataType.Password)]
+		[Display(Name = "Lykilorð")]
+		public string Password { get; set; }
+
+		[DataType(DataType.Password)]
+		[Display(Name = "Staðfesta Lykilorð")]
+		[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+		public string ConfirmPassword { get; set; }
     }
 }
