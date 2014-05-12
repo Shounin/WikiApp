@@ -13,25 +13,26 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
 
-        SubtitleRepository repo = new SubtitleRepository();
+         SubtitleRepository repo = new SubtitleRepository();
+         SubtitleContext repo2 = new SubtitleContext();
 		public ActionResult Index() 
 		{
-            
-            //Bætt við aukalega!!!!
-            ViewBag.Message = "Tyding.is";
-            //ArrayList<SubtitleFile> subtitle = new ArrayList<SubtitleFile>();
+                       
+           //// //Bætt við aukalega!!!!
+           ViewBag.Message = "Tyding.is";
+           //// //ArrayList<SubtitleFile> subtitle = new ArrayList<SubtitleFile>();
 
-            //Array<IEnumerable<SubtitleFile>> subtitle = new Array<IEnumerable<SubtitleFile>>();
+           //Array<IEnumerable<SubtitleFile>> subtitle = new Array<IEnumerable<SubtitleFile>>();
                 
             IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
                                                                    orderby item.ID descending
                                                                    select item).Take(10);
-           /* subtitle.AddLast((from item in repo.GetAllSubtitles()
-                              orderby item.upvote descending
-                              select item).Take(10));
+           /////* subtitle.AddLast((from item in repo.GetAllSubtitles()
+           ////                   orderby item.upvote descending
+           ////                   select item).Take(10));
 
-            */
-			return View(subtitle);
+           //// */
+            return View(subtitle);
         }
         [HttpPost]
         public ActionResult Index(string searchString)
