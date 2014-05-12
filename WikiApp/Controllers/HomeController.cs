@@ -56,24 +56,15 @@ namespace WikiApp.Controllers
 		}
 
         // Add a new SubtitleFile to the database //
+        [HttpGet]
 		public ActionResult AddSubtitle()
 		{
-			//ViewBag.Message = "Your website to add subtitles.";
 
-			return View(new SubtitleFile());
+
+            return View(new SubtitleFile());
 		}
         
-        // Add new SubtitleFile to 
-//        [HttpPost]
- //       public ActionResult AddSubtitle(FormCollection form)
-  //      {
 
-            
-            //repo.Save();
-			//ViewBag.Message = "Your website to add subtitles.";
-
-	//		return RedirectToAction("Index");
-	//	}
         public ActionResult Requests()
         {
             ViewBag.Message = "Here you can request subtitles.";
@@ -91,6 +82,8 @@ namespace WikiApp.Controllers
         [HttpPost]
         public ActionResult AddSubtitle(HttpPostedFileBase file)
         {
+
+
             if (ModelState.IsValid)
             {
                 if (file == null)
@@ -117,7 +110,14 @@ namespace WikiApp.Controllers
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
                         file.SaveAs(path);
+
+                        SubtitleFile item = new SubtitleFile();
+                        UpdateModel(item);
+                        repo.AddSubtitle(item);
+                        repo.Save();
+
                         ModelState.Clear();
+                        
 
                         ViewBag.Message = "File uploaded successfully";
                     }
