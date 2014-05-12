@@ -192,6 +192,7 @@
     <Content Include="logo.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\Upload\Captain.Phillips.2013.DVDRip.X264-SPARKS1.srt" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\JavaScript1.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -241,7 +242,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\Upload\" />
     <Folder Include="Views\SubtitleFile\" />
   </ItemGroup>
   <ItemGroup>

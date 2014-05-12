@@ -59,7 +59,18 @@ namespace WikiApp.Controllers
         [HttpGet]
 		public ActionResult AddSubtitle()
 		{
+            List<SelectListItem> subtitleCategory = new List<SelectListItem>();
+            subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
+            subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
+            subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
+            subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
 
+            ViewData["Categories"] = subtitleCategory;
 
             return View(new SubtitleFile());
 		}
@@ -82,7 +93,18 @@ namespace WikiApp.Controllers
         [HttpPost]
         public ActionResult AddSubtitle(HttpPostedFileBase file)
         {
+            List<SelectListItem> subtitleCategory = new List<SelectListItem>();
+            subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
+            subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
+            subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
+            subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
 
+            ViewData["Categories"] = subtitleCategory;
 
             if (ModelState.IsValid)
             {
