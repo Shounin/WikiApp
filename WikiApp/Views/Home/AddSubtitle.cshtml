@@ -133,17 +133,9 @@
 
             @Html.LabelFor(model => model.category, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="form-control input-sm">
-                    <option value="Kvikmyndir">--Velja tegund--</option>
-                    <option value="Kvikmyndir">Barnaefni</option>
-                    <option value="Kvikmyndir">Drama</option>
-                    <option value="Kvikmyndir">Gamanmyndir</option>
-                    <option value="Kvikmyndir">Hryllingsmyndir</option>
-                    <option value="Kvikmyndir">Rómantík</option>
-                    <option value="Kvikmyndir">Spennumyndir</option>
-                    <option value="Kvikmyndir">Þættir</option>
-                    <option value="Kvikmyndir">Ævintýramyndir</option>
-                </select>
+                @Html.DropDownListFor(model => model.category, ViewData["Categories"] as List<SelectListItem>)
+                @Html.ValidationMessageFor(model => model.category)
+
             </div>
 
 
