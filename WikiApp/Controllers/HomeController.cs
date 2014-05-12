@@ -118,9 +118,7 @@ namespace WikiApp.Controllers
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
                         file.SaveAs(path);
                         ModelState.Clear();
-                        SubtitleFile item = new SubtitleFile();
-                        UpdateModel(item);
-                        repo.AddSubtitle(item);
+
                         ViewBag.Message = "File uploaded successfully";
                     }
                 }
