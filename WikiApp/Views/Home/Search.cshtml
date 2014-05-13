@@ -7,10 +7,13 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="jumbotron">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Search", "Home", @FormMethod.Get))
     {
-        @Html.TextBox("searchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð"}) 
-        @Html.ActionLink("Leita", "Search", "Home", null, new { @class = "btn btn-primary" }) <br/>
+        <p>
+            @Html.TextBox("SearchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð" })
+            <input type="submit" value="Leita" class="btn btn-primary" />
+            @Html.ActionLink("Ítarleg leit", "Search", "Home", null, new { @class = "btn btn-info" })
+        </p>
     }
 </div>
 <div>

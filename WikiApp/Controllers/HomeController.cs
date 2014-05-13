@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -213,12 +214,6 @@ namespace WikiApp.Controllers
             return View();
             }
 
-		[HttpGet]
-		public ActionResult Search()
-		{
-            return View();
-        }
-
         public ActionResult AddRequest()
         {
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
@@ -264,9 +259,14 @@ namespace WikiApp.Controllers
         }
 
 		[HttpPost]
+		public ActionResult Search()
+		{
+			return View();
+		}
+
+		[HttpGet]
 		public ActionResult Search(string searchString)
 		{
-			Console.WriteLine(searchString);
 			SubtitlesVM sVM = new SubtitlesVM();
 			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
 									where item.name.Contains(searchString)
