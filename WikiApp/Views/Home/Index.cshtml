@@ -23,8 +23,9 @@
     @using (Html.BeginForm())
     {
         <p>
-            @Html.TextBox("SearchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð" }) @Html.ActionLink("Leita", "Search", "Home", null, new { @class = "btn btn-primary" })<br />
-            @Html.ActionLink("Ítarleg Leit", "Search", "Home", null, new { @class = "btn btn-info"})
+            @Html.TextBox("SearchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð" })
+            @Html.ActionLink("Leita", "Search", "Home", null, new { @class = "btn btn-primary" })<br />
+            @Html.ActionLink("Ítarleg leit", "Search", "Home", null, new { @class = "btn btn-info"})
         </p>
     }
     
