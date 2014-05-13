@@ -12,6 +12,7 @@ using WikiApp.Models.View_Models;
 
 
 
+
 namespace WikiApp.Controllers
 {
 	public class HomeController : Controller
@@ -61,9 +62,33 @@ namespace WikiApp.Controllers
 		public ActionResult AllSubtitles() 
 		{ 
 			ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm2 = new SubtitlesVM();
+            vm2.allFiles = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item);
 
-			return View();
+
+            return View(vm2);
 		}
+         /* [HttpPost]
+		public ActionResult AllSubtitles() 
+		{ 
+			ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm3 = new SubtitlesVM();
+            vm3.allFiles = (from item in repo.GetAllSubtitles()
+                            group item by item.name.Substring(0, 1)
+                                into itemgroup
+                                select new SubtitlesVM()
+                                {
+                                    FirstLetter = itemgroup.Key,
+                                    allFiles = itemgroup.ToList()
+
+                                }).OrderBy(mapping => mapping.FirstLetter);
+                           
+            return View(vm3);
+		} */
+      
+
 
         // Add a new SubtitleFile to the database //
         [HttpGet]
@@ -109,6 +134,12 @@ namespace WikiApp.Controllers
            // return View();
         }
 
+        public ActionResult View3()
+        {
+            ViewBag.Message = "Here you can request subtitles.";
+
+            return View();
+        }
         public ActionResult About()
         {
 
