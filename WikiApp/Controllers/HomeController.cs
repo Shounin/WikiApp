@@ -82,6 +82,13 @@ namespace WikiApp.Controllers
 
             return View();
         }
+
+        public ActionResult View3()
+        {
+            ViewBag.Message = "Here you can request subtitles.";
+
+            return View();
+        }
         public ActionResult About()
         {
 

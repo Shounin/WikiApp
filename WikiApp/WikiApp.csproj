@@ -205,6 +205,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Assets\Upload\Captain.Phillips.2013.DVDRip.X264-SPARKS1.srt" />
+    <Content Include="Controllers\ViewPage1.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\JavaScript1.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -251,6 +252,10 @@
     <Content Include="Views\Home\Index1.cshtml" />
     <Content Include="Views\Home\Prufa.cshtml" />
     <Content Include="Views\Home\SubtitleView.cshtml" />
+    <Content Include="Views\Information.cshtml" />
+    <Content Include="Views\Home\View1.cshtml" />
+    <Content Include="Views\Home\View2.cshtml" />
+    <Content Include="Views\Home\View3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
