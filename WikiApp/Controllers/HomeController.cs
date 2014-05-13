@@ -56,6 +56,7 @@ namespace WikiApp.Controllers
             return View(movies);
         }
 
+
 		public ActionResult AllSubtitles() 
 		{ 
 			ViewBag.Message = "Listi yfir alla skjátexta.";
@@ -97,13 +98,19 @@ namespace WikiApp.Controllers
 
             return View();
         }
-
         public ActionResult View3()
         {
             ViewBag.Message = "Here you can request subtitles.";
 
-            return View();
+            SubtitlesVM vm = new SubtitlesVM();
+            vm.allMovies = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
+
+            return View(vm); 
+
         }
+
         public ActionResult About()
         {
 
