@@ -148,7 +148,7 @@ namespace WikiApp.Controllers
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
                         
-                        //Uri baseUri = new Uri("http://www.github.com");
+                        Uri baseUri = new Uri("http://www.github.com");
                         //Uri myUri = new Uri(baseUri, "/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
 
                         //file.SaveAs(myUri);
