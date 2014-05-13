@@ -193,9 +193,9 @@ namespace WikiApp.Controllers
                         
                         //Uri baseUri = new Uri("http://www.github.com");
                         //Uri myUri = new Uri(baseUri, "/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
-                        string myUri = ("http://www.github.com/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
+                        //string myUri = ("http://www.github.com/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
 
-                        file.SaveAs(Server.MapPath(myUri));
+                        file.SaveAs(path);
 
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);
