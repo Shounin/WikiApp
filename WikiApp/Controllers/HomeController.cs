@@ -59,20 +59,27 @@ namespace WikiApp.Controllers
         [HttpGet]
 		public ActionResult AddSubtitle()
 		{
-            List<SelectListItem> subtitleCategory = new List<SelectListItem>();
-            subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
-            subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
-            subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
-            subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
-            subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
-            subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
-            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
-            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
-            subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+            if (User.Identity.Name == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                List<SelectListItem> subtitleCategory = new List<SelectListItem>();
+                subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
+                subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
+                subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
+                subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
+                subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
+                subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+                subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
+                subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+                subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
 
-            ViewData["Categories"] = subtitleCategory;
+                ViewData["Categories"] = subtitleCategory;
 
-            return View(new SubtitleFile());
+                return View(new SubtitleFile());
+            }
 		}
         
 
@@ -131,7 +138,11 @@ namespace WikiApp.Controllers
                         //TO:DO
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
-                        file.SaveAs(path);
+                        
+                        //Uri baseUri = new Uri("http://www.github.com");
+                        //Uri myUri = new Uri(baseUri, "/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
+
+                        //file.SaveAs(myUri);
 
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);
