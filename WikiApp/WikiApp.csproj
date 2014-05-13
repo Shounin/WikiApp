@@ -162,6 +162,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\SubtitleFileController.cs" />
     <Compile Include="DAL\SubtitleContext.cs" />
     <Compile Include="DAL\SubtitleInitializer.cs" />
@@ -241,14 +242,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Requests.cshtml" />
-    <Content Include="Views\Home\Info.cshtml" />
-    <Content Include="Views\Home\Index1.cshtml" />
-    <Content Include="Views\Home\Prufa.cshtml" />
-    <Content Include="Views\Home\SubtitleView.cshtml" />
-    <Content Include="Views\Home\View1.cshtml" />
+    <Content Include="Views\Home\AddRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Request\" />
     <Folder Include="Views\SubtitleFile\" />
   </ItemGroup>
   <ItemGroup>
