@@ -125,7 +125,6 @@ namespace WikiApp.Controllers
             return View(vm);
            // return View();
         }
-		[Authorize]
         public ActionResult View3()
         {
             ViewBag.Message = "Here you can request subtitles.";
