@@ -12,6 +12,7 @@ using WikiApp.Models.View_Models;
 
 
 
+
 namespace WikiApp.Controllers
 {
 	public class HomeController : Controller
@@ -29,17 +30,7 @@ namespace WikiApp.Controllers
             vm.allTV = (from item in repo.GetAllSubtitles()
                             orderby item.ID descending
                             select item).Take(10);
-           //// //Bætt við aukalega!!!!
-                
-                
-          //  IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
-            //                                                       orderby item.ID descending
-              //                                                     select item).Take(10);
-           /////* subtitle.AddLast((from item in repo.GetAllSubtitles()
-           ////                   orderby item.upvote descending
-           ////                   select item).Take(10));
 
-           //// */
             return View(vm);
         }
         [HttpPost]
@@ -54,14 +45,38 @@ namespace WikiApp.Controllers
             }
 
             return View(movies);
-        }
+        }        
+        
+        public ActionResult AllSubtitles()
+        {
+            ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm2 = new SubtitlesVM();
+            vm2.allFiles = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item);
 
+
+            return View(vm2);
+        }
+         /* [HttpPost]
 		public ActionResult AllSubtitles() 
 		{ 
 			ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm3 = new SubtitlesVM();
+            vm3.allFiles = (from item in repo.GetAllSubtitles()
+                            group item by item.name.Substring(0, 1)
+                                into itemgroup
+                                select new SubtitlesVM()
+                                {
+                                    FirstLetter = itemgroup.Key,
+                                    allFiles = itemgroup.ToList()
 
-			return View();
-		}
+                                }).OrderBy(mapping => mapping.FirstLetter);
+                           
+            return View(vm3);
+		} */
+      
+
 
         // Add a new SubtitleFile to the database //
         [HttpGet]

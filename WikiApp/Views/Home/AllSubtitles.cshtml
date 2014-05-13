@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WikiApp.Models.View_Models.SubtitlesVM
+@{
     ViewBag.Title = "Allir skjátextar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -26,6 +27,14 @@
             }
         </ul>
 
+        from item in repo.GetAllSubtitles()
+        orderby item.ID descending
+        select item)
+
+        @foreach (var item in @Model.allFiles)
+        {
+            <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+        }
        
 
         <div class="tabContent" id="A">

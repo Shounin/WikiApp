@@ -10,6 +10,8 @@ namespace WikiApp.Models.View_Models
         
         public IEnumerable<SubtitleFile> allMovies { get; set; }
         public IEnumerable<SubtitleFile> allTV { get; set; }
-        
+
+        public IEnumerable<SubtitleFile> allFiles { get; set; }
+        public char FirstLetter { get; set; }
     }
 }
