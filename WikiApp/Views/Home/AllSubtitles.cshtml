@@ -40,6 +40,18 @@
             </ul>
         </div>
 
+                @foreach (var item in @Model.allFiles)
+                {
+                    item.key = item.name[0];
+                     <div class="tabContent" id="@item.key">
+                         <ul>
+                            <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+                        </ul>
+                     </div>
+                 }
+
+
+        <!-->
         <div class="tabContent" id="A">
             <h3>Titlar sem byrja a: A</h3>
             <p>Anaconda</p>
@@ -58,7 +70,7 @@
             <p>Herdís hin Hræðilega</p>
             <p>Herdís segir brandara</p>
 
-        </div>
+        </div> -->
     </div>
 </div>
 

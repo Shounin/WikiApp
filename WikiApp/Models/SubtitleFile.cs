@@ -17,6 +17,7 @@ namespace WikiApp.Models
         public DateTime dateAdded { get; set; }
         public int upvote { get; set; }
         public string path { get; set; }
+        public char key {get;set;}
         
         public State state { get; set; }
 
