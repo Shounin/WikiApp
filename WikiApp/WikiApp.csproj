@@ -162,6 +162,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\SubtitleFileController.cs" />
     <Compile Include="DAL\SubtitleContext.cs" />
     <Compile Include="DAL\SubtitleInitializer.cs" />
@@ -175,6 +176,10 @@
     <Compile Include="Migrations\201405131200043_Addstate.cs" />
     <Compile Include="Migrations\201405131200043_Addstate.Designer.cs">
       <DependentUpon>201405131200043_Addstate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405131638470_Addfile.cs" />
+    <Compile Include="Migrations\201405131638470_Addfile.Designer.cs">
+      <DependentUpon>201405131638470_Addfile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -250,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Request\" />
     <Folder Include="Views\SubtitleFile\" />
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201405131200043_Addstate.resx">
       <DependentUpon>201405131200043_Addstate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405131638470_Addfile.resx">
+      <DependentUpon>201405131638470_Addfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

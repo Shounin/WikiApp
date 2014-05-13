@@ -1,4 +1,4 @@
-﻿@model WikiApp.Models.SubtitleFile
+﻿@model WikiApp.Models.View_Models.SubtitlesVM
 @{
     ViewBag.Title = "Leit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,7 +14,21 @@
     }
 </div>
 <div>
-
+    <table class="Thetable">
+        <tr id="Variables">
+            <th>Nafn</th>
+            <th>Flokkur</th>
+            <th>Sett inn</th>
+        </tr>
+        @foreach (var item in @Model.SearchResultList)
+        {
+            <tr>
+                <td>@item.name</td>
+                <td>@item.category</td>
+                <td>@item.dateAdded</td>
+            </tr>
+        }
+    </table>
 </div>
 
 

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using WikiApp.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace WikiApp.Models
 {
@@ -17,8 +19,10 @@ namespace WikiApp.Models
         public DateTime dateAdded { get; set; }
         public int upvote { get; set; }
         public string path { get; set; }
+        public char key {get;set;}
         
-        public State state { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        public string file { get; set; }    //VarChar
 
         public SubtitleFile()
         {
