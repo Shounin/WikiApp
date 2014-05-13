@@ -82,6 +82,7 @@ namespace WikiApp.Controllers
 
             return View();
         }
+
         public ActionResult About()
         {
 
