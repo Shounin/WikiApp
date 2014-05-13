@@ -12,6 +12,7 @@ using WikiApp.Models.View_Models;
 
 
 
+
 namespace WikiApp.Controllers
 {
 	public class HomeController : Controller
@@ -29,6 +30,8 @@ namespace WikiApp.Controllers
             vm.allTV = (from item in repo.GetAllSubtitles()
                             orderby item.ID descending
                             select item).Take(10);
+            
+            return View(vm);
            //// //Bætt við aukalega!!!!
                 
                 
@@ -40,7 +43,7 @@ namespace WikiApp.Controllers
            ////                   select item).Take(10));
 
            //// */
-            return View(vm);
+            
         }
         [HttpPost]
         public ActionResult Index(string searchString)
@@ -59,9 +62,33 @@ namespace WikiApp.Controllers
 		public ActionResult AllSubtitles() 
 		{ 
 			ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm2 = new SubtitlesVM();
+            vm2.allFiles = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item);
 
-			return View();
+
+            return View(vm2);
 		}
+         /* [HttpPost]
+		public ActionResult AllSubtitles() 
+		{ 
+			ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm3 = new SubtitlesVM();
+            vm3.allFiles = (from item in repo.GetAllSubtitles()
+                            group item by item.name.Substring(0, 1)
+                                into itemgroup
+                                select new SubtitlesVM()
+                                {
+                                    FirstLetter = itemgroup.Key,
+                                    allFiles = itemgroup.ToList()
+
+                                }).OrderBy(mapping => mapping.FirstLetter);
+                           
+            return View(vm3);
+		} */
+      
+
 
         // Add a new SubtitleFile to the database //
         [HttpGet]
@@ -94,10 +121,25 @@ namespace WikiApp.Controllers
         public ActionResult Requests()
         {
             ViewBag.Message = "Here you can request subtitles.";
+            SubtitlesVM vm = new SubtitlesVM();
+            vm.allMovies = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
+
+            vm.allTV = (from item in repo.GetAllSubtitles()
+                        orderby item.ID descending
+                        select item).Take(10);
+
+            return View(vm);
+           // return View();
+        }
+
+        public ActionResult View3()
+        {
+            ViewBag.Message = "Here you can request subtitles.";
 
             return View();
         }
-
         public ActionResult About()
         {
 
@@ -148,7 +190,7 @@ namespace WikiApp.Controllers
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
                         
-                        Uri baseUri = new Uri("http://www.github.com");
+                        //Uri baseUri = new Uri("http://www.github.com");
                         //Uri myUri = new Uri(baseUri, "/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
                         string myUri = ("http://www.github.com/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
 
