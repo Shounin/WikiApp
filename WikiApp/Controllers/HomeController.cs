@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WikiApp.DAL;
 using WikiApp.Models;
+using WikiApp.Models.View_Models;
 
 
 
@@ -17,7 +18,7 @@ namespace WikiApp.Controllers
 	{
 
          SubtitleRepository repo = new SubtitleRepository();
-         SubtitleContext repo2 = new SubtitleContext();
+        //SubtitleContext repo2 = new SubtitleContext();
 		public ActionResult Index() 
 		{
             SubtitlesVM vm = new SubtitlesVM();
@@ -152,11 +153,7 @@ namespace WikiApp.Controllers
                         //TO:DO
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
-                        
-                        //Uri baseUri = new Uri("http://www.github.com");
-                        //Uri myUri = new Uri(baseUri, "/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
-
-                        //file.SaveAs(myUri);
+                        file.SaveAs(path);
 
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);

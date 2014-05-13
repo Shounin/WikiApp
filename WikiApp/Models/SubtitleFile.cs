@@ -17,6 +17,12 @@ namespace WikiApp.Models
         public DateTime dateAdded { get; set; }
         public int upvote { get; set; }
         public string path { get; set; }
+        
+        public enum State
+        { 
+            Beiðni, Ritstýring, Tilbúið
+        }
+
 
         public SubtitleFile()
         {

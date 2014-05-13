@@ -8,8 +8,10 @@ namespace WikiApp.Models
 {
     public class SubtitleRepository
     {
+        
         SubtitleContext m_db = new SubtitleContext();
 
+        /// Returns all Subtitles in database ///
         public IEnumerable<SubtitleFile> GetAllSubtitles()
         {
             var result = (from s in m_db.SubtitleFiles
@@ -18,6 +20,7 @@ namespace WikiApp.Models
             return result;
         }
 
+        /// Returns all comments in the database ///
         public IEnumerable<SubtitleComment> GetAllComments()
         {
             var result = (from s in m_db.SubtitleComments
@@ -26,6 +29,7 @@ namespace WikiApp.Models
             return result;
         }
 
+        /// Add a subtitle to database ///
         public void AddSubtitle(SubtitleFile s)
         {
             m_db.SubtitleFiles.Add(s);
@@ -33,6 +37,7 @@ namespace WikiApp.Models
             Save();
         }
 
+        /// Save changes to database ///
         public void Save()
         {
             m_db.SaveChanges();
