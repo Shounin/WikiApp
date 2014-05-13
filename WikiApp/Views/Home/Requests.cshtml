@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WikiApp.Models.View_Models.SubtitlesVM
+@{
     ViewBag.Title = "Beiðnir";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,29 +9,35 @@
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
 
 <div class="row">
-    <div class="col-lg-12">
-        <ul id="tabs">
-            @for (char i = 'A'; i <= 'Z'; i++)
-            {
-                <li><a href=#@i>@i</a></li>
-            }
-        </ul>
-    </div>
+    @*<div class="col-lg-12">
+    <ul id="tabs">
+        @for (char i = 'A'; i <= 'Z'; i++)
+        {
+            <li><a href=#@i>@i</a></li>
+        }
+    </ul>
+    </div>*@
     <table class= "Thetable">
         <tr id="Variables">
             <th>Nafn</th>
             <th>Likes</th>
             <th>Flokkur</th>
-            <th>Sótt</th>
             <th>Sett inn</th>
         </tr>
-        <tr>
-            <td>Anaconda</td>
-            <td>223</td>
-            <td>Hasar</td>
-            <td>10</td>
-            <td>Timasetning</td>
-        </tr>
+
+        @foreach (var item in @Model.allMovies)
+        {
+            
+            <tr>
+                <td>@item.name</td>
+                <td>@item.upvote</td>
+                <td>@item.category</td>
+                <td>@item.dateAdded</td>
+            </tr>
+        }    
+           @* <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li> *@
+                
+        
     </table>
 
 </div>
