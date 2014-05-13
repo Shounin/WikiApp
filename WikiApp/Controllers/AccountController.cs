@@ -78,7 +78,7 @@ namespace WikiApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.UserName, email = model.Email, fullName = model.FullName, birthDate = model.BirthDate };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
