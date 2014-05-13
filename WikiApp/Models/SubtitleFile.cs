@@ -20,7 +20,9 @@ namespace WikiApp.Models
         public int upvote { get; set; }
         public string path { get; set; }
         public char key {get;set;}
-        
+
+        public State state { get; set; }
+
         [Column(TypeName = "VARCHAR")]
         public string file { get; set; }    //VarChar
 

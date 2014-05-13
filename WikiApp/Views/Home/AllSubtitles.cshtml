@@ -22,6 +22,7 @@
     <div class="col-lg-12">
         <ul id="tabs">
             
+
             <li><a href="#All Titles">All Titles</a></li>
             @for(char i = 'A'; i <= 'Z'; i++)
             {
@@ -43,34 +44,15 @@
                 @foreach (var item in @Model.allFiles)
                 {
                     item.key = item.name[0];
-                     <div class="tabContent" id="@item.key">
+                     <div class="tabContent" id="@item.name[0]">
                          <ul>
                             <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
                         </ul>
                      </div>
-                 }
+                 }  
 
 
-        <!-->
-        <div class="tabContent" id="A">
-            <h3>Titlar sem byrja a: A</h3>
-            <p>Anaconda</p>
-            <p>Another Teen movie</p>
 
-        </div>
-
-        <div class="tabContent" id="B">
-            <h3>Titlar sem byrja a: B</h3>
-            <p>Batman</p>
-           
-        </div>
-
-        <div class="tabContent" id="C">
-            <h3>Titlar sem byrja a: H</h3>
-            <p>Herdís hin Hræðilega</p>
-            <p>Herdís segir brandara</p>
-
-        </div> -->
     </div>
 </div>
 
