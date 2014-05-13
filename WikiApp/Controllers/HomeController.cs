@@ -8,6 +8,9 @@ using System.Web.Mvc;
 using WikiApp.DAL;
 using WikiApp.Models;
 
+
+
+
 namespace WikiApp.Controllers
 {
 	public class HomeController : Controller
@@ -17,22 +20,26 @@ namespace WikiApp.Controllers
          SubtitleContext repo2 = new SubtitleContext();
 		public ActionResult Index() 
 		{
+            SubtitlesVM vm = new SubtitlesVM();
+            vm.allMovies = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
                        
+            vm.allTV = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
            //// //Bætt við aukalega!!!!
-           ViewBag.Message = "Tyding.is";
-           //// //ArrayList<SubtitleFile> subtitle = new ArrayList<SubtitleFile>();
 
-           //Array<IEnumerable<SubtitleFile>> subtitle = new Array<IEnumerable<SubtitleFile>>();
                 
-            IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
-                                                                   orderby item.ID descending
-                                                                   select item).Take(10);
+          //  IEnumerable<SubtitleFile> subtitle = (from item in repo.GetAllSubtitles()
+            //                                                       orderby item.ID descending
+              //                                                     select item).Take(10);
            /////* subtitle.AddLast((from item in repo.GetAllSubtitles()
            ////                   orderby item.upvote descending
            ////                   select item).Take(10));
 
            //// */
-            return View(subtitle);
+            return View(vm);
         }
         [HttpPost]
         public ActionResult Index(string searchString)
@@ -59,6 +66,12 @@ namespace WikiApp.Controllers
         [HttpGet]
 		public ActionResult AddSubtitle()
 		{
+            if (User.Identity.Name == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
             subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
             subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -73,6 +86,7 @@ namespace WikiApp.Controllers
             ViewData["Categories"] = subtitleCategory;
 
             return View(new SubtitleFile());
+		}
 		}
         
 
@@ -138,7 +152,11 @@ namespace WikiApp.Controllers
                         //TO:DO
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
-                        file.SaveAs(path);
+                        
+                        //Uri baseUri = new Uri("http://www.github.com");
+                        //Uri myUri = new Uri(baseUri, "/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
+
+                        //file.SaveAs(myUri);
 
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);
