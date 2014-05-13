@@ -21,42 +21,30 @@
 <div class="row">
     <div class="col-lg-12">
         <ul id="tabs">
+            
+            <li><a href="#All Titles">All Titles</a></li>
             @for(char i = 'A'; i <= 'Z'; i++)
             {
                 <li><a href=#@i>@i</a></li>
             }
         </ul>
 
-        from item in repo.GetAllSubtitles()
-        orderby item.ID descending
-        select item)
 
-        @foreach (var item in @Model.allFiles)
-        {
-            <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-        }
-       
+        <div class="tabContent" id="All Titles">
+            <h3>All Titles</h3>
+            <ul>
+                @foreach (var item in @Model.allFiles)
+                {
+                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+                }
+            </ul>
+        </div>
 
         <div class="tabContent" id="A">
             <h3>Titlar sem byrja a: A</h3>
             <p>Anaconda</p>
             <p>Another Teen movie</p>
-          <!-- <table>
-               <tr>
-                    <th>Nafn</th>
-                   <th>Likes</th>
-                   <th>Flokkur</th>
-                   <th>Sótt</th>
-                   <th>Sett inn</th>
-               </tr>
-               <tr>
-                   <td>Anaconda</td>
-                   <td>223</td>
-                   <td>Hasar</td>
-                   <td>10</td>
-                   <td></td>
-               </tr>
-           </table>-->
+
         </div>
 
         <div class="tabContent" id="B">

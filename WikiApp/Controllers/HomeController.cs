@@ -19,12 +19,14 @@ namespace WikiApp.Controllers
 		{
             SubtitlesVM vm = new SubtitlesVM();
             vm.allMovies = (from item in repo.GetAllSubtitles()
+                            where item.state == State.Edit && item.category != "Þættir"
                             orderby item.ID descending
                             select item).Take(10);
 
             vm.allTV = (from item in repo.GetAllSubtitles()
-                            orderby item.ID descending
-                            select item).Take(10);
+                        where item.state == State.Edit && item.category == "Þættir"
+                        orderby item.ID descending
+                        select item).Take(10);
             
             return View(vm);
         }
@@ -47,18 +49,22 @@ namespace WikiApp.Controllers
 			ViewBag.Message = "Listi yfir alla skjátexta.";
             SubtitlesVM vm2 = new SubtitlesVM();
             vm2.allFiles = (from item in repo.GetAllSubtitles()
+                            where item.state == State.Edit
                             orderby item.ID descending
                             select item);
 
 
             return View(vm2);
 		}
-         /* [HttpPost]
-		public ActionResult AllSubtitles() 
+         [HttpPost]
+		public ActionResult AllSubtitles(string id) 
 		{ 
 			ViewBag.Message = "Listi yfir alla skjátexta.";
             SubtitlesVM vm3 = new SubtitlesVM();
             vm3.allFiles = (from item in repo.GetAllSubtitles()
+                               where item.name.StartsWith(id)
+                               select item);
+            /*vm3.allFiles = (from item in repo.GetAllSubtitles()
                             group item by item.name.Substring(0, 1)
                                 into itemgroup
                                 select new SubtitlesVM()
@@ -66,14 +72,15 @@ namespace WikiApp.Controllers
                                     FirstLetter = itemgroup.Key,
                                     allFiles = itemgroup.ToList()
 
-                                }).OrderBy(mapping => mapping.FirstLetter);
+                                }).OrderBy(mapping => mapping.FirstLetter);*/
                            
             return View(vm3);
-		} */
+		} 
       
 
 
         // Add a new SubtitleFile to the database //
+		[Authorize]
         [HttpGet]
 		public ActionResult AddSubtitle()
 		{
@@ -119,13 +126,19 @@ namespace WikiApp.Controllers
            // return View();
            // return View(new SubtitleFile());
         }
-       
         public ActionResult View3()
         {
             ViewBag.Message = "Here you can request subtitles.";
 
-            return View();
+            SubtitlesVM vm = new SubtitlesVM();
+            vm.allMovies = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
+
+            return View(vm); 
+
         }
+
         public ActionResult About()
         {
 
@@ -134,6 +147,7 @@ namespace WikiApp.Controllers
             return View();
         }
 
+		[Authorize]
         [HttpPost]
         public ActionResult AddSubtitle(HttpPostedFileBase file)
         {
@@ -178,8 +192,9 @@ namespace WikiApp.Controllers
                         
                         //Uri baseUri = new Uri("http://www.github.com");
                         //Uri myUri = new Uri(baseUri, "/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
+                        string myUri = ("http://www.github.com/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
 
-                        //file.SaveAs(myUri);
+                        file.SaveAs(Server.MapPath(myUri));
 
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);
@@ -194,6 +209,12 @@ namespace WikiApp.Controllers
                     }
                 }
             }
+            return View();
+            }
+
+		[HttpGet]
+		public ActionResult Search()
+		{
             return View();
         }
 
@@ -240,5 +261,19 @@ namespace WikiApp.Controllers
 
 
         }
+
+		[HttpPost]
+		public ActionResult Search(string searchString)
+		{
+			var movies = from m in repo.GetAllSubtitles()
+						 select m;
+
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				movies = movies.Where(s => s.name.Contains(searchString));
+			}
+
+			return View(movies);
+		}
 	}
 }
