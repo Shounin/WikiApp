@@ -13,5 +13,6 @@ namespace WikiApp.Models.View_Models
 
         public IEnumerable<SubtitleFile> allFiles { get; set; }
         public char FirstLetter { get; set; }
+		public IEnumerable<SubtitleFile> SearchResultList { get; set; }
     }
 }
