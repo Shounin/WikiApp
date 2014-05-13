@@ -29,6 +29,8 @@ namespace WikiApp.Controllers
             vm.allTV = (from item in repo.GetAllSubtitles()
                             orderby item.ID descending
                             select item).Take(10);
+            
+            return View(vm);
            //// //Bætt við aukalega!!!!
                 
                 
@@ -40,7 +42,7 @@ namespace WikiApp.Controllers
            ////                   select item).Take(10));
 
            //// */
-            return View(vm);
+            
         }
         [HttpPost]
         public ActionResult Index(string searchString)
@@ -94,8 +96,17 @@ namespace WikiApp.Controllers
         public ActionResult Requests()
         {
             ViewBag.Message = "Here you can request subtitles.";
+            SubtitlesVM vm = new SubtitlesVM();
+            vm.allMovies = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
 
-            return View();
+            vm.allTV = (from item in repo.GetAllSubtitles()
+                        orderby item.ID descending
+                        select item).Take(10);
+
+            return View(vm);
+           // return View();
         }
 
         public ActionResult About()
