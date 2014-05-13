@@ -18,6 +18,7 @@ namespace WikiApp.Models
         public int upvote { get; set; }
         public string path { get; set; }
         
+        public State state { get; set; }
 
         public SubtitleFile()
         {

@@ -7,13 +7,13 @@ namespace WikiApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class Addstate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Addstate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201405061601286_InitialCreate"; }
+            get { return "201405131200043_Addstate"; }
         }
         
         string IMigrationMetadata.Source

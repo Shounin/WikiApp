@@ -5,15 +5,14 @@ namespace WikiApp.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WikiApp.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<WikiApp.DAL.SubtitleContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WikiApp.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(WikiApp.Models.ApplicationDbContext context)
+        protected override void Seed(WikiApp.DAL.SubtitleContext context)
         {
             //  This method will be called after migrating to the latest version.
 

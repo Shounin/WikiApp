@@ -1,0 +1,30 @@
+﻿@model WikiApp.Models.View_Models.SubtitlesVM
+
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+@foreach (var item in @Model.allMovies)
+{
+<h2>Upplýsingar um @item.name.</h2>
+    
+<div>
+            Nafn: @item.name <br />
+
+            Flokkur: @item.category <br />
+
+            Lýsing: @item.description <br />
+
+            Dagsetning: @item.dateAdded <br />
+
+            Líkar við: @item.upvote <br />
+
+            Slóð: @item.path
+</div>
+}
+

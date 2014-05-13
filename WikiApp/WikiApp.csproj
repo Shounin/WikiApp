@@ -168,24 +168,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201405061601286_InitialCreate.cs" />
-    <Compile Include="Migrations\201405061601286_InitialCreate.Designer.cs">
-      <DependentUpon>201405061601286_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201405131108140_Initial.cs" />
+    <Compile Include="Migrations\201405131108140_Initial.Designer.cs">
+      <DependentUpon>201405131108140_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201405121650006_email.cs" />
-    <Compile Include="Migrations\201405121650006_email.Designer.cs">
-      <DependentUpon>201405121650006_email.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201405121650363_fullName.cs" />
-    <Compile Include="Migrations\201405121650363_fullName.Designer.cs">
-      <DependentUpon>201405121650363_fullName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201405121651010_birthDate.cs" />
-    <Compile Include="Migrations\201405121651010_birthDate.Designer.cs">
-      <DependentUpon>201405121651010_birthDate.cs</DependentUpon>
+    <Compile Include="Migrations\201405131200043_Addstate.cs" />
+    <Compile Include="Migrations\201405131200043_Addstate.Designer.cs">
+      <DependentUpon>201405131200043_Addstate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\State.cs" />
     <Compile Include="Models\SubtitleComment.cs" />
     <Compile Include="Models\SubtitleRepository.cs" />
     <Compile Include="Models\SubtitleFile.cs" />
@@ -267,17 +260,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201405061601286_InitialCreate.resx">
-      <DependentUpon>201405061601286_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405131108140_Initial.resx">
+      <DependentUpon>201405131108140_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405121650006_email.resx">
-      <DependentUpon>201405121650006_email.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405121650363_fullName.resx">
-      <DependentUpon>201405121650363_fullName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405121651010_birthDate.resx">
-      <DependentUpon>201405121651010_birthDate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405131200043_Addstate.resx">
+      <DependentUpon>201405131200043_Addstate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
