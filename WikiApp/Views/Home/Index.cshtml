@@ -23,8 +23,8 @@
     @using (Html.BeginForm())
     {
         <p>
-            @Html.TextBox("SearchString") <br />
-            <input type="submit" value="Leita" />
+            Title: @Html.TextBox("SearchString") @Html.ActionLink("Leita", "Index", "Home", null, new { @class = "btn btn-primary" })<br />
+            <input type="submit" value="Filter" />
         </p>
     }
     
