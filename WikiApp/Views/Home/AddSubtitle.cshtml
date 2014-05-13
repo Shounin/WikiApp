@@ -101,18 +101,13 @@
     $(function () {
         $("#fileToUpload").change(function () {
             checkfile();
+
         });
     });
 </script>
 
 <!-- SCRIPTA ER BUINN, KOÐI KEMUR NUNA-->
 
-<div class="jumbotron">
-    <form class="form-search">
-        <input type="text" class="input-medium-search-query">
-        <button type="submit" class="btn-primary">Leita</button>
-    </form>
-</div>
 
 <h3 style="color:green">@ViewBag.Message</h3>
 @using (Html.BeginForm("AddSubtitle", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
