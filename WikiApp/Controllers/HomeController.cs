@@ -42,19 +42,6 @@ namespace WikiApp.Controllers
            //// */
             return View(vm);
         }
-        [HttpPost]
-        public ActionResult Index(string searchString)
-        {
-            var movies = from m in repo.GetAllSubtitles()
-                         select m;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                movies = movies.Where(s => s.name.Contains(searchString));
-            }
-
-            return View(movies);
-        }
 
 		public ActionResult AllSubtitles() 
 		{ 
@@ -156,5 +143,25 @@ namespace WikiApp.Controllers
             }
             return View();
         }
+
+		[HttpGet]
+		public ActionResult Search()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult Search(string searchString)
+		{
+			var movies = from m in repo.GetAllSubtitles()
+						 select m;
+
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				movies = movies.Where(s => s.name.Contains(searchString));
+			}
+
+			return View(movies);
+		}
 	}
 }

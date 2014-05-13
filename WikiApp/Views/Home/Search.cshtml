@@ -1,0 +1,20 @@
+﻿@model WikiApp.Models.SubtitleFile
+@{
+    ViewBag.Title = "Leit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="jumbotron">
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("searchString", null, new { @class = "input-medium-search-query", @type = "text", @label = "Leit"}) 
+        @Html.ActionLink("Leita", "Search", "Home", null, new { @class = "btn btn-primary" }) <br/>
+    }
+</div>
+<div>
+
+</div>
+
+
