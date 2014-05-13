@@ -18,7 +18,7 @@ namespace WikiApp.Controllers
 	{
 
          SubtitleRepository repo = new SubtitleRepository();
-         SubtitleContext repo2 = new SubtitleContext();
+        //SubtitleContext repo2 = new SubtitleContext();
 		public ActionResult Index() 
 		{
             SubtitlesVM vm = new SubtitlesVM();

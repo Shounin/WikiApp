@@ -18,6 +18,11 @@ namespace WikiApp.Models
         public int upvote { get; set; }
         public string path { get; set; }
         
+        public enum State
+        { 
+            Beiðni, Ritstýring, Tilbúið
+        }
+
 
         public SubtitleFile()
         {
