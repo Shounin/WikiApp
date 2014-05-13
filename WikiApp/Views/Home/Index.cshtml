@@ -23,7 +23,7 @@
     @using (Html.BeginForm())
     {
         <p>
-            Title: @Html.TextBox("SearchString") @Html.ActionLink("Leita", "Search", "Home", null, new { @class = "btn btn-primary" })<br />
+            @Html.TextBox("SearchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð" }) @Html.ActionLink("Leita", "Search", "Home", null, new { @class = "btn btn-primary" })<br />
             @Html.ActionLink("Ítarleg Leit", "Search", "Home", null, new { @class = "btn btn-info"})
         </p>
     }

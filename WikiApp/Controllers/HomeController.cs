@@ -82,6 +82,7 @@ namespace WikiApp.Controllers
 
 
         // Add a new SubtitleFile to the database //
+		[Authorize]
         [HttpGet]
 		public ActionResult AddSubtitle()
 		{
@@ -124,6 +125,7 @@ namespace WikiApp.Controllers
             return View(vm);
            // return View();
         }
+		[Authorize]
         public ActionResult View3()
         {
             ViewBag.Message = "Here you can request subtitles.";
@@ -145,6 +147,7 @@ namespace WikiApp.Controllers
             return View();
         }
 
+		[Authorize]
         [HttpPost]
         public ActionResult AddSubtitle(HttpPostedFileBase file)
         {

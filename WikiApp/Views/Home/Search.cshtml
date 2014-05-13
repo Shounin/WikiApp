@@ -9,7 +9,7 @@
 <div class="jumbotron">
     @using (Html.BeginForm())
     {
-        @Html.TextBox("searchString", null, new { @class = "input-medium-search-query", @type = "text", @label = "Leit"}) 
+        @Html.TextBox("searchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð"}) 
         @Html.ActionLink("Leita", "Search", "Home", null, new { @class = "btn btn-primary" }) <br/>
     }
 </div>
