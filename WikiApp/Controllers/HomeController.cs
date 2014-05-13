@@ -19,7 +19,7 @@ namespace WikiApp.Controllers
 	{
 
          SubtitleRepository repo = new SubtitleRepository();
-         SubtitleContext repo2 = new SubtitleContext();
+        //SubtitleContext repo2 = new SubtitleContext();
 		public ActionResult Index() 
 		{
             SubtitlesVM vm = new SubtitlesVM();
@@ -30,7 +30,7 @@ namespace WikiApp.Controllers
             vm.allTV = (from item in repo.GetAllSubtitles()
                             orderby item.ID descending
                             select item).Take(10);
-
+                
             return View(vm);
         }
         [HttpPost]
@@ -45,11 +45,11 @@ namespace WikiApp.Controllers
             }
 
             return View(movies);
-        }        
-        
-        public ActionResult AllSubtitles()
-        {
-            ViewBag.Message = "Listi yfir alla skjátexta.";
+        }
+
+		public ActionResult AllSubtitles() 
+		{ 
+			ViewBag.Message = "Listi yfir alla skjátexta.";
             SubtitlesVM vm2 = new SubtitlesVM();
             vm2.allFiles = (from item in repo.GetAllSubtitles()
                             orderby item.ID descending
@@ -57,7 +57,7 @@ namespace WikiApp.Controllers
 
 
             return View(vm2);
-        }
+		}
          /* [HttpPost]
 		public ActionResult AllSubtitles() 
 		{ 
@@ -82,6 +82,12 @@ namespace WikiApp.Controllers
         [HttpGet]
 		public ActionResult AddSubtitle()
 		{
+            if (User.Identity.Name == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
             subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
             subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -97,6 +103,7 @@ namespace WikiApp.Controllers
 
             return View(new SubtitleFile());
 		}
+		}
         
 
         public ActionResult Requests()
@@ -106,6 +113,12 @@ namespace WikiApp.Controllers
             return View();
         }
 
+        public ActionResult View3()
+        {
+            ViewBag.Message = "Here you can request subtitles.";
+
+            return View();
+        }
         public ActionResult About()
         {
 
