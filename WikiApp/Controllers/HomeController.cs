@@ -58,12 +58,15 @@ namespace WikiApp.Controllers
 
             return View(vm2);
 		}
-         /* [HttpPost]
-		public ActionResult AllSubtitles() 
+         [HttpPost]
+		public ActionResult AllSubtitles(string id) 
 		{ 
 			ViewBag.Message = "Listi yfir alla skjátexta.";
             SubtitlesVM vm3 = new SubtitlesVM();
-            vm3.allFiles = (from item in repo.GetAllSubtitles()
+             vm3.allFiles = (from item in repo.GetAllSubtitles()
+                               where item.name.StartsWith(id)
+                               select item);
+            /*vm3.allFiles = (from item in repo.GetAllSubtitles()
                             group item by item.name.Substring(0, 1)
                                 into itemgroup
                                 select new SubtitlesVM()
@@ -71,10 +74,10 @@ namespace WikiApp.Controllers
                                     FirstLetter = itemgroup.Key,
                                     allFiles = itemgroup.ToList()
 
-                                }).OrderBy(mapping => mapping.FirstLetter);
+                                }).OrderBy(mapping => mapping.FirstLetter);*/
                            
             return View(vm3);
-		} */
+		} 
       
 
 
