@@ -265,15 +265,13 @@ namespace WikiApp.Controllers
 		[HttpPost]
 		public ActionResult Search(string searchString)
 		{
-			var movies = from m in repo.GetAllSubtitles()
-						 select m;
-
-			if (!String.IsNullOrEmpty(searchString))
-			{
-				movies = movies.Where(s => s.name.Contains(searchString));
-			}
-
-			return View(movies);
+			Console.WriteLine(searchString);
+			SubtitlesVM sVM = new SubtitlesVM();
+			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+									where item.name.Contains(searchString)
+									orderby item.name descending
+									select item);
+			return View(sVM);
 		}
 	}
 }
