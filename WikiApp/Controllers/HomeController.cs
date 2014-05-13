@@ -57,6 +57,7 @@ namespace WikiApp.Controllers
 
             return View(vm2);
 		}
+/*
          [HttpPost]
 		public ActionResult AllSubtitles(string id) 
 		{ 
@@ -65,7 +66,7 @@ namespace WikiApp.Controllers
             vm3.allFiles = (from item in repo.GetAllSubtitles()
                                where item.name.StartsWith(id)
                                select item);
-            /*vm3.allFiles = (from item in repo.GetAllSubtitles()
+            vm3.allFiles = (from item in repo.GetAllSubtitles()
                             group item by item.name.Substring(0, 1)
                                 into itemgroup
                                 select new SubtitlesVM()
@@ -73,10 +74,10 @@ namespace WikiApp.Controllers
                                     FirstLetter = itemgroup.Key,
                                     allFiles = itemgroup.ToList()
 
-                                }).OrderBy(mapping => mapping.FirstLetter);*/
+                                }).OrderBy(mapping => mapping.FirstLetter);
                            
             return View(vm3);
-		} 
+		} */
       
 
 
@@ -193,9 +194,9 @@ namespace WikiApp.Controllers
                         
                         //Uri baseUri = new Uri("http://www.github.com");
                         //Uri myUri = new Uri(baseUri, "/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
-                        string myUri = ("http://www.github.com/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
+                        //string myUri = ("http://www.github.com/Shounin/WikiApp/tree/master/WikiApp/Assets/Upload");
 
-                        file.SaveAs(Server.MapPath(myUri));
+                        file.SaveAs(path);
 
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);

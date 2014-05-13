@@ -181,6 +181,10 @@
     <Compile Include="Migrations\201405131638470_Addfile.Designer.cs">
       <DependentUpon>201405131638470_Addfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201405131723175_Addkey.cs" />
+    <Compile Include="Migrations\201405131723175_Addkey.Designer.cs">
+      <DependentUpon>201405131723175_Addkey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\State.cs" />
@@ -274,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201405131638470_Addfile.resx">
       <DependentUpon>201405131638470_Addfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405131723175_Addkey.resx">
+      <DependentUpon>201405131723175_Addkey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
