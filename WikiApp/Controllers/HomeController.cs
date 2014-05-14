@@ -251,10 +251,10 @@ namespace WikiApp.Controllers
         }
         public ActionResult View3(int? id)
         {
-            
+
             CommentVM comment1 = new CommentVM();
             /*comment1.allComments = CommentRepository.Instance.GetComments();*/
-            
+
             comment1.allSubtitleFiles = (from item in repo.GetAllSubtitles()
                                          where id == item.ID
                                          select item);
@@ -444,7 +444,7 @@ namespace WikiApp.Controllers
 			ViewBag.movieGenre = new SelectList(categoryList);
 			var allSubtitles = from m in repo.GetAllSubtitles()
 							   where m.state == State.Edit || m.state == State.Ready
-							   select m;
+							select m;
 
 			if (!String.IsNullOrEmpty(searchString))
 			{
