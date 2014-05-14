@@ -247,18 +247,17 @@ namespace WikiApp.Controllers
             return View(vm);
 
         }
-        public ActionResult View3(int? subtitleid)
+        public ActionResult View3(int? id)
         {
-            ViewBag.Message = "Here you can request subtitles.";
+            
+            CommentVM comment1 = new CommentVM();
+            /*comment1.allComments = CommentRepository.Instance.GetComments();*/
+            
+            comment1.allSubtitleFiles = (from item in repo.GetAllSubtitles()
+                                         where id == item.ID
+                                         select item);
 
-            SubtitlesVM vm = new SubtitlesVM();
-            vm.NewestMovies = (from item in repo.GetAllSubtitles()
-                            orderby item.ID descending
-                            select item).Take(10);
-            CommentVM cvm = new CommentVM();
-            cvm.allComments = CommentRepository.Instance.GetComments();
-
-            return View(vm); 
+            return View(comment1);
 
             //return View(cvm); 
         }
