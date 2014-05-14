@@ -293,54 +293,31 @@ namespace WikiApp.Controllers
 			return View();
 		}
  */ 
-		[HttpGet]
 		public ActionResult Search(string searchString, string category)
 		{
-			List<SelectListItem> subtitleCategory = new List<SelectListItem>();
-			subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
-			subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
-			subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
-			subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
-			subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+			var categoryList = new List<string>();
 
-			ViewData["Categories"] = subtitleCategory;
+			var categoryQry = from d in repo.GetAllSubtitles()
+						   orderby d.category
+						   select d.category;
 
-			if(category == "")
+			categoryList.AddRange(categoryQry.Distinct());
+			ViewBag.movieGenre = new SelectList(categoryList);
+			var allSubtitles = from m in repo.GetAllSubtitles()
+							select m;
+
+			if (!String.IsNullOrEmpty(searchString))
 			{
-				SubtitlesVM sVM = new SubtitlesVM();
-				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.name.Contains(searchString)
-										orderby item.name descending
-										select item);
-				return View(sVM);
+				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
-			else if(searchString == "")
+			   
+			if (!string.IsNullOrEmpty(category))
 			{
-				SubtitlesVM sVM = new SubtitlesVM();
-				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.category.Contains(category)
-										orderby item.name descending
-										select item);
-				return View(sVM);
+				allSubtitles = allSubtitles.Where(x => x.category == category);
 			}
-			else if(searchString == "" && category == "")
-			{
-				return View();
-			}
-			else 
-		{
-			SubtitlesVM sVM = new SubtitlesVM();
-			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-									where item.name.Contains(searchString)
-											&& item.category.Contains(category)
-									orderby item.name descending
-									select item);
-			return View(sVM);
+
+
+			return View(allSubtitles); 
 		}
 	}
-}
 }
