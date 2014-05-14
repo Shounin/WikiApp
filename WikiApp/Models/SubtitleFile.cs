@@ -23,7 +23,8 @@ namespace WikiApp.Models
 
         public State state { get; set; }
 
-        [Column(TypeName = "VARCHAR")]
+
+        [Column(TypeName = "TEXT")]
         public string SubtitleText { get; set; }    //VarChar
 
         public SubtitleFile()

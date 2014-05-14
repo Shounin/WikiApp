@@ -218,13 +218,13 @@ namespace WikiApp.Controllers
                             {
                                 srtContent += line + '\0';
                             }
-                            //  file.file = srtContent;
-
                         }
 
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);
                         item.state = State.Edit;
+                        item.SubtitleText = srtContent;
+                       // item.name = item.name.First().
                         repo.AddSubtitle(item);
                         repo.Save();
 
@@ -240,13 +240,6 @@ namespace WikiApp.Controllers
             return View();
             }
 
-
-
-        [HttpGet]
-        public ActionResult Search()
-        {
-            return View();
-            }
 
         [Authorize]
         public ActionResult AddRequest()
