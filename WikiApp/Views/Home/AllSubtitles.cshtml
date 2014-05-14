@@ -21,7 +21,7 @@
 <div class="row">
     <div class="col-lg-12">
         <ul id="tabs">
-
+            
 
             <li><a href="#All Titles">All Titles</a></li>
             @for (char i = 'A'; i <= 'Z'; i++)
@@ -45,18 +45,18 @@
         @if (Model.specificFiles != null)
         {
             foreach (var item in @Model.specificFiles)
-            {
-                item.key = item.name[0];
-                <div class="tabContent" id="@item.key">
-                    <ul>
-                        <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                    </ul>
-                </div>
-            }
+                {
+                    item.key = item.name[0];
+                     <div class="tabContent" id="@item.key">
+                         <ul>
+                            <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+                        </ul>
+                     </div>
+                 }  
         }
 
 
-        
+
 
 
 

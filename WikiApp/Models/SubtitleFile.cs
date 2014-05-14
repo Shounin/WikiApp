@@ -29,7 +29,9 @@ namespace WikiApp.Models
         public SubtitleFile()
         {
             dateAdded = DateTime.Now;
+            
         }
+        
     }
 }
 

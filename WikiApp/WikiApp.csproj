@@ -181,9 +181,9 @@
     <Compile Include="Migrations\201405131638470_Addfile.Designer.cs">
       <DependentUpon>201405131638470_Addfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201405131723175_Addkey.cs" />
-    <Compile Include="Migrations\201405131723175_Addkey.Designer.cs">
-      <DependentUpon>201405131723175_Addkey.cs</DependentUpon>
+    <Compile Include="Migrations\201405141048519_AddSubtitleText.cs" />
+    <Compile Include="Migrations\201405141048519_AddSubtitleText.Designer.cs">
+      <DependentUpon>201405141048519_AddSubtitleText.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -250,7 +250,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Requests.cshtml" />
+    <Content Include="Views\Home\Info.cshtml" />
+    <Content Include="Views\Home\Index1.cshtml" />
+    <Content Include="Views\Home\Prufa.cshtml" />
     <Content Include="Views\Home\SubtitleView.cshtml" />
+    <Content Include="Views\Home\View1.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -275,8 +279,8 @@
     <EmbeddedResource Include="Migrations\201405131638470_Addfile.resx">
       <DependentUpon>201405131638470_Addfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405131723175_Addkey.resx">
-      <DependentUpon>201405131723175_Addkey.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405141048519_AddSubtitleText.resx">
+      <DependentUpon>201405141048519_AddSubtitleText.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
