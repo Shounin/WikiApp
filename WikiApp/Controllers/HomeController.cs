@@ -17,7 +17,9 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
          SubtitleRepository repo = new SubtitleRepository();
-        //SubtitleContext repo2 = new SubtitleContext();
+        SubtitleContext repo2 = new SubtitleContext();
+		 UpvoteRepository upvRepo = new UpvoteRepository();
+
 		public ActionResult Index() 
 		{
             SubtitlesVM vm = new SubtitlesVM();
@@ -251,10 +253,14 @@ namespace WikiApp.Controllers
         {
             
             CommentVM comment1 = new CommentVM();
-            /*comment1.allComments = CommentRepository.Instance.GetComments();*/
+            /*comment1.allComments = SubtitleRepository.GetAllComments();*/
             
             comment1.allSubtitleFiles = (from item in repo.GetAllSubtitles()
                                          where id == item.ID
+                                         select item);
+
+            comment1.allComments = (from item in repo.GetAllComments()
+                                         where id == item.subtitleid
                                          select item);
 
             return View(comment1);
@@ -281,7 +287,7 @@ namespace WikiApp.Controllers
                     }
                     c.username = strUser;
 
-                    CommentRepository.Instance.AddComment(c);
+                    SubtitleRepository.Instance.AddComment(c);
                 }
                 else
                 {

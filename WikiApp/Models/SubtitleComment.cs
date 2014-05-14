@@ -14,5 +14,6 @@ namespace WikiApp.Models
         public DateTime commentDate { get; set; }
         public string username { get; set; }
         public string commentText { get; set; }
+        public int subtitleid { get; set; }
     }
 }
