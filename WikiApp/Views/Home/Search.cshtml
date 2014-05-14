@@ -7,10 +7,18 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="jumbotron">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Search", "Home", @FormMethod.Get))
     {
-        @Html.TextBox("searchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð"}) 
-        @Html.ActionLink("Leita", "Search", "Home", null, new { @class = "btn btn-primary" }) <br/>
+        <p>
+            @Html.TextBox("SearchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð" })
+            @Html.LabelFor(model => model.category, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.category, ViewData["Categories"] as List<SelectListItem>)
+                @Html.ValidationMessageFor(model => model.category)
+            </div>
+            <input type="submit" value="Leita" class="btn btn-primary" />
+            @Html.ActionLink("Ítarleg leit", "Search", "Home", null, new { @class = "btn btn-info" })
+        </p>
     }
 </div>
 <div>

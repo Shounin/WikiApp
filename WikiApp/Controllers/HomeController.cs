@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -13,12 +14,12 @@ using WikiApp.Models.View_Models;
 
 namespace WikiApp.Controllers
 {
-    public class HomeController : Controller
-    {
-        SubtitleRepository repo = new SubtitleRepository();
+	public class HomeController : Controller
+	{
+         SubtitleRepository repo = new SubtitleRepository();
         //SubtitleContext repo2 = new SubtitleContext();
-        public ActionResult Index()
-        {
+		public ActionResult Index() 
+		{
             SubtitlesVM vm = new SubtitlesVM();
             vm.allMovies = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit && item.category != "Þættir"
@@ -29,7 +30,7 @@ namespace WikiApp.Controllers
                         where item.state == State.Edit && item.category == "Þættir"
                         orderby item.ID descending
                         select item).Take(10);
-
+            
             return View(vm);
         }
         [HttpPost]
@@ -46,9 +47,9 @@ namespace WikiApp.Controllers
             return View(movies);
         }
 
-        public ActionResult AllSubtitles()
-        {
-            ViewBag.Message = "Listi yfir alla skjátexta.";
+		public ActionResult AllSubtitles() 
+		{ 
+			ViewBag.Message = "Listi yfir alla skjátexta.";
             SubtitlesVM vm2 = new SubtitlesVM();
             vm2.allFiles = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit
@@ -57,36 +58,51 @@ namespace WikiApp.Controllers
 
 
             return View(vm2);
+		}
+        [HttpPost]
+        public ActionResult AllSubtitles(char x)
+        {
+            ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm2 = new SubtitlesVM();
+            vm2.specificFiles = (from item in repo.GetAllSubtitles()
+                            where item.name[0] == x
+                            orderby item.ID descending
+                            select item);
+
+
+            return View(vm2);
         }
-        /*
-                 [HttpPost]
-                public ActionResult AllSubtitles(string id) 
-                { 
-                    ViewBag.Message = "Listi yfir alla skjátexta.";
-                    SubtitlesVM vm3 = new SubtitlesVM();
-                    vm3.allFiles = (from item in repo.GetAllSubtitles()
-                                       where item.name.StartsWith(id)
-                                       select item);
-                    vm3.allFiles = (from item in repo.GetAllSubtitles()
-                                    group item by item.name.Substring(0, 1)
-                                        into itemgroup
-                                        select new SubtitlesVM()
-                                        {
-                                            FirstLetter = itemgroup.Key,
-                                            allFiles = itemgroup.ToList()
 
-                                        }).OrderBy(mapping => mapping.FirstLetter);
+
+/*
+         [HttpPost]
+		public ActionResult AllSubtitles(string id) 
+		{ 
+			ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm3 = new SubtitlesVM();
+            vm3.allFiles = (from item in repo.GetAllSubtitles()
+                               where item.name.StartsWith(id)
+                               select item);
+            vm3.allFiles = (from item in repo.GetAllSubtitles()
+                            group item by item.name.Substring(0, 1)
+                                into itemgroup
+                                select new SubtitlesVM()
+                                {
+                                    FirstLetter = itemgroup.Key,
+                                    allFiles = itemgroup.ToList()
+
+                                }).OrderBy(mapping => mapping.FirstLetter);
                            
-                    return View(vm3);
-                } */
-
+            return View(vm3);
+		} */
+      
 
 
         // Add a new SubtitleFile to the database //
-        [Authorize]
+		[Authorize]
         [HttpGet]
-        public ActionResult AddSubtitle()
-        {
+		public ActionResult AddSubtitle()
+		{
 
             if (User.Identity.Name == null)
             {
@@ -109,8 +125,8 @@ namespace WikiApp.Controllers
 
                 return View(new SubtitleFile());
             }
-        }
-
+		}
+        
         [HttpGet]
         public ActionResult Requests()
         {
@@ -127,8 +143,8 @@ namespace WikiApp.Controllers
                         select item).Take(10);
 
             return View(vm);
-            // return View();
-            // return View(new SubtitleFile());
+           // return View();
+           // return View(new SubtitleFile());
         }
         public ActionResult View3()
         {
@@ -139,7 +155,7 @@ namespace WikiApp.Controllers
                             orderby item.ID descending
                             select item).Take(10);
 
-            return View(vm);
+            return View(vm); 
 
         }
 
@@ -151,7 +167,7 @@ namespace WikiApp.Controllers
             return View();
         }
 
-        [Authorize]
+		[Authorize]
         [HttpPost]
         public ActionResult AddSubtitle(HttpPostedFileBase file)
         {
@@ -193,7 +209,7 @@ namespace WikiApp.Controllers
                         //TO:DO
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
-
+                        
                         string srtContent = null;
                         using (StreamReader sr = new StreamReader(file.InputStream, Encoding.Default, true))
                         {
@@ -215,14 +231,14 @@ namespace WikiApp.Controllers
 
 
                         ModelState.Clear();
-
+                        
 
                         ViewBag.Message = "File uploaded successfully";
                     }
                 }
             }
             return View();
-        }
+            }
 
 
 
@@ -276,16 +292,55 @@ namespace WikiApp.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult Search(string searchString)
-        {
-            Console.WriteLine(searchString);
-            SubtitlesVM sVM = new SubtitlesVM();
-            sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-                                    where item.name.Contains(searchString)
-                                    orderby item.name descending
-                                    select item);
-            return View(sVM);
-        }
-    }
+		[HttpPost]
+		public ActionResult Search()
+		{
+			return View();
+		}
+		[HttpGet]
+		public ActionResult Search(string searchString, string category)
+		{
+			List<SelectListItem> subtitleCategory = new List<SelectListItem>();
+			subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
+			subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
+			subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
+			subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
+			subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
+			subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+			subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
+			subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+			subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+
+			ViewData["Categories"] = subtitleCategory;
+
+			if(category == "")
+			{
+				SubtitlesVM sVM = new SubtitlesVM();
+				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+										where item.name.Contains(searchString)
+										orderby item.name descending
+										select item);
+				return View(sVM);
+			}
+			else if(searchString == "")
+			{
+				SubtitlesVM sVM = new SubtitlesVM();
+				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+										where item.category == category
+										orderby item.name descending
+										select item);
+				return View(sVM);
+			}
+			else 
+		{
+			SubtitlesVM sVM = new SubtitlesVM();
+			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+									where item.name.Contains(searchString)
+										&& item.category == category
+									orderby item.name descending
+									select item);
+			return View(sVM);
+		}
+	}
+}
 }
