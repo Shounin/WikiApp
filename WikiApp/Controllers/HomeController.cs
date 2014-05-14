@@ -30,7 +30,7 @@ namespace WikiApp.Controllers
                         where item.state == State.Edit && item.category == "Þættir"
                         orderby item.ID descending
                         select item).Take(10);
-
+            
             vm.PopularMovies = (from item in repo.GetAllSubtitles()
                            where item.state == State.Edit && item.category != "Þættir"
                            orderby item.upvote descending
@@ -199,9 +199,9 @@ namespace WikiApp.Controllers
 		}
 
 
-   
 
 
+                           
         // Add a new SubtitleFile to the database //
 		[Authorize]
         [HttpGet]
@@ -249,7 +249,7 @@ namespace WikiApp.Controllers
             return View(vm);
 
         }
-        public ActionResult View3()
+        public ActionResult View3(int? subtitleid)
         {
             ViewBag.Message = "Here you can request subtitles.";
 
@@ -257,9 +257,46 @@ namespace WikiApp.Controllers
             vm.NewestMovies = (from item in repo.GetAllSubtitles()
                             orderby item.ID descending
                             select item).Take(10);
+            CommentVM cvm = new CommentVM();
+            cvm.allComments = CommentRepository.Instance.GetComments();
 
             return View(vm); 
 
+            return View(cvm); 
+        }
+
+        [HttpPost]
+        public ActionResult View3(FormCollection formData)
+        {
+            String strComment = formData["CommentText"];
+            if (!String.IsNullOrEmpty(strComment))
+            {
+                SubtitleComment c = new SubtitleComment();
+
+                c.commentText = strComment;
+                String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                if (!String.IsNullOrEmpty(strUser))
+                {
+                    int slashPos = strUser.IndexOf("\\");
+                    if (slashPos != -1)
+                    {
+                        strUser = strUser.Substring(slashPos + 1);
+                    }
+                    c.username = strUser;
+
+                    CommentRepository.Instance.AddComment(c);
+                }
+                else
+                {
+                    c.username = "Unknown user";
+                }
+                return RedirectToAction("CommentView");
+            }
+            else
+            {
+                ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
+                return Index();
+        }
         }
 
         public ActionResult About()
@@ -396,54 +433,31 @@ namespace WikiApp.Controllers
 			return View();
 		}
  */ 
-		[HttpGet]
 		public ActionResult Search(string searchString, string category)
 		{
-			List<SelectListItem> subtitleCategory = new List<SelectListItem>();
-			subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
-			subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
-			subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
-			subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
-			subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+			var categoryList = new List<string>();
 
-			ViewData["Categories"] = subtitleCategory;
+			var categoryQry = from d in repo.GetAllSubtitles()
+						   orderby d.category
+						   select d.category;
 
-			if(category == "")
+			categoryList.AddRange(categoryQry.Distinct());
+			ViewBag.movieGenre = new SelectList(categoryList);
+			var allSubtitles = from m in repo.GetAllSubtitles()
+							select m;
+
+			if (!String.IsNullOrEmpty(searchString))
 			{
-				SubtitlesVM sVM = new SubtitlesVM();
-				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.name.Contains(searchString)
-										orderby item.name descending
-										select item);
-				return View(sVM);
+				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
-			else if(searchString == "")
-			{
-				SubtitlesVM sVM = new SubtitlesVM();
-				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.category.Contains(category)
-										orderby item.name descending
-										select item);
-				return View(sVM);
-			}
-			else if(searchString == "" && category == "")
-			{
-				return View();
-			}
-			else 
+			   
+			if (!string.IsNullOrEmpty(category))
 		{
-			SubtitlesVM sVM = new SubtitlesVM();
-			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-									where item.name.Contains(searchString)
-											&& item.category.Contains(category)
-									orderby item.name descending
-									select item);
-			return View(sVM);
+				allSubtitles = allSubtitles.Where(x => x.category == category);
 		}
+
+
+			return View(allSubtitles); 
 	}
 }
 }

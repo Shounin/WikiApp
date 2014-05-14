@@ -24,7 +24,7 @@
     {
         <p>
             @Html.TextBox("SearchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð" })
-            <input type="submit" value="Leita" class="btn btn-primary" /> 
+            <input type="submit" value="Leita" class="btn btn-primary" /> <br/>
             @Html.ActionLink("Ítarleg leit", "Search", "Home", null, new { @class = "btn btn-info" })
         </p>
     }
