@@ -57,6 +57,21 @@ namespace WikiApp.Controllers
 
             return View(vm2);
 		}
+        [HttpPost]
+        public ActionResult AllSubtitles(char x)
+        {
+            ViewBag.Message = "Listi yfir alla skjátexta.";
+            SubtitlesVM vm2 = new SubtitlesVM();
+            vm2.specificFiles = (from item in repo.GetAllSubtitles()
+                            where item.name[0] == x
+                            orderby item.ID descending
+                            select item);
+
+
+            return View(vm2);
+        }
+
+
 /*
          [HttpPost]
 		public ActionResult AllSubtitles(string id) 
