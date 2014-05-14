@@ -293,12 +293,13 @@ namespace WikiApp.Controllers
 
 
         }
-
+/*
 		[HttpPost]
 		public ActionResult Search()
 		{
 			return View();
 		}
+ */ 
 		[HttpGet]
 		public ActionResult Search(string searchString, string category)
 		{
