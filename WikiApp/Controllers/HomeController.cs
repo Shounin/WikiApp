@@ -263,16 +263,50 @@ namespace WikiApp.Controllers
 		{
 			return View();
 		}
-
 		[HttpGet]
-		public ActionResult Search(string searchString)
+		public ActionResult Search(string searchString, string category)
 		{
-			SubtitlesVM sVM = new SubtitlesVM();
-			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-									where item.name.Contains(searchString)
-									orderby item.name descending
-									select item);
-			return View(sVM);
+			List<SelectListItem> subtitleCategory = new List<SelectListItem>();
+			subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
+			subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
+			subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
+			subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
+			subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
+			subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
+			subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
+			subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+			subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+
+			ViewData["Categories"] = subtitleCategory;
+
+			if(category == "")
+			{
+				SubtitlesVM sVM = new SubtitlesVM();
+				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+										where item.name.Contains(searchString)
+										orderby item.name descending
+										select item);
+				return View(sVM);
+			}
+			else if(searchString == "")
+			{
+				SubtitlesVM sVM = new SubtitlesVM();
+				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+										where item.category == category
+										orderby item.name descending
+										select item);
+				return View(sVM);
+			}
+			else 
+			{ 
+				SubtitlesVM sVM = new SubtitlesVM();
+				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+										where item.name.Contains(searchString)
+										&& item.category == category
+										orderby item.name descending
+										select item);
+				return View(sVM);
+			}
 		}
 	}
 }

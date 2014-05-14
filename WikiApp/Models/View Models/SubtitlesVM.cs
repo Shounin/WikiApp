@@ -15,5 +15,8 @@ namespace WikiApp.Models.View_Models
 		public IEnumerable<SubtitleFile> SearchResultList { get; set; }
 
         public SubtitleFile subtitleFile { get; set; }
+
+		public string category { get; set; }
+
     }
 }
