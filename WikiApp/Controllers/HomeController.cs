@@ -56,7 +56,135 @@ namespace WikiApp.Controllers
                             orderby item.ID descending
                             select item);
 
+           // for (int i = 'A'; i < vm2.alphaBetical.Length; i++)
+            //{   
+              //  vm2.alphaBetical[i] = new List<SubtitleFile>();
+               // var xjd = vm2.allFiles.Where(x => x.name.StartsWith(i.ToString()));
+                //vm2.alphaBetical[i];
 
+                //vm2.alphaBetical[i];
+
+            //}
+
+
+
+            vm2.A= (from item in repo.GetAllSubtitles()
+                    where item.name[0] == 'A'
+                    orderby item.ID descending
+                    select item);
+
+            vm2.B = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'B'
+                     orderby item.ID descending
+                     select item);
+
+            vm2.C = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'C'
+                     orderby item.ID descending
+                     select item);
+            vm2.D = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'D'
+                     orderby item.ID descending
+                     select item);
+            vm2.E = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'E'
+                     orderby item.ID descending
+                     select item);
+            vm2.F = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'F'
+                     orderby item.ID descending
+                     select item);
+            vm2.G = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'G'
+                     orderby item.ID descending
+                     select item);
+            vm2.H = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'H'
+                     orderby item.ID descending
+                     select item);
+            vm2.I = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'I'
+                     orderby item.ID descending
+                     select item);
+            vm2.J = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'J'
+                     orderby item.ID descending
+                     select item);
+            vm2.K = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'K'
+                     orderby item.ID descending
+                     select item);
+            vm2.L = (from item in repo.GetAllSubtitles()
+                    where item.name[0] == 'L'
+                     orderby item.ID descending
+                     select item);
+            vm2.M = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'M'
+                     orderby item.ID descending
+                     select item);
+            vm2.N = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'N'
+                     orderby item.ID descending
+                     select item);
+            vm2.O = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'O'
+                     orderby item.ID descending
+                     select item);
+            vm2.P = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'P'
+                     orderby item.ID descending
+                     select item);
+            vm2.Q = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'Q'
+                     orderby item.ID descending
+                     select item);
+            vm2.R = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'R'
+                     orderby item.ID descending
+                     select item);
+            vm2.S = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'S'
+                     orderby item.ID descending
+                     select item);
+            vm2.T = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'T'
+                     orderby item.ID descending
+                     select item);
+            vm2.U = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'U'
+                     orderby item.ID descending
+                     select item);
+            vm2.V = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'V'
+                     orderby item.ID descending
+                     select item);
+            vm2.W = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'W'
+                     orderby item.ID descending
+                     select item);
+            vm2.X = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'X'
+                     orderby item.ID descending
+                     select item);
+            vm2.Y = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'Y'
+                     orderby item.ID descending
+                     select item);
+            vm2.Z = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'Z'
+                     orderby item.ID descending
+                     select item);
+
+           /* darf ad fa vm2 til ad taka a moti for lykkjunni
+             for (char i = 'A'; i <= 'Z'; i++)
+            {
+                vm2.i = (from item in repo.GetAllSubtitles()
+                         where item.name[0] == i
+                         orderby item.ID descending
+                         select item);
+            }*/
+
+            
             return View(vm2);
 		}
         [HttpPost]
@@ -146,16 +274,52 @@ namespace WikiApp.Controllers
            // return View();
            // return View(new SubtitleFile());
         }
-        public ActionResult View3()
+        public ActionResult View3(int? subtitleid)
         {
             ViewBag.Message = "Here you can request subtitles.";
 
-            SubtitlesVM vm = new SubtitlesVM();
-            vm.allMovies = (from item in repo.GetAllSubtitles()
-                            orderby item.ID descending
-                            select item).Take(10);
+            CommentVM cvm = new CommentVM();
+            cvm.allComments = CommentRepository.Instance.GetComments();
 
-            return View(vm); 
+            cvm.allSubtitleFiles = (from item in repo.GetAllSubtitles()
+                                    where subtitleid == item.ID
+                                    select item);
+
+            return View(cvm); 
+        }
+
+        [HttpPost]
+        public ActionResult View3(FormCollection formData)
+        {
+            String strComment = formData["CommentText"];
+            if (!String.IsNullOrEmpty(strComment))
+            {
+                SubtitleComment c = new SubtitleComment();
+
+                c.commentText = strComment;
+                String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                if (!String.IsNullOrEmpty(strUser))
+                {
+                    int slashPos = strUser.IndexOf("\\");
+                    if (slashPos != -1)
+                    {
+                        strUser = strUser.Substring(slashPos + 1);
+                    }
+                    c.username = strUser;
+
+                    CommentRepository.Instance.AddComment(c);
+                }
+                else
+                {
+                    c.username = "Unknown user";
+                }
+                return RedirectToAction("CommentView");
+            }
+            else
+            {
+                ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
+                return Index();
+        }
         }
 
         public ActionResult About()
@@ -292,50 +456,31 @@ namespace WikiApp.Controllers
 			return View();
 		}
  */ 
-		[HttpGet]
 		public ActionResult Search(string searchString, string category)
 		{
-			List<SelectListItem> subtitleCategory = new List<SelectListItem>();
-			subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
-			subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
-			subtitleCategory.Add(new SelectListItem { Text = "Drama", Value = "Drama" });
-			subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
-			subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
-			subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+			var categoryList = new List<string>();
 
-			ViewData["Categories"] = subtitleCategory;
+			var categoryQry = from d in repo.GetAllSubtitles()
+						   orderby d.category
+						   select d.category;
 
-			if(category == "")
+			categoryList.AddRange(categoryQry.Distinct());
+			ViewBag.movieGenre = new SelectList(categoryList);
+			var allSubtitles = from m in repo.GetAllSubtitles()
+							select m;
+
+			if (!String.IsNullOrEmpty(searchString))
 			{
-				SubtitlesVM sVM = new SubtitlesVM();
-				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.name.Contains(searchString)
-										orderby item.name descending
-										select item);
-				return View(sVM);
+				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
-			else if(searchString == "")
-			{
-				SubtitlesVM sVM = new SubtitlesVM();
-				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.category == category
-										orderby item.name descending
-										select item);
-				return View(sVM);
-			}
-			else 
+			   
+			if (!string.IsNullOrEmpty(category))
 		{
-			SubtitlesVM sVM = new SubtitlesVM();
-			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-									where item.name.Contains(searchString)
-										&& item.category == category
-									orderby item.name descending
-									select item);
-			return View(sVM);
+				allSubtitles = allSubtitles.Where(x => x.category == category);
 		}
+
+
+			return View(allSubtitles); 
 	}
 }
 }
