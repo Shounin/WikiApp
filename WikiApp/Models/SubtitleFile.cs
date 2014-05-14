@@ -33,6 +33,7 @@ namespace WikiApp.Models
         }
 
 		public int upvote { get; set; }
+
     }
 }
 
