@@ -76,8 +76,6 @@ namespace WikiApp.Controllers
 
             //}
 
-
-
             vm2.A= (from item in repo.GetAllSubtitles()
                     where item.name[0] == 'A'
                     orderby item.ID descending
