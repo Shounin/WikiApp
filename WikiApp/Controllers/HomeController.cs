@@ -42,8 +42,8 @@ namespace WikiApp.Controllers
                                 where item.state == State.Edit && item.category == "Þættir"
                                 orderby item.upvote descending
                                 select item).Take(10);
-
-			return View(vm);
+            
+            return View(vm);
         }
         [HttpPost]
         public ActionResult Index(string searchString)
@@ -251,12 +251,16 @@ namespace WikiApp.Controllers
         }
         public ActionResult View3(int? id)
         {
-
+            
             CommentVM comment1 = new CommentVM();
-            /*comment1.allComments = CommentRepository.Instance.GetComments();*/
-
+            /*comment1.allComments = SubtitleRepository.GetAllComments();*/
+            
             comment1.allSubtitleFiles = (from item in repo.GetAllSubtitles()
                                          where id == item.ID
+                                         select item);
+
+            comment1.allComments = (from item in repo.GetAllComments()
+                                         where id == item.subtitleid
                                          select item);
 
             return View(comment1);
@@ -283,7 +287,7 @@ namespace WikiApp.Controllers
                     }
                     c.username = strUser;
 
-                    CommentRepository.Instance.AddComment(c);
+                    SubtitleRepository.Instance.AddComment(c);
                 }
                 else
                 {
@@ -444,7 +448,7 @@ namespace WikiApp.Controllers
 			ViewBag.movieGenre = new SelectList(categoryList);
 			var allSubtitles = from m in repo.GetAllSubtitles()
 							   where m.state == State.Edit || m.state == State.Ready
-							select m;
+							   select m;
 
 			if (!String.IsNullOrEmpty(searchString))
 			{
