@@ -24,7 +24,7 @@ namespace WikiApp.Models
         public State state { get; set; }
 
         [Column(TypeName = "VARCHAR")]
-        public string file { get; set; }    //VarChar
+        public string SubtitleText { get; set; }    //VarChar
 
         public SubtitleFile()
         {
