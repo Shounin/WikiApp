@@ -241,13 +241,6 @@ namespace WikiApp.Controllers
             }
 
 
-
-        [HttpGet]
-        public ActionResult Search()
-        {
-            return View();
-        }
-
         public ActionResult AddRequest()
         {
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
@@ -326,21 +319,25 @@ namespace WikiApp.Controllers
 			{
 				SubtitlesVM sVM = new SubtitlesVM();
 				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.category == category
+										where item.category.Contains(category)
 										orderby item.name descending
 										select item);
 				return View(sVM);
 			}
+			else if(searchString == "" && category == "")
+			{
+				return View();
+			}
 			else 
-		{
-			SubtitlesVM sVM = new SubtitlesVM();
-			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-									where item.name.Contains(searchString)
-										&& item.category == category
-									orderby item.name descending
-									select item);
-			return View(sVM);
-		}
+			{
+				SubtitlesVM sVM = new SubtitlesVM();
+				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+										where item.name.Contains(searchString)
+											&& item.category.Contains(category)
+										orderby item.name descending
+										select item);
+				return View(sVM);
+			}
 	}
 }
 }
