@@ -491,5 +491,14 @@ namespace WikiApp.Controllers
 
 			return View("Search", allSubtitles);
 		}
+
+		public ActionResult UpvoteSubtitle(SubtitleFile subtitle, ApplicationUser user)
+		{
+			Upvote up = new Upvote();
+			up.subtitleFileID = subtitle.ID;
+			up.applicationUserID = user.Id;
+			
+			return View();
+		}
 }
 }
