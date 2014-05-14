@@ -31,15 +31,15 @@
         </ul>
 
 
-       <!-- <div class="tabContent" id="All Titles">
+       <div class="tabContent" id="All Titles">
             <h3>All Titles</h3>
             <ul>
-                foreach (var item in Model.allFiles)
+                @foreach (var item in Model.allFiles)
                 {
                     <li>Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; item.dateAdded &nbsp;&nbsp;&nbsp; item.category</li>
                 }
             </ul>
-        </div>-->
+       </div>
 
                 @foreach (var item in @Model.allFiles)
                 {

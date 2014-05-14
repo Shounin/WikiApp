@@ -214,6 +214,7 @@ namespace WikiApp.Controllers
             return View();
             }
 
+        [Authorize]
         public ActionResult AddRequest()
         {
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
@@ -231,6 +232,7 @@ namespace WikiApp.Controllers
             return View(new SubtitleFile());
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult AddRequest(FormCollection form)
         {
