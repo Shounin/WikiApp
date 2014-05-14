@@ -17,7 +17,6 @@ namespace WikiApp.Models
         public string category { get; set; }
         public string description { get; set; }
         public DateTime dateAdded { get; set; }
-        public int upvote { get; set; }
         public string path { get; set; }
         public char key { get; set; }
 
@@ -32,6 +31,28 @@ namespace WikiApp.Models
             dateAdded = DateTime.Now;
             
         }
+
+		public int upvote { get; set; }
+
+		// Each SubtitleFile has a list of upvotes.
+		List<Upvote> upvotes { get; set; }
+		// Adds or removes Upvotes from the list.
+		public void ChangeUpvotes(Upvote up)
+		{
+			foreach(var item in upvotes)
+			{
+				if(item.userID == up.userID)
+				{
+					upvotes.Remove(item);
+					upvote -= 1;
+					return;
+				}
+			}
+			upvotes.Add(up);
+			upvote += 1;
+		}
+
+		
         
     }
 }

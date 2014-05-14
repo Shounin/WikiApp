@@ -42,18 +42,19 @@
         </ul>
 
         <div class="tabContent" id="top10Movies">
-            <table>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
+            <h3>Vinsælustu Myndirnar</h3>
+            <ul>
+                @foreach (var item in @Model.PopularMovies)
+                {
+                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+                }
+            </ul>
         </div>
 
         <div class="tabContent" id="newestMovies">
             <h3>Nýjustu Myndir</h3>
             <ul>
-                @foreach (var item in @Model.allMovies)
+                @foreach (var item in @Model.NewestMovies)
                 { 
                     <li>@Html.ActionLink(item.name, "View3", "Home", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
                 }
@@ -61,16 +62,19 @@
             </div>
 
         <div class="tabContent" id="top10Shows">
-            <h3>Vinsælustu Þættir</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur urna quis mauris iaculis eleifend. Integer pretium dolor sed ante congue, id eleifend est lacinia. Donec at bibendum leo. Aenean aliquet vitae ante nec pretium. Nullam interdum risus id fermentum fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc aliquam turpis metus, id tristique est iaculis eget. Suspendisse quis nisi in quam sollicitudin vestibulum. Morbi pellentesque arcu at magna congue, ac cursus lacus cursus. Quisque velit orci, vestibulum et lacus sed, convallis laoreet magna.</p>
-            <p>In venenatis euismod purus at laoreet. Cras rhoncus risus ut consectetur lobortis. Integer est diam, vestibulum quis lacinia et, dictum id turpis. Morbi mi augue, facilisis vitae tempor at, porttitor ac lectus. Sed sed magna tempor, congue lacus at, porta nibh. Cras fermentum ac orci scelerisque consequat. Proin pellentesque euismod augue, quis viverra tortor porta et. Sed semper rutrum eleifend. Pellentesque lobortis leo vitae lorem sagittis, consectetur interdum felis sodales. Nulla condimentum, enim sed dictum tincidunt, mi sapien tincidunt sapien, a imperdiet sapien risus ac arcu. Donec posuere risus at dolor aliquet, in accumsan lacus cursus.</p>
-            Donec laoreet mollis leo. Curabitur quis dui rutrum, vehicula odio quis, tincidunt justo. Aenean a euismod nisi, tincidunt accumsan arcu. Integer gravida malesuada diam, sed dictum urna aliquam ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris id orci sit amet tellus tristique congue sed sit amet dolor. Vestibulum sagittis metus quis arcu sagittis rutrum. Mauris tortor nibh, pulvinar sit amet est porttitor, bibendum egestas orci. Quisque eget faucibus nisl. Duis non mauris congue, mattis dui a, aliquam turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam arcu dolor, laoreet eget imperdiet nec, egestas quis dui. Fusce quis neque vel risus feugiat scelerisque quis quis magna. Donec non sapien tempus, feugiat velit quis, venenatis purus. Proin consequat elit et ipsum fermentum, at molestie felis iaculis.
+            <h3>Vinsælustu Þættirnir</h3>
+            <ul>
+            @foreach (var item in @Model.PopularTV)
+            {
+                <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+            }
+            </ul>
         </div>
 
         <div class="tabContent" id="newestShows">
             <h3>Nýjustu Þættir</h3>
             <ul>
-                @foreach (var item in @Model.allTV)
+                @foreach (var item in @Model.NewestTV)
                 {
                     <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
                 }
