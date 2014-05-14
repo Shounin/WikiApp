@@ -20,6 +20,7 @@ namespace WikiApp.DAL
         
         public DbSet<SubtitleFile> SubtitleFiles { get; set; }
         public DbSet<SubtitleComment> SubtitleComments { get; set; }
+		public DbSet<Upvote> Upvotes { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove <PluralizingTableNameConvention>();
