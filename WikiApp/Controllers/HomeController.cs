@@ -218,13 +218,13 @@ namespace WikiApp.Controllers
                             {
                                 srtContent += line + '\0';
                             }
-                            //  file.file = srtContent;
-
                         }
 
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);
                         item.state = State.Edit;
+                        item.SubtitleText = srtContent;
+                       // item.name = item.name.First().
                         repo.AddSubtitle(item);
                         repo.Save();
 
@@ -241,6 +241,7 @@ namespace WikiApp.Controllers
             }
 
 
+        [Authorize]
         public ActionResult AddRequest()
         {
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
@@ -258,6 +259,7 @@ namespace WikiApp.Controllers
             return View(new SubtitleFile());
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult AddRequest(FormCollection form)
         {
@@ -284,12 +286,13 @@ namespace WikiApp.Controllers
 
 
         }
-
+/*
 		[HttpPost]
 		public ActionResult Search()
 		{
 			return View();
 		}
+ */ 
 		[HttpGet]
 		public ActionResult Search(string searchString, string category)
 		{
@@ -329,15 +332,15 @@ namespace WikiApp.Controllers
 				return View();
 			}
 			else 
-			{
-				SubtitlesVM sVM = new SubtitlesVM();
-				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.name.Contains(searchString)
+		{
+			SubtitlesVM sVM = new SubtitlesVM();
+			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
+									where item.name.Contains(searchString)
 											&& item.category.Contains(category)
-										orderby item.name descending
-										select item);
-				return View(sVM);
-			}
+									orderby item.name descending
+									select item);
+			return View(sVM);
+		}
 	}
 }
 }
