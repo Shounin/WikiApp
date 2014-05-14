@@ -414,12 +414,13 @@ namespace WikiApp.Controllers
 
 
         }
-
+/*
 		[HttpPost]
 		public ActionResult Search()
 		{
 			return View();
 		}
+ */ 
 		[HttpGet]
 		public ActionResult Search(string searchString, string category)
 		{
@@ -449,17 +450,21 @@ namespace WikiApp.Controllers
 			{
 				SubtitlesVM sVM = new SubtitlesVM();
 				sVM.SearchResultList = (from item in repo.GetAllSubtitles()
-										where item.category == category
+										where item.category.Contains(category)
 										orderby item.name descending
 										select item);
 				return View(sVM);
+			}
+			else if(searchString == "" && category == "")
+			{
+				return View();
 			}
 			else 
 		{
 			SubtitlesVM sVM = new SubtitlesVM();
 			sVM.SearchResultList = (from item in repo.GetAllSubtitles()
 									where item.name.Contains(searchString)
-										&& item.category == category
+											&& item.category.Contains(category)
 									orderby item.name descending
 									select item);
 			return View(sVM);
