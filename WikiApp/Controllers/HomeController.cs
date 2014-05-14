@@ -442,7 +442,7 @@ namespace WikiApp.Controllers
 			categoryList.AddRange(categoryQry.Distinct());
 			ViewBag.movieGenre = new SelectList(categoryList);
 			var allSubtitles = from m in repo.GetAllSubtitles()
-							   where m.state == State.Edit && m.state == State.Ready
+							   where m.state == State.Edit || m.state == State.Ready
 							   select m;
 
 			if (!String.IsNullOrEmpty(searchString))
@@ -484,7 +484,7 @@ namespace WikiApp.Controllers
 			}
 
 
-			return View(allSubtitles);
+			return View("Search", allSubtitles);
 		}
 }
 }
