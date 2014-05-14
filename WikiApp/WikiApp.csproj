@@ -254,6 +254,7 @@
     <Content Include="Views\Home\Requests.cshtml" />
     <Content Include="Views\Home\SubtitleView.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\View3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
