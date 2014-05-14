@@ -7,18 +7,19 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="jumbotron">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
     {
         <p>
            <h3>Titill:</h3> 
             @Html.TextBox("SearchString", null, new { @placeholder = "Sláðu inn leitarorð", @class = "form-control, input-medium-search-query", @type = "text" }) 
-            <h3>Flokkur:</h3> @Html.DropDownList("movieGenre", null, "Allir", new { @class = "form-control input-medium-search-query" }) <br />
+            <h3>Flokkur:</h3> 
+            @Html.DropDownList("movieGenre", null, "Allir", new { @class = "form-control" }) <br />
             <input type="submit" value="Leita" class="btn btn-primary" />
         </p>
     }
 </div>
 <div>
-    <table class="Thetable">
+    <table class="table table-striped">
         <tr id="Variables">
             <th>Nafn</th>
             <th>Flokkur</th>
@@ -44,7 +45,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.dateAdded)
                 </td>
-
             </tr>
         }
     </table>
