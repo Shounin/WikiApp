@@ -17,7 +17,9 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
          SubtitleRepository repo = new SubtitleRepository();
-        //SubtitleContext repo2 = new SubtitleContext();
+        SubtitleContext repo2 = new SubtitleContext();
+		 UpvoteRepository upvRepo = new UpvoteRepository();
+
 		public ActionResult Index() 
 		{
             SubtitlesVM vm = new SubtitlesVM();
@@ -40,8 +42,8 @@ namespace WikiApp.Controllers
                                 where item.state == State.Edit && item.category == "Þættir"
                                 orderby item.upvote descending
                                 select item).Take(10);
-            
-            return View(vm);
+
+			return View(vm);
         }
         [HttpPost]
         public ActionResult Index(string searchString)
