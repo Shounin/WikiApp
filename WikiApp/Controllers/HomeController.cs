@@ -146,17 +146,52 @@ namespace WikiApp.Controllers
            // return View();
            // return View(new SubtitleFile());
         }
-        public ActionResult View3()
+        public ActionResult View3(int? subtitleid)
         {
             ViewBag.Message = "Here you can request subtitles.";
 
-            SubtitlesVM vm = new SubtitlesVM();
-            vm.allMovies = (from item in repo.GetAllSubtitles()
-                            orderby item.ID descending
-                            select item).Take(10);
+            CommentVM cvm = new CommentVM();
+            cvm.allComments = CommentRepository.Instance.GetComments();
 
-            return View(vm); 
+            cvm.allSubtitleFiles = (from item in repo.GetAllSubtitles()
+                                    where subtitleid == item.ID
+                                    select item);
 
+            return View(cvm); 
+        }
+
+        [HttpPost]
+        public ActionResult View3(FormCollection formData)
+        {
+            String strComment = formData["CommentText"];
+            if (!String.IsNullOrEmpty(strComment))
+            {
+                SubtitleComment c = new SubtitleComment();
+
+                c.commentText = strComment;
+                String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                if (!String.IsNullOrEmpty(strUser))
+                {
+                    int slashPos = strUser.IndexOf("\\");
+                    if (slashPos != -1)
+                    {
+                        strUser = strUser.Substring(slashPos + 1);
+                    }
+                    c.username = strUser;
+
+                    CommentRepository.Instance.AddComment(c);
+                }
+                else
+                {
+                    c.username = "Unknown user";
+                }
+                return RedirectToAction("CommentView");
+            }
+            else
+            {
+                ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
+                return Index();
+            }
         }
 
         public ActionResult About()
