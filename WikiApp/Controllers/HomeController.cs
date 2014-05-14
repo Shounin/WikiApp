@@ -253,14 +253,9 @@ namespace WikiApp.Controllers
         {
             ViewBag.Message = "Here you can request subtitles.";
 
-            SubtitlesVM vm = new SubtitlesVM();
-            vm.NewestMovies = (from item in repo.GetAllSubtitles()
-                            orderby item.ID descending
-                            select item).Take(10);
             CommentVM cvm = new CommentVM();
             cvm.allComments = CommentRepository.Instance.GetComments();
 
-            return View(vm); 
 
             return View(cvm); 
         }
