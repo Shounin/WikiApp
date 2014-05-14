@@ -17,14 +17,13 @@
         }
     </ul>
     </div>*@
-    <table class= "Thetable">
+    <table class="table table-striped">
         <tr id="Variables">
             <th>Nafn</th>
             <th>Likes</th>
             <th>Flokkur</th>
             <th>Sett inn</th>
         </tr>
-
         @foreach (var item in @Model.allMovies)
         {
             <tr>
@@ -33,10 +32,10 @@
                 <td>@item.category</td>
                 <td>@item.dateAdded</td>
             </tr>
-        }    
-           @* <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li> *@
-                
-        
+        }
+        @* <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li> *@
+
+
     </table>
 </div>
         

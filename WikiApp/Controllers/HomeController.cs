@@ -156,7 +156,6 @@ namespace WikiApp.Controllers
                             select item).Take(10);
 
             return View(vm); 
-
         }
 
         public ActionResult About()
