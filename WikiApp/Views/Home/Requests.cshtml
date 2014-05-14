@@ -37,7 +37,7 @@
         @foreach (var item in @Model.NewestMovies)
         {
             <tr>
-                <td>@item.name</td>
+                <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                 <td>@item.upvote</td>
                 <td>@item.category</td>
                 <td>@item.dateAdded</td>
@@ -49,4 +49,6 @@
     </table>
 </div>
         
+
+
 @Html.ActionLink("Bæta við beiðni", "AddRequest", null, new { @class = "btn btn-default navbar-btn" })

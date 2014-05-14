@@ -20,10 +20,12 @@
 
         Líkar við: @item.upvote <br />
 
-        Slóð: @item.path
+        Slóð: @item.path <br />
+
+        @Html.ActionLink("UpvoteSubtitle", "Home", null, new { @class="btn btn-info" })
     </div>
 
-    /*
+
     <ul class="list-group" style="max-width: 560px;">
         @foreach (var item1 in @Model.allComments)
         {
@@ -52,7 +54,6 @@
             }
         </li>
     </ul>
-    */
 
 }
 

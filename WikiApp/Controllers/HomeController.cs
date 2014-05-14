@@ -18,6 +18,8 @@ namespace WikiApp.Controllers
 	{
          SubtitleRepository repo = new SubtitleRepository();
         //SubtitleContext repo2 = new SubtitleContext();
+		 UpvoteRepository upvRepo = new UpvoteRepository();
+
 		public ActionResult Index() 
 		{
             SubtitlesVM vm = new SubtitlesVM();
@@ -249,12 +251,16 @@ namespace WikiApp.Controllers
         }
         public ActionResult View3(int? id)
         {
-
+            
             CommentVM comment1 = new CommentVM();
-            /*comment1.allComments = CommentRepository.Instance.GetComments();*/
-
+            /*comment1.allComments = SubtitleRepository.GetAllComments();*/
+            
             comment1.allSubtitleFiles = (from item in repo.GetAllSubtitles()
                                          where id == item.ID
+                                         select item);
+
+            comment1.allComments = (from item in repo.GetAllComments()
+                                         where id == item.subtitleid
                                          select item);
 
             return View(comment1);
@@ -281,7 +287,7 @@ namespace WikiApp.Controllers
                     }
                     c.username = strUser;
 
-                    CommentRepository.Instance.AddComment(c);
+                    SubtitleRepository.Instance.AddComment(c);
                 }
                 else
                 {
@@ -442,7 +448,7 @@ namespace WikiApp.Controllers
 			ViewBag.movieGenre = new SelectList(categoryList);
 			var allSubtitles = from m in repo.GetAllSubtitles()
 							   where m.state == State.Edit || m.state == State.Ready
-							select m;
+							   select m;
 
 			if (!String.IsNullOrEmpty(searchString))
 			{
@@ -484,6 +490,15 @@ namespace WikiApp.Controllers
 
 
 			return View("Search", allSubtitles);
+		}
+
+		public ActionResult UpvoteSubtitle(SubtitleFile subtitle, ApplicationUser user)
+		{
+			Upvote up = new Upvote();
+			up.subtitleFileID = subtitle.ID;
+			up.applicationUserID = user.Id;
+			
+			return View();
 		}
 }
 }

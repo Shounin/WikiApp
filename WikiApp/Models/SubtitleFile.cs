@@ -34,16 +34,6 @@ namespace WikiApp.Models
 
 		public int upvote { get; set; }
 
-		// Each SubtitleFile has a list of upvotes.
-		List<Upvote> upvotes { get; set; }
-		// Adds or removes Upvotes from the list.
-		public void ChangeUpvotes(Upvote up)
-		{
-			
-		}
-
-		
-        
     }
 }
 

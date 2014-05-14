@@ -8,7 +8,7 @@ using WikiApp.DAL;
 namespace WikiApp.Models
 {
     public class CommentRepository
-    {
+    {/*
         private static CommentRepository instance;
 
         public static CommentRepository Instance
@@ -41,17 +41,6 @@ namespace WikiApp.Models
             return result;
         }
 
-        public void AddComment(SubtitleComment c)
-        {
-            int newID = 1;
-            if (comments.Count() > 0)
-            {
-                newID = comments.Max(x => x.ID) + 1;
-            }
-            c.ID = newID;
-            c.commentDate = DateTime.Now;
-            comments.Add(c);
-        }
-
+        */
     }
 }
