@@ -262,7 +262,7 @@ namespace WikiApp.Controllers
 
             return View(vm); 
 
-            return View(cvm); 
+            //return View(cvm); 
         }
 
         [HttpPost]
@@ -444,7 +444,8 @@ namespace WikiApp.Controllers
 			categoryList.AddRange(categoryQry.Distinct());
 			ViewBag.movieGenre = new SelectList(categoryList);
 			var allSubtitles = from m in repo.GetAllSubtitles()
-							select m;
+							   where m.state == State.Edit && m.state == State.Ready
+							   select m;
 
 			if (!String.IsNullOrEmpty(searchString))
 			{
@@ -459,5 +460,33 @@ namespace WikiApp.Controllers
 
 			return View(allSubtitles); 
 	}
+
+		public ActionResult RequestSearch(string searchString, string category)
+		{
+			var categoryList = new List<string>();
+
+			var categoryQry = from d in repo.GetAllSubtitles()
+							  orderby d.category
+							  select d.category;
+
+			categoryList.AddRange(categoryQry.Distinct());
+			ViewBag.movieGenre = new SelectList(categoryList);
+			var allSubtitles = from m in repo.GetAllSubtitles()
+							   where m.state == State.Request
+							   select m;
+
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
+			}
+
+			if (!string.IsNullOrEmpty(category))
+			{
+				allSubtitles = allSubtitles.Where(x => x.category == category);
+			}
+
+
+			return View(allSubtitles);
+		}
 }
 }

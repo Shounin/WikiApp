@@ -41,7 +41,7 @@ namespace WikiApp.Models
 		{
 			foreach(var item in upvotes)
 			{
-				if(item.username == up.username)
+				if(item.userID == up.userID)
 				{
 					upvotes.Remove(item);
 					upvote -= 1;
