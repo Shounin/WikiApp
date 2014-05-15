@@ -22,7 +22,7 @@
 
         Slóð: @item.path <br />
         
-        @Html.ActionLink("Líka við", "UpvoteSubtitle", "Home") <br />
+        @Html.ActionLink("Líka við", "UpvoteSubtitle", new { subtitleFileID = @item.ID }) <br />
 
         @Html.ActionLink("Niðurhala", "Downloader", "Home", new { id = item.ID }, null)
     </div>

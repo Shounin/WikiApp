@@ -173,6 +173,14 @@
     <Compile Include="Migrations\201405151517311_Initial.Designer.cs">
       <DependentUpon>201405151517311_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201405151833498_AddSubtitleFileID.cs" />
+    <Compile Include="Migrations\201405151833498_AddSubtitleFileID.Designer.cs">
+      <DependentUpon>201405151833498_AddSubtitleFileID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405151836244_AddUpvoteClass.cs" />
+    <Compile Include="Migrations\201405151836244_AddUpvoteClass.Designer.cs">
+      <DependentUpon>201405151836244_AddUpvoteClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentRepository.cs" />
@@ -263,6 +271,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201405151517311_Initial.resx">
       <DependentUpon>201405151517311_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405151833498_AddSubtitleFileID.resx">
+      <DependentUpon>201405151833498_AddSubtitleFileID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405151836244_AddUpvoteClass.resx">
+      <DependentUpon>201405151836244_AddUpvoteClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
