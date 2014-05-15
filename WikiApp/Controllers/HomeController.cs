@@ -81,6 +81,7 @@ namespace WikiApp.Controllers
                             select item);
 
             vm2.stuff = (from item in repo.GetAllSubtitles()
+                         where item.state == State.Edit
                          orderby item.ID ascending
                          group item by item.name[0]);
 
