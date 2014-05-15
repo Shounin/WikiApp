@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WikiApp.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WikiApp.Models
 {
