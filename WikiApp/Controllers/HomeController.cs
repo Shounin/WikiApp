@@ -17,7 +17,7 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
          SubtitleRepository repo = new SubtitleRepository();
-        //SubtitleContext repo2 = new SubtitleContext();
+         //SubtitleContext repo2 = new SubtitleContext();
 		 UpvoteRepository upvRepo = new UpvoteRepository();
 
 		public ActionResult Index() 
@@ -42,7 +42,7 @@ namespace WikiApp.Controllers
                                 where item.state == State.Edit && item.category == "Þættir"
                                 orderby item.upvote descending
                                 select item).Take(10);
-            
+
             return View(vm);
         }
         [HttpPost]
@@ -78,10 +78,19 @@ namespace WikiApp.Controllers
 
             //}
 
-            vm2.A= (from item in repo.GetAllSubtitles()
-                    where item.name[0] == 'A'
-                    orderby item.ID descending
-                    select item);
+            // Marteinn að reyna eitthvað //
+            //for (int i = 0; i < 3; i++ )
+            //{
+            //    vm2.subtitle[i] = (from item in repo.GetAllSubtitles()
+            //                      where item.name[0] == vm2.numbers[i]
+            //                      orderby item.ID descending
+            //                      select item);
+            //}
+
+            vm2.A = (from item in repo.GetAllSubtitles()
+                     where item.name[0] == 'A'
+                     orderby item.ID descending
+                     select item);
 
             vm2.B = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'B'
@@ -125,7 +134,7 @@ namespace WikiApp.Controllers
                      orderby item.ID descending
                      select item);
             vm2.L = (from item in repo.GetAllSubtitles()
-                    where item.name[0] == 'L'
+                     where item.name[0] == 'L'
                      orderby item.ID descending
                      select item);
             vm2.M = (from item in repo.GetAllSubtitles()
