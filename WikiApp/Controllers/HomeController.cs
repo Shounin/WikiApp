@@ -494,10 +494,18 @@ namespace WikiApp.Controllers
 
 		public ActionResult UpvoteSubtitle(SubtitleFile subtitle, ApplicationUser user)
 		{
+			IEnumerable<Upvote> allUpvotes = upvRepo.GetAllUpvotes();
 			Upvote up = new Upvote();
 			up.subtitleFileID = subtitle.ID;
 			up.applicationUserID = user.Id;
-			
+			if(allUpvotes.Contains(up))
+			{
+				upvRepo.RemoveUpvote(up);
+			}
+			else
+			{
+				upvRepo.AddUpvote(up);
+			}
 			return View();
 		}
 }
