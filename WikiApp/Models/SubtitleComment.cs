@@ -15,8 +15,7 @@ namespace WikiApp.Models
         public string username { get; set; }
         public string commentText { get; set; }
 
-
-
-        public int subtitleid { get; set; }
+        public int SubtitleFileID { get; set; }
+        public virtual SubtitleFile SubtitleFile { get; set; }
     }
 }

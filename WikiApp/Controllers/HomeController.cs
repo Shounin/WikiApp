@@ -137,7 +137,7 @@ namespace WikiApp.Controllers
                                          select item);
 
             comment1.allComments = (from item in repo.GetAllComments()
-                                         where id == item.subtitleid
+                                         where id == item.SubtitleFileID
                                          select item);
 
             return View(comment1);
