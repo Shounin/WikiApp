@@ -10,7 +10,7 @@ namespace WikiApp.Models
 	{
 		public int ID { get; set; }
 
-		public int SubtitleFileID { get; set; }
+		public int subtitleFileID { get; set; }
 		public virtual SubtitleFile SubtitleFile { get; set; }
 		
 		public string applicationUserID { get; set; }

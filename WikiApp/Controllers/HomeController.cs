@@ -18,8 +18,6 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
          SubtitleRepository repo = new SubtitleRepository();
-         SubtitleContext repo2 = new SubtitleContext();
-		 UpvoteRepository upvRepo = new UpvoteRepository();
 
 		public ActionResult Index() 
 		{
@@ -401,24 +399,25 @@ namespace WikiApp.Controllers
 			return View("Search", allSubtitles);
 		}
 
-		public ActionResult UpvoteSubtitle(SubtitleFile subtitle, ApplicationUser user)
+		public ActionResult UpvoteSubtitle(SubtitleFile subtitle)
 		{
-			/*IEnumerable<Upvote> allUpvotes = upvRepo.GetAllUpvotes();
+			IEnumerable<Upvote> upvotes = SubtitleRepository.Instance.GetAllUpvotes();
 			Upvote up = new Upvote();
 			up.subtitleFileID = subtitle.ID;
-			up.applicationUserID = user.Id;
+			up.applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-			var userName = User.Identity.Name;
-			if(allUpvotes.Contains(up))
+			if(upvotes.Contains(up))
 			{
-				upvRepo.RemoveUpvote(up);
+				SubtitleRepository.Instance.RemoveUpvote(up);
+				subtitle.upvote--;
 			}
 			else
 			{
-				upvRepo.AddUpvote(up);
+				SubtitleRepository.Instance.AddUpvote(up);
+				subtitle.upvote++;
 			}
-			 */
-			return View();
+
+			return RedirectToAction("View3");
 		}
 
         static byte[] GetBytes(string str)
