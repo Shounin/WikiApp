@@ -295,8 +295,6 @@ namespace WikiApp.Controllers
                         strUser = strUser.Substring(slashPos + 1);
                     }
                     c.username = strUser;
-
-                    SubtitleRepository.Instance.AddComment(c);
                 }
                 else
                 {
@@ -380,11 +378,8 @@ namespace WikiApp.Controllers
                         repo.AddSubtitle(item);
                         repo.Save();
 
-
-
                         ModelState.Clear();
                         
-
                         ViewBag.Message = "File uploaded successfully";
                     }
                 }

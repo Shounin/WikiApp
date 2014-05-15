@@ -115,19 +115,19 @@
 {
     @Html.ValidationSummary();
     
-    <fieldset>
+<fieldset>
         <legend>Bæta við skrá</legend>
 
         <div class="form-group">
 
 
-            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.name, "Nafn", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name)
                 @Html.ValidationMessageFor(model => model.name)
             </div>
 
-            @Html.LabelFor(model => model.category, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.category, "Flokkur", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.category, ViewData["Categories"] as List<SelectListItem>, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.category)
@@ -135,10 +135,9 @@
             </div>
 
 
-
-            @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.description, "Lýsing", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.description)
+                @Html.TextAreaFor(model => model.description)
                 @Html.ValidationMessageFor(model => model.description)
             </div>
             <div class="col-md-10">
