@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WikiApp.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WikiApp.Models
 {
@@ -13,5 +14,6 @@ namespace WikiApp.Models
         public DateTime commentDate { get; set; }
         public string username { get; set; }
         public string commentText { get; set; }
+        public int subtitleid { get; set; }
     }
 }

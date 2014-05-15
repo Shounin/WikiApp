@@ -1,4 +1,4 @@
-﻿@model WikiApp.Models.View_Models.SubtitlesVM
+﻿@model IEnumerable<WikiApp.Models.SubtitleFile>
 @{
     ViewBag.Title = "Leit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,33 +7,48 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="jumbotron">
-    @using (Html.BeginForm("Search", "Home", @FormMethod.Get))
+    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
     {
         <p>
-            @Html.TextBox("SearchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð" })
-            @Html.LabelFor(model => model.category, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.category, ViewData["Categories"] as List<SelectListItem>)
-                @Html.ValidationMessageFor(model => model.category)
-            </div>
+           <h3>Titill:</h3> 
+            @Html.TextBox("SearchString", null, new { @placeholder = "Sláðu inn leitarorð", @class = "form-control, input-medium-search-query", @type = "text" }) 
+            <h3>Flokkur:</h3> 
+            @Html.DropDownList("movieGenre", null, "Allir", new { @class = "form-control" }) <br />
             <input type="submit" value="Leita" class="btn btn-primary" />
-            @Html.ActionLink("Ítarleg leit", "Search", "Home", null, new { @class = "btn btn-info" })
         </p>
     }
 </div>
 <div>
-    <table class="Thetable">
+    <table class="table table-striped">
         <tr id="Variables">
             <th>Nafn</th>
             <th>Flokkur</th>
+            <th>Lýsing</th>
+            <th>Líkar við</th>
             <th>Sett inn</th>
         </tr>
-        @foreach (var item in @Model.SearchResultList)
+
+
+
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@item.name</td>
-                <td>@item.category</td>
-                <td>@item.dateAdded</td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>*@
+                <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.upvote)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateAdded)
+                </td>
             </tr>
         }
     </table>

@@ -7,6 +7,15 @@
 <h2>@ViewBag.Title</h2>
 
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
+<div class="jumbotron">
+    @using (Html.BeginForm("RequestSearch", "Home", @FormMethod.Get))
+    {
+        <p>
+            @Html.TextBox("SearchString", null, new { @class = "input-medium-search-query", @type = "text", @placeholder = "Sláðu inn leitarorð" })
+            <input type="submit" value="Leita" class="btn btn-primary" /> <br />
+        </p>
+    }
+</div>
 
 <div class="row">
     @*<div class="col-lg-12">
@@ -17,7 +26,7 @@
         }
     </ul>
     </div>*@
-    <table class= "Thetable">
+    <table class="table table-striped">
         <tr id="Variables">
             <th>Nafn</th>
             <th>Likes</th>
@@ -25,10 +34,10 @@
             <th>Sett inn</th>
         </tr>
 
-        @foreach (var item in @Model.allMovies)
+        @foreach (var item in @Model.NewestMovies)
         {
             <tr>
-                <td>@item.name</td>
+                <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                 <td>@item.upvote</td>
                 <td>@item.category</td>
                 <td>@item.dateAdded</td>
@@ -40,4 +49,6 @@
     </table>
 </div>
         
-@Html.ActionLink("Bæta við beiðni", "AddRequest")
+
+
+@Html.ActionLink("Bæta við beiðni", "AddRequest", null, new { @class = "btn btn-default navbar-btn" })
