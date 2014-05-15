@@ -36,25 +36,25 @@
             <ul>
                 @foreach (var item in Model.allFiles)
                 {
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category &nbsp;&nbsp;&nbsp; @Html.ActionLink("Niðurhala", "Downloader", "Home", new {id = item.ID}, null)</li>
                 }
             </ul>
         </div>
 
 
-        @if (Model.specificFiles != null)
-        {
-            foreach (var item in @Model.specificFiles)
-                {
-                    item.key = item.name[0];
-                     <div class="tabContent" id="@item.key">
+     <!--   if (Model.specificFiles != null)
+     //   {
+         //   foreach (var item in Model.specificFiles)
+              //  {
+                   // item.key = item.name[0];
+                     <div class="tabContent" id="item.key">
                          <ul>
-                            <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
+                            <li>Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp;item.dateAdded &nbsp;&nbsp;&nbsp; item.category</li>
                         </ul>
                      </div>
                  }  
         }
-
+         -->
 
 
 

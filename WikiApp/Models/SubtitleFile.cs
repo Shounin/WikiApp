@@ -17,9 +17,7 @@ namespace WikiApp.Models
         public string category { get; set; }
         public string description { get; set; }
         public DateTime dateAdded { get; set; }
-        public int upvote { get; set; }
         public string path { get; set; }
-        public char key { get; set; }
 
         public State state { get; set; }
 
@@ -32,6 +30,8 @@ namespace WikiApp.Models
             dateAdded = DateTime.Now;
             
         }
+        public int upvote { get; set; }
+
         
     }
 }
