@@ -8,9 +8,12 @@ namespace WikiApp.Models.View_Models
     public class SubtitlesVM
     {
         
-        public IEnumerable<SubtitleFile> allMovies { get; set; }
-        public IEnumerable<SubtitleFile> specificFiles { get; set; }
-        public IEnumerable<SubtitleFile> allTV { get; set; }
+        public IEnumerable<SubtitleFile> NewestMovies { get; set; }
+
+        public IEnumerable<SubtitleFile> PopularMovies { get; set; }
+     
+        public IEnumerable<SubtitleFile> NewestTV { get; set; }
+        public IEnumerable<SubtitleFile> PopularTV { get; set; }
         public IEnumerable<SubtitleFile> allFiles { get; set; }
         public char FirstLetter { get; set; }
 		public IEnumerable<SubtitleFile> SearchResultList { get; set; }

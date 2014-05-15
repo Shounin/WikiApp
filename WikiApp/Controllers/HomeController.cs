@@ -21,15 +21,25 @@ namespace WikiApp.Controllers
 		public ActionResult Index() 
 		{
             SubtitlesVM vm = new SubtitlesVM();
-            vm.allMovies = (from item in repo.GetAllSubtitles()
+            vm.NewestMovies = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit && item.category != "Þættir"
                             orderby item.ID descending
                             select item).Take(10);
 
-            vm.allTV = (from item in repo.GetAllSubtitles()
+            vm.NewestTV = (from item in repo.GetAllSubtitles()
                         where item.state == State.Edit && item.category == "Þættir"
                         orderby item.ID descending
                         select item).Take(10);
+            
+            vm.PopularMovies = (from item in repo.GetAllSubtitles()
+                           where item.state == State.Edit && item.category != "Þættir"
+                           orderby item.upvote descending
+                           select item).Take(10);
+
+            vm.PopularTV = (from item in repo.GetAllSubtitles()
+                                where item.state == State.Edit && item.category == "Þættir"
+                                orderby item.upvote descending
+                                select item).Take(10);
             
             return View(vm);
         }
@@ -185,45 +195,11 @@ namespace WikiApp.Controllers
             
             return View(vm2);
 		}
-        [HttpPost]
-        public ActionResult AllSubtitles(char x)
-        {
-            ViewBag.Message = "Listi yfir alla skjátexta.";
-            SubtitlesVM vm2 = new SubtitlesVM();
-            vm2.specificFiles = (from item in repo.GetAllSubtitles()
-                            where item.name[0] == x
-                            orderby item.ID descending
-                            select item);
 
 
-            return View(vm2);
-        }
 
 
-/*
-         [HttpPost]
-		public ActionResult AllSubtitles(string id) 
-		{ 
-			ViewBag.Message = "Listi yfir alla skjátexta.";
-            SubtitlesVM vm3 = new SubtitlesVM();
-            vm3.allFiles = (from item in repo.GetAllSubtitles()
-                               where item.name.StartsWith(id)
-                               select item);
-            vm3.allFiles = (from item in repo.GetAllSubtitles()
-                            group item by item.name.Substring(0, 1)
-                                into itemgroup
-                                select new SubtitlesVM()
-                                {
-                                    FirstLetter = itemgroup.Key,
-                                    allFiles = itemgroup.ToList()
-
-                                }).OrderBy(mapping => mapping.FirstLetter);
                            
-            return View(vm3);
-		} */
-      
-
-
         // Add a new SubtitleFile to the database //
 		[Authorize]
         [HttpGet]
@@ -258,30 +234,31 @@ namespace WikiApp.Controllers
         {
             ViewBag.Message = "Here you can request subtitles.";
             SubtitlesVM vm = new SubtitlesVM();
-            vm.allMovies = (from item in repo.GetAllSubtitles()
+            vm.NewestMovies = (from item in repo.GetAllSubtitles()
                             where item.state == State.Request && item.category != "Þættir"
                             orderby item.ID descending
                             select item).Take(10);
 
-            vm.allTV = (from item in repo.GetAllSubtitles()
+            vm.NewestTV = (from item in repo.GetAllSubtitles()
                         where item.state == State.Request && item.category != "Þættir"
                         orderby item.ID descending
                         select item).Take(10);
 
             return View(vm);
-           // return View();
-           // return View(new SubtitleFile());
+
         }
         public ActionResult View3(int? subtitleid)
         {
             ViewBag.Message = "Here you can request subtitles.";
 
+            SubtitlesVM vm = new SubtitlesVM();
+            vm.NewestMovies = (from item in repo.GetAllSubtitles()
+                            orderby item.ID descending
+                            select item).Take(10);
             CommentVM cvm = new CommentVM();
             cvm.allComments = CommentRepository.Instance.GetComments();
 
-            cvm.allSubtitleFiles = (from item in repo.GetAllSubtitles()
-                                    where subtitleid == item.ID
-                                    select item);
+            return View(vm); 
 
             return View(cvm); 
         }
@@ -317,7 +294,7 @@ namespace WikiApp.Controllers
             {
                 ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
                 return Index();
-            }
+        }
         }
 
         public ActionResult About()
@@ -473,12 +450,12 @@ namespace WikiApp.Controllers
 			}
 			   
 			if (!string.IsNullOrEmpty(category))
-			{
+		{
 				allSubtitles = allSubtitles.Where(x => x.category == category);
-			}
+		}
 
 
 			return View(allSubtitles); 
-		}
 	}
+}
 }

@@ -11,8 +11,9 @@
     {
         <p>
            <h3>Titill:</h3> 
-            @Html.TextBox("SearchString", null, new { @placeholder="Sláðu inn leitarorð", @class="form-control"}) 
-            <h3>Flokkur:</h3> @Html.DropDownList("movieGenre", null, "Allir", new { @class="form-control" }) <br />
+            @Html.TextBox("SearchString", null, new { @placeholder = "Sláðu inn leitarorð", @class = "form-control, input-medium-search-query", @type = "text" }) 
+            <h3>Flokkur:</h3> 
+            @Html.DropDownList("movieGenre", null, "Allir", new { @class = "form-control" }) <br />
             <input type="submit" value="Leita" class="btn btn-primary" />
         </p>
     }

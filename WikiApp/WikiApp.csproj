@@ -193,6 +193,7 @@
     <Compile Include="Models\SubtitleRepository.cs" />
     <Compile Include="Models\SubtitleFile.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Upvote.cs" />
     <Compile Include="Models\View Models\CommentVM.cs" />
     <Compile Include="Models\View Models\SubtitlesVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
