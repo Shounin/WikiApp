@@ -65,7 +65,7 @@ namespace WikiApp.Controllers
             SubtitlesVM vm2 = new SubtitlesVM();
             vm2.allFiles = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit
-                            orderby item.ID descending
+                            orderby item.name ascending
                             select item);
 
            // for (int i = 'A'; i < vm2.alphaBetical.Length; i++)
@@ -78,79 +78,88 @@ namespace WikiApp.Controllers
 
             //}
 
-            vm2.A= (from item in repo.GetAllSubtitles()
+            // Marteinn að reyna eitthvað //
+            //for (int i = 0; i < 3; i++ )
+            //{
+            //    vm2.subtitle[i] = (from item in repo.GetAllSubtitles()
+            //                      where item.name[0] == vm2.numbers[i]
+            //                      orderby item.ID descending
+            //                      select item);
+            //}
+
+            vm2.A = (from item in repo.GetAllSubtitles()
                     where item.name[0] == 'A'
-                    orderby item.ID descending
+                    orderby item.ID ascending
                     select item);
 
             vm2.B = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'B'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
 
             vm2.C = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'C'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.D = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'D'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.E = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'E'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.F = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'F'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.G = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'G'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.H = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'H'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.I = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'I'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.J = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'J'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.K = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'K'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.L = (from item in repo.GetAllSubtitles()
                     where item.name[0] == 'L'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.M = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'M'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.N = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'N'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.O = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'O'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.P = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'P'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.Q = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'Q'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.R = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'R'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.S = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'S'
@@ -166,11 +175,11 @@ namespace WikiApp.Controllers
                      select item);
             vm2.V = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'V'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.W = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'W'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.X = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'X'
@@ -178,11 +187,11 @@ namespace WikiApp.Controllers
                      select item);
             vm2.Y = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'Y'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.Z = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'Z'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
 
            /* darf ad fa vm2 til ad taka a moti for lykkjunni
@@ -293,7 +302,7 @@ namespace WikiApp.Controllers
                 {
                     c.username = "Unknown user";
                 }
-                return RedirectToAction("CommentView");
+                return RedirectToAction("View3");
             }
             else
             {
@@ -350,8 +359,6 @@ namespace WikiApp.Controllers
                     else
                     {
                         //TO:DO
-                        var fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
                         
                         string srtContent = null;
                         using (StreamReader sr = new StreamReader(file.InputStream, Encoding.Default, true))
@@ -359,7 +366,7 @@ namespace WikiApp.Controllers
                             string line;
                             while ((line = sr.ReadLine()) != null)
                             {
-                                srtContent += line + '\0';
+                                srtContent += line + '\n';
                             }
                         }
 
@@ -367,15 +374,12 @@ namespace WikiApp.Controllers
                         UpdateModel(item);
                         item.state = State.Edit;
                         item.SubtitleText = srtContent;
-                       // item.name = item.name.First().
+                        item.name = char.ToUpper(item.name[0]) + item.name.Substring(1);
                         repo.AddSubtitle(item);
                         repo.Save();
 
-
-
                         ModelState.Clear();
                         
-
                         ViewBag.Message = "File uploaded successfully";
                     }
                 }
@@ -507,8 +511,35 @@ namespace WikiApp.Controllers
 			else
 			{
 				upvRepo.AddUpvote(up);
-			}*/
+			}
+			 */
 			return View();
 		}
+	
+        [HttpGet]
+        public ActionResult Downloader(int? id)
+        {
+            var subFile = (from item in repo.GetAllSubtitles()
+                        where item.ID == id
+                        select item).SingleOrDefault().SubtitleText;
+
+
+            string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string pathDownload = Path.Combine(pathUser, "Downloads");
+            
+
+            using (StreamWriter writer = new StreamWriter(@pathDownload, false))
+            {
+                writer.Write(subFile);
+            }
+
+            var sb = new StringBuilder();
+
+            return File(Encoding.UTF8.GetBytes(sb.ToString()), System.Net.Mime.MediaTypeNames.Application.Octet, "ReportCsv.csv");
+
+         //   return RedirectToAction("Index");
+			
+		}
+
 }
 }

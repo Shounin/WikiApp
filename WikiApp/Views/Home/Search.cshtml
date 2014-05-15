@@ -27,12 +27,16 @@
             <th>Líkar við</th>
             <th>Sett inn</th>
         </tr>
+
+
+
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.name)
-                </td>
+                </td>*@
+                <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.category)
                 </td>
