@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="jumbotron">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
     {
         <p>
            <h3>Titill:</h3> 
