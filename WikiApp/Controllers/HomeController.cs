@@ -22,7 +22,18 @@ namespace WikiApp.Controllers
 
 		public ActionResult Index() 
 		{
-            SubtitlesVM vm = new SubtitlesVM();
+			// Stuff for the category drop-down menu.
+			var categoryList = new List<string>();
+
+			var categoryQry = from d in repo.GetAllSubtitles()
+							  orderby d.category
+							  select d.category;
+
+			categoryList.AddRange(categoryQry.Distinct());
+			ViewBag.movieGenre = new SelectList(categoryList);
+			// Drop-down stuff completed
+            
+			SubtitlesVM vm = new SubtitlesVM();
             vm.NewestMovies = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit && item.category != "Þættir"
                             orderby item.ID descending
