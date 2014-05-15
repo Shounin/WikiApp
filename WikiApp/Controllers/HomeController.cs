@@ -17,7 +17,7 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
          SubtitleRepository repo = new SubtitleRepository();
-        //SubtitleContext repo2 = new SubtitleContext();
+         //SubtitleContext repo2 = new SubtitleContext();
 		 UpvoteRepository upvRepo = new UpvoteRepository();
 
 		public ActionResult Index() 
@@ -53,7 +53,7 @@ namespace WikiApp.Controllers
                                 where item.state == State.Edit && item.category == "Þættir"
                                 orderby item.upvote descending
                                 select item).Take(10);
-            
+
             return View(vm);
         }
         [HttpPost]
@@ -78,11 +78,11 @@ namespace WikiApp.Controllers
                             where item.state == State.Edit
                             orderby item.name ascending
                             select item);
-            
+
             vm2.stuff = (from item in repo.GetAllSubtitles()
                          orderby item.ID ascending
                          group item by item.name[0]);
-            
+
             return View(vm2);
 		}
 
@@ -148,7 +148,7 @@ namespace WikiApp.Controllers
                                          select item);
 
             comment1.allComments = (from item in repo.GetAllComments()
-                                         where id == item.subtitleid
+                                         where id == item.SubtitleFileID
                                          select item);
 
             return View(comment1);
@@ -174,8 +174,6 @@ namespace WikiApp.Controllers
                         strUser = strUser.Substring(slashPos + 1);
                     }
                     c.username = strUser;
-
-                    SubtitleRepository.Instance.AddComment(c);
                 }
                 else
                 {
@@ -187,7 +185,7 @@ namespace WikiApp.Controllers
             {
                 ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
                 return Index();
-        }
+            }
         }
 
         public ActionResult About()
@@ -415,5 +413,5 @@ namespace WikiApp.Controllers
 
             return File(GetBytes(subFile), System.Net.Mime.MediaTypeNames.Application.Octet, subName + ".srt");			
 		}
-    }
+}
 }

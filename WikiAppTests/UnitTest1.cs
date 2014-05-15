@@ -9,6 +9,7 @@ namespace WikiAppTests
         [TestMethod]
         public void TestMethod1()
         {
+
         }
     }
 }
