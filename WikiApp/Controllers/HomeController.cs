@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Web;
@@ -80,6 +81,7 @@ namespace WikiApp.Controllers
                             select item);
 
             vm2.stuff = (from item in repo.GetAllSubtitles()
+                         where item.state == State.Edit
                          orderby item.ID ascending
                          group item by item.name[0]);
 
@@ -191,12 +193,35 @@ namespace WikiApp.Controllers
             }
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult About(String Name, String Email, String Message)
         {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.From = new MailAddress("fromadd");
+                mail.To.Add("toadd");
+                mail.Subject = "Test Mail";
+                mail.Body = "This is for testing SMTP mail from GMAIL";
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
+                SmtpServer.EnableSsl = true;
 
-            ViewBag.Message = "About the site";
+                SmtpServer.Send(mail);
+                return RedirectToAction("Home");
+            }
+            catch (Exception ex)
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.From = new MailAddress("fromadd");
+                mail.To.Add("toadd");
+                mail.Subject = "Test Mail";
+                mail.Body = ex.ToString();
 
-            return View();
+                return RedirectToAction("Home");
+                }
         }
 
 		[Authorize]
