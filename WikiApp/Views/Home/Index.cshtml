@@ -13,12 +13,6 @@
 <!--Search takkinn-->
 
 <div class="jumbotron">
-<!--
-    <form class="form-search">
-        <input type="text" class="input-medium-search-query">
-        <button type="submit" class="btn-primary">Leita</button>
-    </form>
--->
 
     @using (Html.BeginForm("Search", "Home", @FormMethod.Get))
     {
@@ -51,7 +45,7 @@
                 </tr>
                 @foreach (var item in @Model.PopularMovies)
                 {
-                    <tr>
+                    <tr class="ContentofFile">
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
@@ -71,7 +65,7 @@
                 </tr>
                 @foreach (var item in @Model.NewestMovies)
                 {
-                    <tr>
+                    <tr class="ContentofFile">
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
@@ -93,7 +87,7 @@
                 </tr>
                 @foreach (var item in @Model.PopularTV)
                 {
-                    <tr>
+                    <tr class = "ContentofFile">
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
@@ -113,7 +107,7 @@
                 </tr>
                 @foreach (var item in @Model.NewestTV)
                 {
-                    <tr>
+                    <tr class="ContentofFile">
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
@@ -122,23 +116,7 @@
                 }
             </table>
         </div>
-        
-
-
-
-
-
-                @* <div class="tabContent" id="newestMovies">
-                    <h3>Nýjustu Myndir</h3>
-                    <ul>
-                        @foreach (var item in @Model.NewestMovies)
-                        {
-                            <li>@Html.ActionLink(item.name, "View3", "Home", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                        }
-                    </ul>
-                </div>*@
-
-             
+      
         </div>
 </div>
 

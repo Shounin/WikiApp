@@ -31,7 +31,7 @@ namespace WikiApp.Models
             dateAdded = DateTime.Now;
             
         }
-
+        
 		public int upvote { get; set; }
 
     }
