@@ -17,7 +17,7 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
          SubtitleRepository repo = new SubtitleRepository();
-         //SubtitleContext repo2 = new SubtitleContext();
+         SubtitleContext repo2 = new SubtitleContext();
 		 UpvoteRepository upvRepo = new UpvoteRepository();
 
 		public ActionResult Index() 
@@ -157,7 +157,7 @@ namespace WikiApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult View3(FormCollection formData)
+        public ActionResult View3(FormCollection formData, SubtitleFile file)
         {
             String strComment = formData["CommentText"];
             if (!String.IsNullOrEmpty(strComment))
@@ -166,6 +166,7 @@ namespace WikiApp.Controllers
 
                 c.commentText = strComment;
                 String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+               
                 if (!String.IsNullOrEmpty(strUser))
                 {
                     int slashPos = strUser.IndexOf("\\");
@@ -173,7 +174,9 @@ namespace WikiApp.Controllers
                     {
                         strUser = strUser.Substring(slashPos + 1);
                     }
+                    c.SubtitleFileID = file.ID;
                     c.username = strUser;
+                    SubtitleRepository.Instance.AddComment(c);
                 }
                 else
                 {
