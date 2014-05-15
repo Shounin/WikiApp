@@ -17,7 +17,9 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
          SubtitleRepository repo = new SubtitleRepository();
-        //SubtitleContext repo2 = new SubtitleContext();
+        SubtitleContext repo2 = new SubtitleContext();
+		 UpvoteRepository upvRepo = new UpvoteRepository();
+
 		public ActionResult Index() 
 		{
             SubtitlesVM vm = new SubtitlesVM();

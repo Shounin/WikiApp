@@ -185,6 +185,10 @@
     <Compile Include="Migrations\201405141121469_AddSubtitleText.Designer.cs">
       <DependentUpon>201405141121469_AddSubtitleText.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201405141905345_Upvote.cs" />
+    <Compile Include="Migrations\201405141905345_Upvote.Designer.cs">
+      <DependentUpon>201405141905345_Upvote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentRepository.cs" />
@@ -194,6 +198,7 @@
     <Compile Include="Models\SubtitleFile.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Upvote.cs" />
+    <Compile Include="Models\UpvoteRepository.cs" />
     <Compile Include="Models\View Models\CommentVM.cs" />
     <Compile Include="Models\View Models\SubtitlesVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -281,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201405141121469_AddSubtitleText.resx">
       <DependentUpon>201405141121469_AddSubtitleText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405141905345_Upvote.resx">
+      <DependentUpon>201405141905345_Upvote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
