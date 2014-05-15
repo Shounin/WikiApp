@@ -65,7 +65,7 @@ namespace WikiApp.Controllers
             SubtitlesVM vm2 = new SubtitlesVM();
             vm2.allFiles = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit
-                            orderby item.ID descending
+                            orderby item.name ascending
                             select item);
 
            // for (int i = 'A'; i < vm2.alphaBetical.Length; i++)
@@ -80,77 +80,77 @@ namespace WikiApp.Controllers
 
             vm2.A= (from item in repo.GetAllSubtitles()
                     where item.name[0] == 'A'
-                    orderby item.ID descending
+                    orderby item.ID ascending
                     select item);
 
             vm2.B = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'B'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
 
             vm2.C = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'C'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.D = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'D'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.E = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'E'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.F = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'F'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.G = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'G'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.H = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'H'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.I = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'I'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.J = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'J'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.K = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'K'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.L = (from item in repo.GetAllSubtitles()
                     where item.name[0] == 'L'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.M = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'M'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.N = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'N'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.O = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'O'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.P = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'P'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.Q = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'Q'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.R = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'R'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.S = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'S'
@@ -166,11 +166,11 @@ namespace WikiApp.Controllers
                      select item);
             vm2.V = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'V'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.W = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'W'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.X = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'X'
@@ -178,11 +178,11 @@ namespace WikiApp.Controllers
                      select item);
             vm2.Y = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'Y'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
             vm2.Z = (from item in repo.GetAllSubtitles()
                      where item.name[0] == 'Z'
-                     orderby item.ID descending
+                     orderby item.ID ascending
                      select item);
 
            /* darf ad fa vm2 til ad taka a moti for lykkjunni
