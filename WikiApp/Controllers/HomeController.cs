@@ -227,8 +227,6 @@ namespace WikiApp.Controllers
                     else
                     {
                         //TO:DO
-                        var fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Assets/Upload"), fileName);
                         
                         string srtContent = null;
                         using (StreamReader sr = new StreamReader(file.InputStream, Encoding.Default, true))
@@ -236,7 +234,7 @@ namespace WikiApp.Controllers
                             string line;
                             while ((line = sr.ReadLine()) != null)
                             {
-                                srtContent += line + '\0';
+                                srtContent += line + '\n';
                             }
                         }
 
@@ -244,15 +242,12 @@ namespace WikiApp.Controllers
                         UpdateModel(item);
                         item.state = State.Edit;
                         item.SubtitleText = srtContent;
-                       // item.name = item.name.First().
+                        item.name = char.ToUpper(item.name[0]) + item.name.Substring(1);
                         repo.AddSubtitle(item);
                         repo.Save();
 
-
-
                         ModelState.Clear();
                         
-
                         ViewBag.Message = "File uploaded successfully";
                     }
                 }
@@ -371,10 +366,12 @@ namespace WikiApp.Controllers
 
 		public ActionResult UpvoteSubtitle(SubtitleFile subtitle, ApplicationUser user)
 		{
-			IEnumerable<Upvote> allUpvotes = upvRepo.GetAllUpvotes();
+			/*IEnumerable<Upvote> allUpvotes = upvRepo.GetAllUpvotes();
 			Upvote up = new Upvote();
 			up.subtitleFileID = subtitle.ID;
 			up.applicationUserID = user.Id;
+
+			var userName = User.Identity.Name;
 			if(allUpvotes.Contains(up))
 			{
 				upvRepo.RemoveUpvote(up);
@@ -383,7 +380,34 @@ namespace WikiApp.Controllers
 			{
 				upvRepo.AddUpvote(up);
 			}
+			 */
 			return View();
 		}
+	
+        [HttpGet]
+        public ActionResult Downloader(int? id)
+        {
+            var subFile = (from item in repo.GetAllSubtitles()
+                        where item.ID == id
+                        select item).SingleOrDefault().SubtitleText;
+
+
+            string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string pathDownload = Path.Combine(pathUser, "Downloads");
+            
+
+            using (StreamWriter writer = new StreamWriter(@pathDownload, false))
+            {
+                writer.Write(subFile);
+            }
+
+            var sb = new StringBuilder();
+
+            return File(Encoding.UTF8.GetBytes(sb.ToString()), System.Net.Mime.MediaTypeNames.Application.Octet, "ReportCsv.csv");
+
+         //   return RedirectToAction("Index");
+			
+		}
+
 }
 }

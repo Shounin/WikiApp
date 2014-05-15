@@ -244,6 +244,7 @@
     <Content Include="Views\Home\Requests.cshtml" />
     <Content Include="Views\Home\SubtitleView.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Downloader.cshtml" />
     <Content Include="Views\Home\View3.cshtml" />
     <Content Include="Views\Home\AddRequest.cshtml" />
   </ItemGroup>
