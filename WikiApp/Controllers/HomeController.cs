@@ -251,10 +251,14 @@ namespace WikiApp.Controllers
         {
             
             CommentVM comment1 = new CommentVM();
-            /*comment1.allComments = CommentRepository.Instance.GetComments();*/
+            /*comment1.allComments = SubtitleRepository.GetAllComments();*/
             
             comment1.allSubtitleFiles = (from item in repo.GetAllSubtitles()
                                          where id == item.ID
+                                         select item);
+
+            comment1.allComments = (from item in repo.GetAllComments()
+                                         where id == item.subtitleid
                                          select item);
 
             return View(comment1);
@@ -281,7 +285,7 @@ namespace WikiApp.Controllers
                     }
                     c.username = strUser;
 
-                    CommentRepository.Instance.AddComment(c);
+                    SubtitleRepository.Instance.AddComment(c);
                 }
                 else
                 {
