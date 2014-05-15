@@ -26,25 +26,16 @@
     <div class="col-lg-12">
         <ul id="tabs">
             
-            <!--Building the tabs on the Navigation Bar-->
+            <!--Building the tabs for the Navigation Bar-->
             <li><a href="#All Titles">All Titles</a></li>
-            @for (char i = 'A'; i <= 'Z'; i++)
+            @foreach (var letterGroup in @Model.stuff.OrderBy(item => item.Key))
             {
-                <li><a href=#@i>@i</a></li>
+                <li><a href="@letterGroup.Key">@letterGroup.Key</a></li>
             }
         </ul>
 
-        <!--Putting allt the content under All Titles -->
-        @*<div class="tabContent" id="All Titles">
-            <h3>All Titles</h3>
-            <ul>
-                @foreach (var item in Model.allFiles)
-                {
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                }
-            </ul>
-        </div>*@
 
+        <!--Inputing all subtitles in to All Titles-->
         <div class="tabContent" id="All Titles">
             <table class="table table-striped">
                 <tr id="Variables">
@@ -55,7 +46,7 @@
                 </tr>
                 @foreach (var item in @Model.allFiles)
                 {
-                    <tr>
+                    <tr class="ContentofFile">
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
@@ -65,352 +56,29 @@
             </table>
         </div>
 
-
-         <div class="tabContent" id="A">
-            <table class="table table-striped">
-                <tr id="Variables">
-                    <th>Nafn</th>
-                    <th>Likes</th>
-                    <th>Flokkur</th>
-                    <th>Sett inn</th>
-                </tr>
-            @foreach (var item in @Model.A)
-            {
-                    <tr>
-                        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
-                        <td>@item.upvote</td>
-                        <td>@item.category</td>
-                        <td>@item.dateAdded</td>
-                    </tr>
-            }   
-            </table>
-        </div>
-     
-
-
-     
-        <div class="tabContent" id="B">
-            <table class="table table-striped">
-                <tr id="Variables">
-                    <th>Nafn</th>
-                    <th>Likes</th>
-                    <th>Flokkur</th>
-                    <th>Sett inn</th>
-                </tr>
-            @foreach (var item in @Model.B)
-                {
-                    <tr>
-                        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
-                        <td>@item.upvote</td>
-                        <td>@item.category</td>
-                        <td>@item.dateAdded</td>
-                    </tr>
-            }
-            </table>
-        </div>
-
-        <div class="tabContent" id="C">
-            <table class="table table-striped">
-                <tr id="Variables">
-                    <th>Nafn</th>
-                    <th>Likes</th>
-                    <th>Flokkur</th>
-                    <th>Sett inn</th>
-                </tr>
-            @foreach (var item in @Model.C)
-            {
-                    <tr>
-                        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
-                        <td>@item.upvote</td>
-                        <td>@item.category</td>
-                        <td>@item.dateAdded</td>
-                    </tr>
-            }
-            </table>
-        </div>
-
-
-        <div class="tabContent" id="D">
-            <table class="table table-striped">
-                <tr id="Variables">
-                    <th>Nafn</th>
-                    <th>Likes</th>
-                    <th>Flokkur</th>
-                    <th>Sett inn</th>
-                </tr>
-            @foreach (var item in @Model.D)
-            {
-                    <tr>
-                        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
-                        <td>@item.upvote</td>
-                        <td>@item.category</td>
-                        <td>@item.dateAdded</td>
-                    </tr>
-            }
-            </table>
-        </div>
-
-        <div class="tabContent" id="E">
-            @foreach (var item in @Model.E)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="F">
-            @foreach (var item in @Model.F)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="G">
-            @foreach (var item in @Model.G)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="H">
-            @foreach (var item in @Model.H)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="I">
-            @foreach (var item in @Model.I)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="J">
-            @foreach (var item in @Model.J)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="K">
-            @foreach (var item in @Model.K)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="L">
-            @foreach (var item in @Model.L)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="M">
-            @foreach (var item in @Model.M)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="N">
-            @foreach (var item in @Model.N)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="O">
-            @foreach (var item in @Model.O)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="P">
-            @foreach (var item in @Model.P)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="Q">
-            @foreach (var item in @Model.Q)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-
-        <div class="tabContent" id="R">
-            @foreach (var item in @Model.R)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="S">
-            @foreach (var item in @Model.S)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="T">
-            @foreach (var item in @Model.T)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="U">
-            @foreach (var item in @Model.U)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="V">
-            @foreach (var item in @Model.V)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="W">
-            @foreach (var item in @Model.W)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="X">
-            @foreach (var item in @Model.X)
-            {
-                <ul>
-                    <li>@Html.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li>
-                </ul>
-            }
-        </div>
-
-        <div class="tabContent" id="Y">
-            <table class="table table-striped">
-                <tr id="Variables">
-                    <th>Nafn</th>
-                    <th>Likes</th>
-                    <th>Flokkur</th>
-                    <th>Sett inn</th>
-                </tr>
-            @foreach (var item in @Model.Y)
-            {
-                    <tr>
-                        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
-                        <td>@item.upvote</td>
-                        <td>@item.category</td>
-                        <td>@item.dateAdded</td>
-                    </tr>
-            }
-            </table>
-        </div>
-
-
-        <div class="tabContent" id="Z">
-            <table class="table table-striped">
-                <tr id="Variables">
-                    <th>Nafn</th>
-                    <th>Likes</th>
-                    <th>Flokkur</th>
-                    <th>Sett inn</th>
-                </tr>
-            @foreach (var item in @Model.Z)
-            {
-                    <tr>
-                        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
-                        <td>@item.upvote</td>
-                        <td>@item.category</td>
-                        <td>@item.dateAdded</td>
-                    </tr>
-            }
-            </table>
-        </div>
-
-       <!--Virkar ekki eina sem darf ad virka er model.i-->  
-<!--attfor (char i = 'A'; i <= 'Z'; i++)
-{ 
-        <div class="tabContent" id="i">
-            attforeach (var item in attModel.i)
-            {
-                <ul>
-                    <li>attHtml.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; attitem.dateAdded &nbsp;&nbsp;&nbsp; attitem.category</li>
-                </ul>
-            }
-        </div>
-    
-}
-    -->
-
-
-
-    
-
-
-        <!--Putting movies under the alphabetical order-->
-       <!-- ATTif (Model.specificFiles != null)
+        <!--Inputing the content in to the tabs-->
+        @foreach (var letterGroup in @Model.stuff)
         {
-            foreach (var item in ATTModel.specificFiles)
-                {
-                    item.key = item.name[0];
-                     <div class="tabContent" id="ATTitem.key">
-                         <ul>
-                            <li>ATTHtml.ActionLink(item.name, "View3", new { id = item.ID }) &nbsp;&nbsp;&nbsp; ATTitem.dateAdded &nbsp;&nbsp;&nbsp; ATTitem.category</li>
-                        </ul>
-                     </div>
-                 }  
+            <div class="tabContent" id="@letterGroup.Key">
+                <table class="table table-striped">
+                    <tr id="Variables">
+                        <th>Nafn</th>
+                        <th>Likes</th>
+                        <th>Flokkur</th>
+                        <th>Sett inn</th>
+                    </tr>
+                    @foreach (var item in letterGroup)
+                    {
+                        <tr class="ContentofFile">
+                            <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
+                            <td>@item.upvote</td>
+                            <td>@item.category</td>
+                            <td>@item.dateAdded</td>
+                        </tr>
+                    }
+                </table>
+            </div>
         }
--->
-
-
-
-
-
 
     </div>
 </div>
