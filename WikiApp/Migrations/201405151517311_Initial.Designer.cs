@@ -13,7 +13,7 @@ namespace WikiApp.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201405142045331_Initial"; }
+            get { return "201405151517311_Initial"; }
         }
         
         string IMigrationMetadata.Source

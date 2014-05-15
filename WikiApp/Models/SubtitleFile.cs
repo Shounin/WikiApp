@@ -26,6 +26,9 @@ namespace WikiApp.Models
         [Column(TypeName = "TEXT")]
         public string SubtitleText { get; set; }    //VarChar
 
+        public virtual ICollection<SubtitleComment> SubtitleComments { get; set; }
+
+
         public SubtitleFile()
         {
             dateAdded = DateTime.Now;
