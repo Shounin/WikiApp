@@ -302,13 +302,13 @@ namespace WikiApp.Controllers
                 {
                     c.username = "Unknown user";
                 }
-                return RedirectToAction("CommentView");
+                return RedirectToAction("View3");
             }
             else
             {
                 ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
                 return Index();
-        }
+            }
         }
 
         public ActionResult About()
