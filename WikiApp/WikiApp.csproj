@@ -169,25 +169,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201405131108140_Initial.cs" />
-    <Compile Include="Migrations\201405131108140_Initial.Designer.cs">
-      <DependentUpon>201405131108140_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201405131200043_Addstate.cs" />
-    <Compile Include="Migrations\201405131200043_Addstate.Designer.cs">
-      <DependentUpon>201405131200043_Addstate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201405131638470_Addfile.cs" />
-    <Compile Include="Migrations\201405131638470_Addfile.Designer.cs">
-      <DependentUpon>201405131638470_Addfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201405141121469_AddSubtitleText.cs" />
-    <Compile Include="Migrations\201405141121469_AddSubtitleText.Designer.cs">
-      <DependentUpon>201405141121469_AddSubtitleText.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201405141905345_Upvote.cs" />
-    <Compile Include="Migrations\201405141905345_Upvote.Designer.cs">
-      <DependentUpon>201405141905345_Upvote.cs</DependentUpon>
+    <Compile Include="Migrations\201405142045331_Initial.cs" />
+    <Compile Include="Migrations\201405142045331_Initial.Designer.cs">
+      <DependentUpon>201405142045331_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -261,6 +245,7 @@
     <Content Include="Views\Home\SubtitleView.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\View3.cshtml" />
+    <Content Include="Views\Home\AddRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -275,20 +260,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201405131108140_Initial.resx">
-      <DependentUpon>201405131108140_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405131200043_Addstate.resx">
-      <DependentUpon>201405131200043_Addstate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405131638470_Addfile.resx">
-      <DependentUpon>201405131638470_Addfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405141121469_AddSubtitleText.resx">
-      <DependentUpon>201405141121469_AddSubtitleText.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405141905345_Upvote.resx">
-      <DependentUpon>201405141905345_Upvote.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405142045331_Initial.resx">
+      <DependentUpon>201405142045331_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

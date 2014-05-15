@@ -18,7 +18,7 @@ namespace WikiApp.Models
         public string description { get; set; }
         public DateTime dateAdded { get; set; }
         public string path { get; set; }
-        public char key { get; set; }
+        //public char key { get; set; }
 
         public State state { get; set; }
 

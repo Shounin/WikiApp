@@ -66,7 +66,7 @@
         </div>
 
 
-        <div class="tabContent" id="A">
+         <div class="tabContent" id="A">
             <table class="table table-striped">
                 <tr id="Variables">
                     <th>Nafn</th>
@@ -74,18 +74,18 @@
                     <th>Flokkur</th>
                     <th>Sett inn</th>
                 </tr>
-                @foreach (var item in @Model.A)
-                {
+            @foreach (var item in @Model.A)
+            {
                     <tr>
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
                         <td>@item.dateAdded</td>
                     </tr>
-                }
+            }   
             </table>
         </div>
-
+     
 
 
      
@@ -97,7 +97,7 @@
                     <th>Flokkur</th>
                     <th>Sett inn</th>
                 </tr>
-                @foreach (var item in @Model.B)
+            @foreach (var item in @Model.B)
                 {
                     <tr>
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
@@ -105,7 +105,7 @@
                         <td>@item.category</td>
                         <td>@item.dateAdded</td>
                     </tr>
-                }
+            }
             </table>
         </div>
 
@@ -117,15 +117,15 @@
                     <th>Flokkur</th>
                     <th>Sett inn</th>
                 </tr>
-                @foreach (var item in @Model.C)
-                {
+            @foreach (var item in @Model.C)
+            {
                     <tr>
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
                         <td>@item.dateAdded</td>
                     </tr>
-                }
+            }
             </table>
         </div>
 
@@ -138,15 +138,15 @@
                     <th>Flokkur</th>
                     <th>Sett inn</th>
                 </tr>
-                @foreach (var item in @Model.D)
-                {
+            @foreach (var item in @Model.D)
+            {
                     <tr>
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
                         <td>@item.dateAdded</td>
                     </tr>
-                }
+            }
             </table>
         </div>
 
@@ -339,15 +339,15 @@
                     <th>Flokkur</th>
                     <th>Sett inn</th>
                 </tr>
-                @foreach (var item in @Model.Y)
-                {
+            @foreach (var item in @Model.Y)
+            {
                     <tr>
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
                         <td>@item.dateAdded</td>
                     </tr>
-                }
+            }
             </table>
         </div>
 
@@ -360,15 +360,15 @@
                     <th>Flokkur</th>
                     <th>Sett inn</th>
                 </tr>
-                @foreach (var item in @Model.Z)
-                {
+            @foreach (var item in @Model.Z)
+            {
                     <tr>
                         <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
                         <td>@item.dateAdded</td>
                     </tr>
-                }
+            }
             </table>
         </div>
 

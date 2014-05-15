@@ -51,6 +51,10 @@ namespace WikiApp.Models.View_Models
        
         public IEnumerable<SubtitleFile> Z { get; set; }
         public IEnumerable<SubtitleFile> Tolur { get; set; }
+
+        //public char[] numbers = new char[4] { 'A', 'B', 'C', 'D' };
+
+        //public IEnumerable<SubtitleFile>[] subtitle = new IEnumerable<SubtitleFile>[4];
        
     }
 }

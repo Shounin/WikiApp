@@ -78,7 +78,16 @@ namespace WikiApp.Controllers
 
             //}
 
-            vm2.A= (from item in repo.GetAllSubtitles()
+            // Marteinn að reyna eitthvað //
+            //for (int i = 0; i < 3; i++ )
+            //{
+            //    vm2.subtitle[i] = (from item in repo.GetAllSubtitles()
+            //                      where item.name[0] == vm2.numbers[i]
+            //                      orderby item.ID descending
+            //                      select item);
+            //}
+
+            vm2.A = (from item in repo.GetAllSubtitles()
                     where item.name[0] == 'A'
                     orderby item.ID ascending
                     select item);
@@ -293,7 +302,7 @@ namespace WikiApp.Controllers
                 {
                     c.username = "Unknown user";
                 }
-                return RedirectToAction("CommentView");
+                return RedirectToAction("View3");
             }
             else
             {
@@ -494,10 +503,18 @@ namespace WikiApp.Controllers
 
 		public ActionResult UpvoteSubtitle(SubtitleFile subtitle, ApplicationUser user)
 		{
+			IEnumerable<Upvote> allUpvotes = upvRepo.GetAllUpvotes();
 			Upvote up = new Upvote();
 			up.subtitleFileID = subtitle.ID;
 			up.applicationUserID = user.Id;
-			
+			if(allUpvotes.Contains(up))
+			{
+				upvRepo.RemoveUpvote(up);
+			}
+			else
+			{
+				upvRepo.AddUpvote(up);
+			}
 			return View();
 		}
 }
