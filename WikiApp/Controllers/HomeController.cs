@@ -515,7 +515,14 @@ namespace WikiApp.Controllers
 			 */
 			return View();
 		}
-	
+
+        static byte[] GetBytes(string str)
+        {
+            byte[] bytes = new byte[str.Length * sizeof(char)];
+            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
+
         [HttpGet]
         public ActionResult Downloader(int? id)
         {
@@ -523,23 +530,11 @@ namespace WikiApp.Controllers
                         where item.ID == id
                         select item).SingleOrDefault().SubtitleText;
 
+            var subName = (from item in repo.GetAllSubtitles()
+                           where item.ID == id
+                           select item).SingleOrDefault().name;
 
-            string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathDownload = Path.Combine(pathUser, "Downloads");
-            
-
-            using (StreamWriter writer = new StreamWriter(@pathDownload, false))
-            {
-                writer.Write(subFile);
-            }
-
-            var sb = new StringBuilder();
-
-            return File(Encoding.UTF8.GetBytes(sb.ToString()), System.Net.Mime.MediaTypeNames.Application.Octet, "ReportCsv.csv");
-
-         //   return RedirectToAction("Index");
-			
+            return File(GetBytes(subFile), System.Net.Mime.MediaTypeNames.Application.Octet, subName + ".srt");			
 		}
-
-}
+    }
 }
