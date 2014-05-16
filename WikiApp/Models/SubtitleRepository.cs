@@ -72,19 +72,21 @@ namespace WikiApp.Models
 			return result;
 		}
 
-		/// Add a subtitle to database ///
+		// Add an upvote to database
 		public void AddUpvote(Upvote u)
 		{
 			m_db.Upvotes.Add(u);
 			Save();
 		}
 
+		// Remove upvote from database.
 		public void RemoveUpvote(Upvote u)
 		{
 			m_db.Upvotes.Remove(u);
 			Save();
 		}
 
+		// Returns an Upvote with the given SubtitleFileID
 		public Upvote GetUpvoteByID(int subTitleFileID)
 		{
 			var result = (from u in m_db.Upvotes
@@ -93,6 +95,7 @@ namespace WikiApp.Models
 			return result;
 		}
 
+		// Returns a SubtitleFile with the given SubtitleFileID
 		public SubtitleFile GetSubtitleByID(int subTitleFileID)
 		{
 			var result = (from s in m_db.SubtitleFiles
