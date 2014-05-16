@@ -102,6 +102,7 @@ namespace WikiApp.Controllers
                 //the diffrent types of intertainments
             else
             {
+                // Creates a list for choices as a submit category that works in the Get method.
                 List<SelectListItem> subtitleCategory = new List<SelectListItem>();
                 subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
                 subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -191,12 +192,14 @@ namespace WikiApp.Controllers
         [HttpGet]
         public ActionResult About()
         {
+            // Just a get method
             return View();
         }
         [HttpPost]
         public ActionResult About(FormCollection form)
         {
-
+            // Collects information to send email when they want to contact us. The email is sent from us, to us. With a title of 
+            // contacter name with a + mark and then their email address, and content is the real content.
             MailMessage message = new MailMessage();
             message.From = new MailAddress("tyding2014@gmail.com");
             message.To.Add(new MailAddress("tyding2014@gmail.com"));
@@ -221,6 +224,7 @@ namespace WikiApp.Controllers
         [HttpPost]
         public ActionResult AddSubtitle(HttpPostedFileBase file)
         {
+            // List of categories that work
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
             subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
             subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -233,52 +237,57 @@ namespace WikiApp.Controllers
             subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
 
             ViewData["Categories"] = subtitleCategory;
-
+            // If the upload is valid
             if (ModelState.IsValid)
             {
                 if (file == null)
                 {
-                    ModelState.AddModelError("File", "Please Upload Your file");
+                    ModelState.AddModelError("File", "Vinsamlegast bættu við .srt skrá");
                 }
                 else if (file.ContentLength > 0)
                 {
+                    // If file is larger than 0, but smaller than 3 Mb.
                     int MaxContentLength = 1024 * 1024 * 3; //3 MB
                     string[] AllowedFileExtensions = new string[] { ".srt" };
 
                     if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
                     {
-                        ModelState.AddModelError("File", "Please file of type: " + string.Join(", ", AllowedFileExtensions));
+                        ModelState.AddModelError("File", "Vinsamlegast eingöngu skrá af gerðini: " + string.Join(", ", AllowedFileExtensions));
                     }
 
                     else if (file.ContentLength > MaxContentLength)
                     {
-                        ModelState.AddModelError("File", "Your file is too large, maximum allowed size is: " + MaxContentLength + " MB");
+                        ModelState.AddModelError("File", "Skráin þín er of stór, vinsamlegast ekki stærri en: " + MaxContentLength + " MB");
                     }
                     else
                     {
                         //TO:DO
-                        
+                        // Streamreader reads in all data from the file and puts in the variable srtContent.
                         string srtContent = null;
                         using (StreamReader sr = new StreamReader(file.InputStream, Encoding.Default, true))
                         {
                             string line;
                             while ((line = sr.ReadLine()) != null)
                             {
+                                // Takes each line and adds a \n after each to create a new one.
                                 srtContent += line + '\n';
                             }
                         }
-
+                        // Creates a new instance of SubtitleFile
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);
                         item.state = State.Edit;
+                        // Puts file into an Edit state
                         item.SubtitleText = srtContent;
+                        // The table data in subtitleText is updated ti srtContent
                         item.name = char.ToUpper(item.name[0]) + item.name.Substring(1);
+                        // Puts each new name of subtitle to uppercase as first letter.
                         repo.AddSubtitle(item);
                         repo.Save();
-
+                        // Saves the repository.
                         ModelState.Clear();
                         
-                        ViewBag.Message = "File uploaded successfully";
+                        ViewBag.Message = "Viðbæting skráar gekk eins og í sögu.";
                     }
                 }
             }
@@ -442,12 +451,13 @@ namespace WikiApp.Controllers
             var subFile = (from item in repo.GetAllSubtitles()
                         where item.ID == id
                         select item).SingleOrDefault().SubtitleText;
-
+            // I find the file by Id, and use the table data from SubtitleText.
             var subName = (from item in repo.GetAllSubtitles()
                            where item.ID == id
                            select item).SingleOrDefault().name;
-
+            // I find the file name by Id.
             return File(GetBytes(subFile), System.Net.Mime.MediaTypeNames.Application.Octet, subName + ".srt");			
+            // I return the file with the filename with a .srt ending.
 		}
 }
 }
