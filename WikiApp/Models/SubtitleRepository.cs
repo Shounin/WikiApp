@@ -93,6 +93,14 @@ namespace WikiApp.Models
 			return result;
 		}
 
+		public SubtitleFile GetSubtitleByID(int subTitleFileID)
+		{
+			var result = (from s in m_db.SubtitleFiles
+						  where s.ID == subTitleFileID
+						  select s).SingleOrDefault();
+			return result;
+		}
+
         /// Save changes to database ///
         public void Save()
         {

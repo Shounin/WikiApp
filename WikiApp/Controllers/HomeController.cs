@@ -88,11 +88,7 @@ namespace WikiApp.Controllers
 
             return View(vm2);
 		}
-
-
-
-
-                           
+                   
         /// Add a new SubtitleFile to the database ///
 		[Authorize]
         [HttpGet]
@@ -338,7 +334,7 @@ namespace WikiApp.Controllers
         }
 
 
-		public ActionResult Search(string searchString, string category)
+		public ActionResult Search(string searchString, string movieGenre)
 		{
            
 			var categoryList = new List<string>();
@@ -358,17 +354,16 @@ namespace WikiApp.Controllers
 				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
 			   
-			if (!string.IsNullOrEmpty(category))
-		{
-				Debug.WriteLine("Category is not null");
-				allSubtitles = allSubtitles.Where(x => x.category == category);
-		}
+			if (!string.IsNullOrEmpty(movieGenre))
+			{
+				allSubtitles = allSubtitles.Where(x => x.category == movieGenre);
+			}
 
 
 			return View(allSubtitles); 
-	}
+		}
 
-		public ActionResult RequestSearch(string searchString, string category)
+		public ActionResult RequestSearch(string searchString, string movieGenre)
 		{
 			var categoryList = new List<string>();
 
@@ -387,21 +382,25 @@ namespace WikiApp.Controllers
 				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
 
-			if (!string.IsNullOrEmpty(category))
+			if (!string.IsNullOrEmpty(movieGenre))
 			{
-				allSubtitles = allSubtitles.Where(x => x.category == category);
+				allSubtitles = allSubtitles.Where(x => x.category == movieGenre);
 			}
 
 
 			return View("Search", allSubtitles);
 		}
 
-		public ActionResult UpvoteSubtitle(/*SubtitleFile subtitle*/ int subtitleFileID)
+		public ActionResult UpvoteSubtitle(int subtitleFileID)
 		{
 			Upvote u = SubtitleRepository.Instance.GetUpvoteByID(subtitleFileID);
+			SubtitleFile subtitle = SubtitleRepository.Instance.GetSubtitleByID(subtitleFileID);
+
 			if (u != null)
 			{
 				SubtitleRepository.Instance.RemoveUpvote(u);
+				subtitle.upvote--;
+				SubtitleRepository.Instance.Save();
 			}
 			else
 			{
@@ -410,9 +409,11 @@ namespace WikiApp.Controllers
 					SubtitleFileID = subtitleFileID,
 					applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name
 				});
+				subtitle.upvote++;
+				SubtitleRepository.Instance.Save();
 			}
 
-			return RedirectToAction("View3");
+			return RedirectToAction("Index");
 		}
 
         static byte[] GetBytes(string str)
