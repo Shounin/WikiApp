@@ -342,7 +342,7 @@ namespace WikiApp.Controllers
 		{
 			return View();
 		}
- */ 
+ */		[HttpGet]
 		public ActionResult Search(string searchString, string category)
 		{
 			var categoryList = new List<string>();
@@ -363,9 +363,10 @@ namespace WikiApp.Controllers
 			}
 			   
 			if (!string.IsNullOrEmpty(category))
-		{
+			{
+				Debug.WriteLine("Category is not null");
 				allSubtitles = allSubtitles.Where(x => x.category == category);
-		}
+			}
 
 
 			return View(allSubtitles); 
@@ -401,23 +402,6 @@ namespace WikiApp.Controllers
 
 		public ActionResult UpvoteSubtitle(/*SubtitleFile subtitle*/ int subtitleFileID)
 		{
-			Debug.WriteLine(subtitleFileID);
-			/*IEnumerable<Upvote> upvotes = SubtitleRepository.Instance.GetAllUpvotes();
-			Upvote up = new Upvote();
-			up.SubtitleFileID = subtitle.ID;
-			up.applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-
-			if(upvotes.Contains(up))
-			{
-				SubtitleRepository.Instance.RemoveUpvote(up);
-				subtitle.upvote--;
-			}
-			else
-			{
-				SubtitleRepository.Instance.AddUpvote(up);
-				subtitle.upvote++;
-			}*/
-
 			Upvote u = SubtitleRepository.Instance.GetUpvoteByID(subtitleFileID);
 			if (u != null)
 			{
