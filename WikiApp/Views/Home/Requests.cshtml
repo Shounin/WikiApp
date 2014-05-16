@@ -6,6 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 
+<!-- Search bar implemented for the request page -->
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
 <div class="jumbotron">
     @using (Html.BeginForm("RequestSearch", "Home", @FormMethod.Get))
@@ -17,15 +18,8 @@
     }
 </div>
 
+<!-- All requests displayed in requests page-->
 <div class="row">
-    @*<div class="col-lg-12">
-    <ul id="tabs">
-        @for (char i = 'A'; i <= 'Z'; i++)
-        {
-            <li><a href=#@i>@i</a></li>
-        }
-    </ul>
-    </div>*@
     <table class="table table-striped">
         <tr id="Variables">
             <th>Nafn</th>
@@ -37,18 +31,15 @@
         @foreach (var item in @Model.NewestMovies)
         {
             <tr>
-                <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
+                <td>@Html.ActionLink(item.name, "SubtitleInfo", new { id = item.ID })</td>
                 <td>@item.upvote</td>
                 <td>@item.category</td>
                 <td>@item.dateAdded</td>
             </tr>
         }    
-           @* <li>@Html.ActionLink(item.name, "SubtitleView", new { id = item.ID }) &nbsp;&nbsp;&nbsp; @item.dateAdded &nbsp;&nbsp;&nbsp; @item.category</li> *@
                 
-        
     </table>
 </div>
-        
-
-
+       
+<!-- Link to page where the user can add a new request --> 
 @Html.ActionLink("Bæta við beiðni", "AddRequest", null, new { @class = "btn btn-default navbar-btn" })

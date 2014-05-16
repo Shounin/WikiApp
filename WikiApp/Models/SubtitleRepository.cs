@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using WikiApp.DAL;
@@ -62,7 +63,46 @@ namespace WikiApp.Models
             m_db.SubtitleComments.Add(c);
             Save();
         }
+		// Functions for Upvotes.
+		public IEnumerable<Upvote> GetAllUpvotes()
+		{
+			var result = (from u in m_db.Upvotes
+						  orderby u.ID ascending
+						  select u);
+			return result;
+		}
 
+		// Add an upvote to database
+		public void AddUpvote(Upvote u)
+		{
+			m_db.Upvotes.Add(u);
+			Save();
+		}
+
+		// Remove upvote from database.
+		public void RemoveUpvote(Upvote u)
+		{
+			m_db.Upvotes.Remove(u);
+			Save();
+		}
+
+		// Returns an Upvote with the given SubtitleFileID
+		public Upvote GetUpvoteByID(int subTitleFileID)
+		{
+			var result = (from u in m_db.Upvotes
+						  where u.SubtitleFileID == subTitleFileID
+						  select u).SingleOrDefault();
+			return result;
+		}
+
+		// Returns a SubtitleFile with the given SubtitleFileID
+		public SubtitleFile GetSubtitleByID(int subTitleFileID)
+		{
+			var result = (from s in m_db.SubtitleFiles
+						  where s.ID == subTitleFileID
+						  select s).SingleOrDefault();
+			return result;
+		}
 
         /// Save changes to database ///
         public void Save()

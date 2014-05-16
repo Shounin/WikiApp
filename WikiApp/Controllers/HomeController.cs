@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -18,12 +19,10 @@ namespace WikiApp.Controllers
 	public class HomeController : Controller
 	{
          SubtitleRepository repo = new SubtitleRepository();
-         SubtitleContext repo2 = new SubtitleContext();
-		 UpvoteRepository upvRepo = new UpvoteRepository();
 
 		public ActionResult Index() 
 		{
-			// Stuff for the category drop-down menu.
+			// Data for the category drop-down menu.
 			var categoryList = new List<string>();
 
 			var categoryQry = from d in repo.GetAllSubtitles()
@@ -32,8 +31,8 @@ namespace WikiApp.Controllers
 
 			categoryList.AddRange(categoryQry.Distinct());
 			ViewBag.movieGenre = new SelectList(categoryList);
-			// Drop-down stuff completed
-            
+			// Drop-down data completed
+            // Categorize the dota to fit the description (Top rated,Newest)
 			SubtitlesVM vm = new SubtitlesVM();
             vm.NewestMovies = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit && item.category != "Þættir"
@@ -57,6 +56,8 @@ namespace WikiApp.Controllers
 
             return View(vm);
         }
+
+        /// Response when searchstring is entered in front page ///
         [HttpPost]
         public ActionResult Index(string searchString)
         {
@@ -70,7 +71,7 @@ namespace WikiApp.Controllers
 
             return View(movies);
         }
-        // Show all the Subtitles as well as orginized 
+        /// Show all the Subtitles as well as orginized in to alphabetical order ///
 		public ActionResult AllSubtitles() 
 		{
 			ViewBag.Message = "Listi yfir alla skjátexta.";
@@ -88,11 +89,7 @@ namespace WikiApp.Controllers
             return View(vm2);
 		}
 
-
-
-
-                           
-        // Add a new SubtitleFile to the database //
+        /// Add a new SubtitleFile to the database ///
 		[Authorize]
         [HttpGet]
 		public ActionResult AddSubtitle()
@@ -102,8 +99,10 @@ namespace WikiApp.Controllers
             {
                 return RedirectToAction("Index");
             }
+                //the diffrent types of intertainments
             else
             {
+                // Creates a list for choices as a submit category that works in the Get method.
                 List<SelectListItem> subtitleCategory = new List<SelectListItem>();
                 subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
                 subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -111,9 +110,9 @@ namespace WikiApp.Controllers
                 subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
                 subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
                 subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
-                subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
-                subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+                subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennumyndir" });
                 subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+                subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
 
                 ViewData["Categories"] = subtitleCategory;
 
@@ -121,25 +120,23 @@ namespace WikiApp.Controllers
             }
 		}
         
+        /// Returns all requests to the requests page ///
         [HttpGet]
         public ActionResult Requests()
         {
             ViewBag.Message = "Here you can request subtitles.";
+            
             SubtitlesVM vm = new SubtitlesVM();
             vm.NewestMovies = (from item in repo.GetAllSubtitles()
-                            where item.state == State.Request && item.category != "Þættir"
+                               where item.state == State.Request
                             orderby item.ID descending
-                            select item).Take(10);
-
-            vm.NewestTV = (from item in repo.GetAllSubtitles()
-                        where item.state == State.Request && item.category != "Þættir"
-                        orderby item.ID descending
-                        select item).Take(10);
-
+                               select item);
             return View(vm);
 
         }
-        public ActionResult View3(int? id)
+
+
+        public ActionResult SubtitleInfo(int? id)
         {
             
             CommentVM comment1 = new CommentVM();
@@ -159,7 +156,7 @@ namespace WikiApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult View3(FormCollection formData, SubtitleFile file)
+        public ActionResult SubtitleInfo(FormCollection formData, SubtitleFile file)
         {
             String strComment = formData["CommentText"];
             if (!String.IsNullOrEmpty(strComment))
@@ -184,7 +181,7 @@ namespace WikiApp.Controllers
                 {
                     c.username = "Unknown user";
                 }
-                return RedirectToAction("View3");
+                return RedirectToAction("SubtitleInfo");
             }
             else
             {
@@ -192,42 +189,42 @@ namespace WikiApp.Controllers
                 return Index();
             }
         }
-
-        [HttpPost]
-        public ActionResult About(String Name, String Email, String Message)
+        [HttpGet]
+        public ActionResult About()
         {
-            try
-            {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("fromadd");
-                mail.To.Add("toadd");
-                mail.Subject = "Test Mail";
-                mail.Body = "This is for testing SMTP mail from GMAIL";
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
-                SmtpServer.EnableSsl = true;
+            // Just a get method
+            return View();
+        }
+        [HttpPost]
+        public ActionResult About(FormCollection form)
+        {
+            // Collects information to send email when they want to contact us. The email is sent from us, to us. With a title of 
+            // contacter name with a + mark and then their email address, and content is the real content.
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("tyding2014@gmail.com");
+            message.To.Add(new MailAddress("tyding2014@gmail.com"));
+            message.Subject = form["contactName"] + " + " + form["contactEmail"];
+            message.Body = form["contactMessage"];
 
-                SmtpServer.Send(mail);
-                return RedirectToAction("Home");
-            }
-            catch (Exception ex)
+            using (SmtpClient client = new SmtpClient())
             {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("fromadd");
-                mail.To.Add("toadd");
-                mail.Subject = "Test Mail";
-                mail.Body = ex.ToString();
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("tyding2014@gmail.com", "Verklegt");
+                client.Host = "smtp.gmail.com";
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-                return RedirectToAction("Home");
+                client.Send(message);
                 }
+            return RedirectToAction("Index");
         }
 
 		[Authorize]
         [HttpPost]
         public ActionResult AddSubtitle(HttpPostedFileBase file)
         {
+            // List of categories that work
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
             subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
             subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -235,65 +232,70 @@ namespace WikiApp.Controllers
             subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
             subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
             subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
-            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
-            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennumyndir" }); 
             subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
 
             ViewData["Categories"] = subtitleCategory;
-
+            // If the upload is valid
             if (ModelState.IsValid)
             {
                 if (file == null)
                 {
-                    ModelState.AddModelError("File", "Please Upload Your file");
+                    ModelState.AddModelError("File", "Vinsamlegast bættu við .srt skrá");
                 }
                 else if (file.ContentLength > 0)
                 {
+                    // If file is larger than 0, but smaller than 3 Mb.
                     int MaxContentLength = 1024 * 1024 * 3; //3 MB
                     string[] AllowedFileExtensions = new string[] { ".srt" };
 
                     if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
                     {
-                        ModelState.AddModelError("File", "Please file of type: " + string.Join(", ", AllowedFileExtensions));
+                        ModelState.AddModelError("File", "Vinsamlegast eingöngu skrá af gerðini: " + string.Join(", ", AllowedFileExtensions));
                     }
 
                     else if (file.ContentLength > MaxContentLength)
                     {
-                        ModelState.AddModelError("File", "Your file is too large, maximum allowed size is: " + MaxContentLength + " MB");
+                        ModelState.AddModelError("File", "Skráin þín er of stór, vinsamlegast ekki stærri en: " + MaxContentLength + " MB");
                     }
                     else
                     {
                         //TO:DO
-                        
+                        // Streamreader reads in all data from the file and puts in the variable srtContent.
                         string srtContent = null;
                         using (StreamReader sr = new StreamReader(file.InputStream, Encoding.Default, true))
                         {
                             string line;
                             while ((line = sr.ReadLine()) != null)
                             {
+                                // Takes each line and adds a \n after each to create a new one.
                                 srtContent += line + '\n';
                             }
                         }
-
+                        // Creates a new instance of SubtitleFile
                         SubtitleFile item = new SubtitleFile();
                         UpdateModel(item);
                         item.state = State.Edit;
+                        // Puts file into an Edit state
                         item.SubtitleText = srtContent;
+                        // The table data in subtitleText is updated ti srtContent
                         item.name = char.ToUpper(item.name[0]) + item.name.Substring(1);
+                        // Puts each new name of subtitle to uppercase as first letter.
                         repo.AddSubtitle(item);
                         repo.Save();
-
+                        // Saves the repository.
                         ModelState.Clear();
                         
-                        ViewBag.Message = "File uploaded successfully";
+                        ViewBag.Message = "Viðbæting skráar gekk eins og í sögu.";
                     }
                 }
             }
             return View();
             }
 
-
         [Authorize]
+        [HttpGet]
         public ActionResult AddRequest()
         {
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
@@ -303,18 +305,20 @@ namespace WikiApp.Controllers
             subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
             subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
             subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
-            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
-            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennumyndir" });
             subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
 
             ViewData["Categories"] = subtitleCategory;
             return View(new SubtitleFile());
         }
 
+        /// New reqest added to database ///
         [Authorize]
         [HttpPost]
         public ActionResult AddRequest(FormCollection form)
         {
+            // Values for dropdown list declared.
             List<SelectListItem> subtitleCategory = new List<SelectListItem>();
             subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
             subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -322,31 +326,27 @@ namespace WikiApp.Controllers
             subtitleCategory.Add(new SelectListItem { Text = "Gamanmyndir", Value = "Gamanmyndir" });
             subtitleCategory.Add(new SelectListItem { Text = "Hryllingsmyndir", Value = "Hryllingsmyndir" });
             subtitleCategory.Add(new SelectListItem { Text = "Rómantík", Value = "Rómantík" });
-            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennuþættir" });
-            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennumyndir" });        
             subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
+            subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
 
             ViewData["Categories"] = subtitleCategory;
+            
+            // The SubtitleFile data from view added to database.
             SubtitleFile item = new SubtitleFile();
             UpdateModel(item);
             item.state = State.Request;
             repo.AddSubtitle(item);
-
-
             repo.Save();
-            return RedirectToAction("Index"); // View();
 
-
+            // The user is redirected to the Index page when done.
+            return RedirectToAction("Index");
         }
-/*
-		[HttpPost]
-		public ActionResult Search()
+
+		// The search engine.
+		public ActionResult Search(string searchString, string movieGenre)
 		{
-			return View();
-		}
- */ 
-		public ActionResult Search(string searchString, string category)
-		{
+           // Makes a list of all current categories to use in the drop-down list.
 			var categoryList = new List<string>();
 
 			var categoryQry = from d in repo.GetAllSubtitles()
@@ -355,25 +355,30 @@ namespace WikiApp.Controllers
 
 			categoryList.AddRange(categoryQry.Distinct());
 			ViewBag.movieGenre = new SelectList(categoryList);
+
+			// Creates a list of all subtitles in the database.
 			var allSubtitles = from m in repo.GetAllSubtitles()
 							   where m.state == State.Edit || m.state == State.Ready
 							   select m;
 
+			// Searches by input string.
 			if (!String.IsNullOrEmpty(searchString))
 			{
 				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
-			   
-			if (!string.IsNullOrEmpty(category))
+			
+			// Searches by Category/Genre.
+			if (!string.IsNullOrEmpty(movieGenre))
 		{
-				allSubtitles = allSubtitles.Where(x => x.category == category);
+				allSubtitles = allSubtitles.Where(x => x.category == movieGenre);
 		}
 
 
 			return View(allSubtitles); 
 	}
 
-		public ActionResult RequestSearch(string searchString, string category)
+		// Search engine for requests.  Otherwise the same as above.
+		public ActionResult RequestSearch(string searchString, string movieGenre)
 		{
 			var categoryList = new List<string>();
 
@@ -392,33 +397,45 @@ namespace WikiApp.Controllers
 				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
 
-			if (!string.IsNullOrEmpty(category))
+			if (!string.IsNullOrEmpty(movieGenre))
 			{
-				allSubtitles = allSubtitles.Where(x => x.category == category);
+				allSubtitles = allSubtitles.Where(x => x.category == movieGenre);
 			}
 
 
 			return View("Search", allSubtitles);
 		}
 
-		public ActionResult UpvoteSubtitle(SubtitleFile subtitle, ApplicationUser user)
+		// The result of the Like-button
+		public ActionResult UpvoteSubtitle(int subtitleFileID)
 		{
-			/*IEnumerable<Upvote> allUpvotes = upvRepo.GetAllUpvotes();
-			Upvote up = new Upvote();
-			up.subtitleFileID = subtitle.ID;
-			up.applicationUserID = user.Id;
+			// Checks whether an upvote with the same username and SubtitleFile ID exists.
+			// Return null otherwise.
+			Upvote u = SubtitleRepository.Instance.GetUpvoteByID(subtitleFileID);
 
-			var userName = User.Identity.Name;
-			if(allUpvotes.Contains(up))
+			// Retrieves the subtitle with the given ID.
+			SubtitleFile subtitle = SubtitleRepository.Instance.GetSubtitleByID(subtitleFileID);
+
+			// Removes the upvote if it exists
+			if (u != null)
 			{
-				upvRepo.RemoveUpvote(up);
+				SubtitleRepository.Instance.RemoveUpvote(u);
+				subtitle.upvote--;
+				SubtitleRepository.Instance.Save();
 			}
+			// Creates a new one otherwise.
 			else
 			{
-				upvRepo.AddUpvote(up);
+				SubtitleRepository.Instance.AddUpvote(new Upvote
+				{
+					SubtitleFileID = subtitleFileID,
+					applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name
+				});
+				subtitle.upvote++;
+				SubtitleRepository.Instance.Save();
 			}
-			 */
-			return View();
+
+			return RedirectToAction("Index");
 		}
 
         static byte[] GetBytes(string str)
@@ -434,12 +451,13 @@ namespace WikiApp.Controllers
             var subFile = (from item in repo.GetAllSubtitles()
                         where item.ID == id
                         select item).SingleOrDefault().SubtitleText;
-
+            // I find the file by Id, and use the table data from SubtitleText.
             var subName = (from item in repo.GetAllSubtitles()
                            where item.ID == id
                            select item).SingleOrDefault().name;
-
+            // I find the file name by Id.
             return File(GetBytes(subFile), System.Net.Mime.MediaTypeNames.Application.Octet, subName + ".srt");			
+            // I return the file with the filename with a .srt ending.
 		}
 }
 }
