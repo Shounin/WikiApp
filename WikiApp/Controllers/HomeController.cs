@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -188,36 +189,33 @@ namespace WikiApp.Controllers
                 return Index();
             }
         }
-
-        [HttpPost]
-        public ActionResult About(String Name, String Email, String Message)
+        [HttpGet]
+        public ActionResult About()
         {
-            try
-            {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("fromadd");
-                mail.To.Add("toadd");
-                mail.Subject = "Test Mail";
-                mail.Body = "This is for testing SMTP mail from GMAIL";
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
-                SmtpServer.EnableSsl = true;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult About(FormCollection form)
+        {
+            
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("tyding2014@gmail.com");
+            message.To.Add(new MailAddress("tyding2014@gmail.com"));
+            message.Subject = form["contactName"] + " + " + form["contactEmail"];
+            message.Body = form["contactMessage"];
 
-                SmtpServer.Send(mail);
-                return RedirectToAction("Home");
+            using (SmtpClient client = new SmtpClient())
+            {
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("tyding2014@gmail.com", "Verklegt");
+                client.Host = "smtp.gmail.com";
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                client.Send(message);
             }
-            catch (Exception ex)
-            {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("fromadd");
-                mail.To.Add("toadd");
-                mail.Subject = "Test Mail";
-                mail.Body = ex.ToString();
-
-                return RedirectToAction("Home");
-                }
+            return RedirectToAction("Index");
         }
 
 		[Authorize]
@@ -334,15 +332,13 @@ namespace WikiApp.Controllers
 
 
         }
-/*
-		[HttpPost]
-		public ActionResult Search()
-		{
-			return View();
-		}
- */ 
+           
+
+
+
 		public ActionResult Search(string searchString, string category)
 		{
+           
 			var categoryList = new List<string>();
 
 			var categoryQry = from d in repo.GetAllSubtitles()
