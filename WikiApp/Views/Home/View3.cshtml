@@ -22,12 +22,12 @@
 
         Slóð: @item.path <br />
         
-        @Html.ActionLink("Líka við", "UpvoteSubtitle", new { subtitleFileID = @item.ID }) <br />
-
-        @Html.ActionLink("Niðurhala", "Downloader", "Home", new { id = item.ID }, null)
+        <p id="downloadbutton">
+            @Html.ActionLink("Líka við", "Home", new { }) <br />
+            @Html.ActionLink("Niðurhala", "Downloader", "Home", new { id = item.ID }, null)
+        </p>
     </div>
 }
-
 
 
     <ul class="list-group" style="max-width: 560px;">
@@ -42,7 +42,6 @@
                 </p>
                 <p>
                     <span class="text-muted">@item1.commentDate.ToString("dd. MMMM HH:mm") - </span>
-                    <a class="like-comment" href="#">Like <span class="glyphicon glyphicon-thumbs-up"></span></a>
                 </p>
             </li>
         }
