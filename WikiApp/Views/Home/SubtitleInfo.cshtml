@@ -1,8 +1,60 @@
-﻿
+﻿@model WikiApp.Models.View_Models.CommentVM
+
 @{
-    ViewBag.Title = "SubtitleInfo";
+    ViewBag.Title = "Info";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SubtitleInfo</h2>
+@foreach (var item in @Model.allSubtitleFiles)
+{
+    <h2>Upplýsingar um @item.name</h2>
 
+    <div>
+        Nafn: @item.name <br />
+
+        Flokkur: @item.category <br />
+
+        Lýsing: @item.description <br />
+
+        Dagsetning: @item.dateAdded <br />
+
+        Líkar við: @item.upvote <br />
+
+        Slóð: @item.path <br />
+
+        @Html.ActionLink("Líkar við", "UpvoteSubtitle", new { subtitleFileID = @item.ID }) <br />
+
+        @Html.ActionLink("Niðurhala", "Downloader", "Home", new { id = item.ID }, null)
+    </div>
+}
+
+
+
+<ul class="list-group" style="max-width: 560px;">
+    @foreach (var item1 in @Model.allComments)
+    {
+
+        <li class="list-group-item">
+            <p>
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="text-primary">@Html.DisplayFor(modelItem => item1.username)</span>
+                <span>@Html.DisplayFor(modelItem => item1.commentText)</span>
+            </p>
+            <p>
+                <span class="text-muted">@item1.commentDate.ToString("dd. MMMM HH:mm") - </span>
+                <a class="like-comment" href="#">Like <span class="glyphicon glyphicon-thumbs-up"></span></a>
+            </p>
+        </li>
+    }
+    <li class="list-group-item">
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+                <label class="sr-only" for="CommentText">Comment</label>
+                <textarea class="form-control" rows="3" id="CommentText" name="CommentText"></textarea>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+            @Html.ValidationSummary(false)
+        }
+    </li>
+</ul>

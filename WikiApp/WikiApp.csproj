@@ -251,8 +251,8 @@
     <Content Include="Views\Home\Requests.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Downloader.cshtml" />
-    <Content Include="Views\Home\SubtitleInfo.cshtml" />
     <Content Include="Views\Home\AddRequest.cshtml" />
+    <Content Include="Views\Home\SubtitleInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
