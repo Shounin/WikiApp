@@ -31,7 +31,7 @@ namespace WikiApp.Controllers
 			categoryList.AddRange(categoryQry.Distinct());
 			ViewBag.movieGenre = new SelectList(categoryList);
 			// Drop-down data completed
-            
+            // Categorize the dota to fit the description (Top rated,Newest)
 			SubtitlesVM vm = new SubtitlesVM();
             vm.NewestMovies = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit && item.category != "Þættir"
@@ -70,7 +70,7 @@ namespace WikiApp.Controllers
 
             return View(movies);
         }
-        /// Show all the Subtitles as well as orginized ///
+        /// Show all the Subtitles as well as orginized in to alphabetical order ///
 		public ActionResult AllSubtitles() 
 		{
 			ViewBag.Message = "Listi yfir alla skjátexta.";
@@ -102,8 +102,9 @@ namespace WikiApp.Controllers
             {
                 return RedirectToAction("Index");
             }
+                //the diffrent types of intertainments
             else
-            {
+            {   
                 List<SelectListItem> subtitleCategory = new List<SelectListItem>();
                 subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
                 subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -396,25 +397,9 @@ namespace WikiApp.Controllers
 			return View("Search", allSubtitles);
 		}
 
-		public ActionResult UpvoteSubtitle(/*SubtitleFile subtitle*/ int subtitleFileID)
+		public ActionResult UpvoteSubtitle(int subtitleFileID)
 		{
 			Debug.WriteLine(subtitleFileID);
-			/*IEnumerable<Upvote> upvotes = SubtitleRepository.Instance.GetAllUpvotes();
-			Upvote up = new Upvote();
-			up.SubtitleFileID = subtitle.ID;
-			up.applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-
-			if(upvotes.Contains(up))
-			{
-				SubtitleRepository.Instance.RemoveUpvote(up);
-				subtitle.upvote--;
-			}
-			else
-			{
-				SubtitleRepository.Instance.AddUpvote(up);
-				subtitle.upvote++;
-			}*/
-
 			Upvote u = SubtitleRepository.Instance.GetUpvoteByID(subtitleFileID);
 			if (u != null)
 			{
