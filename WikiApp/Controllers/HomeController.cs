@@ -334,10 +334,10 @@ namespace WikiApp.Controllers
             return RedirectToAction("Index");
         }
 
-
+		// The search engine.
 		public ActionResult Search(string searchString, string movieGenre)
 		{
-           
+           // Makes a list of all current categories to use in the drop-down list.
 			var categoryList = new List<string>();
 
 			var categoryQry = from d in repo.GetAllSubtitles()
@@ -346,15 +346,19 @@ namespace WikiApp.Controllers
 
 			categoryList.AddRange(categoryQry.Distinct());
 			ViewBag.movieGenre = new SelectList(categoryList);
+
+			// Creates a list of all subtitles in the database.
 			var allSubtitles = from m in repo.GetAllSubtitles()
 							   where m.state == State.Edit || m.state == State.Ready
 							   select m;
 
+			// Searches by input string.
 			if (!String.IsNullOrEmpty(searchString))
 			{
 				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
-			   
+			
+			// Searches by Category/Genre.
 			if (!string.IsNullOrEmpty(movieGenre))
 		{
 				allSubtitles = allSubtitles.Where(x => x.category == movieGenre);
@@ -364,6 +368,7 @@ namespace WikiApp.Controllers
 			return View(allSubtitles); 
 	}
 
+		// Search engine for requests.  Otherwise the same as above.
 		public ActionResult RequestSearch(string searchString, string movieGenre)
 		{
 			var categoryList = new List<string>();
@@ -392,18 +397,24 @@ namespace WikiApp.Controllers
 			return View("Search", allSubtitles);
 		}
 
+		// The result of the Like-button
 		public ActionResult UpvoteSubtitle(int subtitleFileID)
 		{
-			Debug.WriteLine(subtitleFileID);
+			// Checks whether an upvote with the same username and SubtitleFile ID exists.
+			// Return null otherwise.
 			Upvote u = SubtitleRepository.Instance.GetUpvoteByID(subtitleFileID);
+
+			// Retrieves the subtitle with the given ID.
 			SubtitleFile subtitle = SubtitleRepository.Instance.GetSubtitleByID(subtitleFileID);
 
+			// Removes the upvote if it exists
 			if (u != null)
 			{
 				SubtitleRepository.Instance.RemoveUpvote(u);
 				subtitle.upvote--;
 				SubtitleRepository.Instance.Save();
 			}
+			// Creates a new one otherwise.
 			else
 			{
 				SubtitleRepository.Instance.AddUpvote(new Upvote
