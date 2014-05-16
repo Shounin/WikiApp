@@ -84,9 +84,6 @@ namespace WikiApp.Models
 			Save();
 		}
 
-
-
-
         /// Save changes to database ///
         public void Save()
         {

@@ -403,7 +403,7 @@ namespace WikiApp.Controllers
 		{
 			IEnumerable<Upvote> upvotes = SubtitleRepository.Instance.GetAllUpvotes();
 			Upvote up = new Upvote();
-			up.subtitleFileID = subtitle.ID;
+			up.SubtitleFileID = subtitle.ID;
 			up.applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
 			if(upvotes.Contains(up))
