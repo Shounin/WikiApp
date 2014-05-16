@@ -338,11 +338,6 @@ namespace WikiApp.Controllers
         }
 
 
-        }
-
-
-
-
 		public ActionResult Search(string searchString, string category)
 		{
            
