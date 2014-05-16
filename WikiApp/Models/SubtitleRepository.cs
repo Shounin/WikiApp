@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using WikiApp.DAL;
@@ -82,6 +83,14 @@ namespace WikiApp.Models
 		{
 			m_db.Upvotes.Remove(u);
 			Save();
+		}
+
+		public Upvote GetUpvoteByID(int subTitleFileID)
+		{
+			var result = (from u in m_db.Upvotes
+						  where u.SubtitleFileID == subTitleFileID
+						  select u).SingleOrDefault();
+			return result;
 		}
 
         /// Save changes to database ///

@@ -399,9 +399,10 @@ namespace WikiApp.Controllers
 			return View("Search", allSubtitles);
 		}
 
-		public ActionResult UpvoteSubtitle(SubtitleFile subtitle)
+		public ActionResult UpvoteSubtitle(/*SubtitleFile subtitle*/ int subtitleFileID)
 		{
-			IEnumerable<Upvote> upvotes = SubtitleRepository.Instance.GetAllUpvotes();
+			Debug.WriteLine(subtitleFileID);
+			/*IEnumerable<Upvote> upvotes = SubtitleRepository.Instance.GetAllUpvotes();
 			Upvote up = new Upvote();
 			up.SubtitleFileID = subtitle.ID;
 			up.applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
@@ -415,6 +416,20 @@ namespace WikiApp.Controllers
 			{
 				SubtitleRepository.Instance.AddUpvote(up);
 				subtitle.upvote++;
+			}*/
+
+			Upvote u = SubtitleRepository.Instance.GetUpvoteByID(subtitleFileID);
+			if (u != null)
+			{
+				SubtitleRepository.Instance.RemoveUpvote(u);
+			}
+			else
+			{
+				SubtitleRepository.Instance.AddUpvote(new Upvote
+				{
+					SubtitleFileID = subtitleFileID,
+					applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name
+				});
 			}
 
 			return RedirectToAction("View3");
