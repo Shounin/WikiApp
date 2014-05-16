@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -104,7 +105,7 @@ namespace WikiApp.Controllers
             }
                 //the diffrent types of intertainments
             else
-            {   
+            {
                 List<SelectListItem> subtitleCategory = new List<SelectListItem>();
                 subtitleCategory.Add(new SelectListItem { Text = "Velja tegund", Value = "" });
                 subtitleCategory.Add(new SelectListItem { Text = "Barnaefni", Value = "Barnaefni" });
@@ -191,36 +192,33 @@ namespace WikiApp.Controllers
                 return Index();
             }
         }
-
-        [HttpPost]
-        public ActionResult About(String Name, String Email, String Message)
+        [HttpGet]
+        public ActionResult About()
         {
-            try
-            {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("fromadd");
-                mail.To.Add("toadd");
-                mail.Subject = "Test Mail";
-                mail.Body = "This is for testing SMTP mail from GMAIL";
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
-                SmtpServer.EnableSsl = true;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult About(FormCollection form)
+        {
 
-                SmtpServer.Send(mail);
-                return RedirectToAction("Home");
-            }
-            catch (Exception ex)
-            {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("fromadd");
-                mail.To.Add("toadd");
-                mail.Subject = "Test Mail";
-                mail.Body = ex.ToString();
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("tyding2014@gmail.com");
+            message.To.Add(new MailAddress("tyding2014@gmail.com"));
+            message.Subject = form["contactName"] + " + " + form["contactEmail"];
+            message.Body = form["contactMessage"];
 
-                return RedirectToAction("Home");
+            using (SmtpClient client = new SmtpClient())
+            {
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("tyding2014@gmail.com", "Verklegt");
+                client.Host = "smtp.gmail.com";
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                client.Send(message);
                 }
+            return RedirectToAction("Index");
         }
 
 		[Authorize]
@@ -343,6 +341,7 @@ namespace WikiApp.Controllers
 
 		public ActionResult Search(string searchString, string category)
 		{
+           
 			var categoryList = new List<string>();
 
 			var categoryQry = from d in repo.GetAllSubtitles()
@@ -362,6 +361,7 @@ namespace WikiApp.Controllers
 			   
 			if (!string.IsNullOrEmpty(category))
 		{
+				Debug.WriteLine("Category is not null");
 				allSubtitles = allSubtitles.Where(x => x.category == category);
 		}
 
