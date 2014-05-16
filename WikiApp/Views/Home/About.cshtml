@@ -15,31 +15,26 @@
 
 <p>Sími: 555-1234</p>
 <p>Heimilisfang: Smáralundur 1</p>
-<p>Netfang: tyding@tyding.is</p>
+<p>Netfang: tyding@tyding.is</p><br />
 
+<li class="list-group-item">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <p>Nafn:</p>
+            <label class="sr-only" for="contactName">Comment</label>
+            <textarea class="form-control" rows="1" id="contactName" name="contactName"></textarea> <br />
 
-<form class="form-horizontal" role="form" method="post">
-    <div class="form-group">
+            <p>Netfang:</p>
+            <label class="sr-only" for="contactEmail">Comment</label>
+            <textarea class="form-control" rows="1" id="contactEmail" name="contactEmail"></textarea> <br />
 
-        <label for="ContactInfoName" class="col-sm-2 control-label">Nafn:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="ContactInfoName">
+            <p>Skilaboð:</p>
+            <label class="sr-only" for="contactMessage">Comment</label>
+            <textarea class="form-control" rows="8" id="contactMessage" name="contactMessage"></textarea> <br />
+
+            <button type="submit" class="btn btn-primary">Senda</button>
         </div>
-
-        <!--Flokkur-->
-        <label for="ContactInfoEmail" class="col-sm-2 control-label">Netfang:</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="ContactInfoEmail">
-        </div>
-
-        <label for="ContactInfoRequest" class="col-sm-2 control-label">Fyrirspurn</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="ContactInfoRequest">
-        </div>
-
-        <label for="ContactInfoSubmit" class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <input type="submit" value="Senda" size="25" id="ContactInfoSubmit" />
-        </div>
-    </div>
-</form>
+        @Html.ValidationSummary(false)
+    }
+</li>

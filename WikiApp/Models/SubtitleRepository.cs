@@ -75,8 +75,6 @@ namespace WikiApp.Models
 		/// Add a subtitle to database ///
 		public void AddUpvote(Upvote u)
 		{
-			Debug.WriteLine(u.SubtitleFileID);
-			Debug.WriteLine(u.applicationUserID);
 			m_db.Upvotes.Add(u);
 			Save();
 		}
