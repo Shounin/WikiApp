@@ -22,7 +22,6 @@
             //for IE
             if ($.browser.msie) {
                 //before making an object of ActiveXObject,
-                //please make sure ActiveX is enabled in your IE browser
                 var objFSO = new ActiveXObject("Scripting.FileSystemObject"); var filePath = $("#" + fileid)[0].value;
                 var objFile = objFSO.getFile(filePath);
                 var fileSize = objFile.size; //size in kb
@@ -34,11 +33,11 @@
                 fileSize = fileSize / 1048576; //size in mb
             }
 
-            // alert("Uploaded File Size is" + fileSize + "MB");
+            // Returns the size of the uploaded file.
             return fileSize;
         }
         catch (e) {
-            alert("Error is :" + e);
+            alert("Villa er :" + e);
         }
     }
 
@@ -58,9 +57,9 @@
     }
 
     $("#btnSubmit").live("click", function () {
-
+        // If file uploader is empty, returns false and cannot upload it, else returns to check if the file is valid.
         if ($('#fileToUpload').val() == "") {
-            $("#spanfile").html("Please upload file");
+            $("#spanfile").html("Vinsamlegast bættu við skrá");
             return false;
         }
         else {
@@ -69,6 +68,7 @@
     });
 
     function checkfile() {
+        // Checks if the uploaded file is of type .Srt
         var file = getNameFromPath($("#fileToUpload").val());
         if (file != null) {
             var extension = file.substr((file.lastIndexOf('.') + 1));
@@ -83,14 +83,14 @@
             }
         }
         if (flag == false) {
-            $("#spanfile").text("You can upload only srt extension file");
+            $("#spanfile").text("Þú getur eingöngu bætt við skrá með endingunni .srt");
             return false;
 
         }
         else {
             var size = GetFileSize('fileToUpload');
             if (size > 3) {
-                $("#spanfile").text("You can upload file up to 3 MB");
+                $("#spanfile").text("Þú getur bætt við skrá sem er allt 3 MB stór");
                 return false;
             }
             else {
