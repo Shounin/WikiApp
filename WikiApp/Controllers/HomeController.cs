@@ -89,10 +89,6 @@ namespace WikiApp.Controllers
             return View(vm2);
 		}
 
-
-
-
-                           
         /// Add a new SubtitleFile to the database ///
 		[Authorize]
         [HttpGet]
@@ -333,7 +329,7 @@ namespace WikiApp.Controllers
             subtitleCategory.Add(new SelectListItem { Text = "Spennumyndir", Value = "Spennumyndir" });        
             subtitleCategory.Add(new SelectListItem { Text = "Ævintýramyndir", Value = "Ævintýramyndir" });
             subtitleCategory.Add(new SelectListItem { Text = "Þættir", Value = "Þættir" });
-            
+
             ViewData["Categories"] = subtitleCategory;
             
             // The SubtitleFile data from view added to database.
@@ -348,7 +344,7 @@ namespace WikiApp.Controllers
         }
 
 
-		public ActionResult Search(string searchString, string category)
+		public ActionResult Search(string searchString, string movieGenre)
 		{
            
 			var categoryList = new List<string>();
@@ -368,17 +364,16 @@ namespace WikiApp.Controllers
 				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
 			   
-			if (!string.IsNullOrEmpty(category))
+			if (!string.IsNullOrEmpty(movieGenre))
 		{
-				Debug.WriteLine("Category is not null");
-				allSubtitles = allSubtitles.Where(x => x.category == category);
+				allSubtitles = allSubtitles.Where(x => x.category == movieGenre);
 		}
 
 
 			return View(allSubtitles); 
 	}
 
-		public ActionResult RequestSearch(string searchString, string category)
+		public ActionResult RequestSearch(string searchString, string movieGenre)
 		{
 			var categoryList = new List<string>();
 
@@ -397,9 +392,9 @@ namespace WikiApp.Controllers
 				allSubtitles = allSubtitles.Where(s => s.name.Contains(searchString));
 			}
 
-			if (!string.IsNullOrEmpty(category))
+			if (!string.IsNullOrEmpty(movieGenre))
 			{
-				allSubtitles = allSubtitles.Where(x => x.category == category);
+				allSubtitles = allSubtitles.Where(x => x.category == movieGenre);
 			}
 
 
@@ -410,9 +405,13 @@ namespace WikiApp.Controllers
 		{
 			Debug.WriteLine(subtitleFileID);
 			Upvote u = SubtitleRepository.Instance.GetUpvoteByID(subtitleFileID);
+			SubtitleFile subtitle = SubtitleRepository.Instance.GetSubtitleByID(subtitleFileID);
+
 			if (u != null)
 			{
 				SubtitleRepository.Instance.RemoveUpvote(u);
+				subtitle.upvote--;
+				SubtitleRepository.Instance.Save();
 			}
 			else
 			{
@@ -421,9 +420,11 @@ namespace WikiApp.Controllers
 					SubtitleFileID = subtitleFileID,
 					applicationUserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name
 				});
+				subtitle.upvote++;
+				SubtitleRepository.Instance.Save();
 			}
 
-			return RedirectToAction("SubtitleInfo");
+			return RedirectToAction("Index");
 		}
 
         static byte[] GetBytes(string str)
