@@ -28,6 +28,8 @@ namespace WikiApp.Models
 
         public virtual ICollection<SubtitleComment> SubtitleComments { get; set; }
 
+		public virtual ICollection<Upvote> Upvotes { get; set; }
+
 
         public SubtitleFile()
         {

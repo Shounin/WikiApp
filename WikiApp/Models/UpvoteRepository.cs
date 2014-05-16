@@ -8,7 +8,22 @@ namespace WikiApp.Models
 {
 	public class UpvoteRepository
 	{
-		SubtitleContext m_db = new SubtitleContext();
+		/*SubtitleContext m_db = new SubtitleContext();
+
+		private static UpvoteRepository instance;
+
+		public static UpvoteRepository Instance
+		{
+			get
+			{
+				if (instance == null)
+				{
+					instance = new UpvoteRepository();
+				}
+				return instance;
+			}
+		}
+
 		public IEnumerable<Upvote> GetAllUpvotes()
 		{
 			var result = (from u in m_db.Upvotes
@@ -36,5 +51,5 @@ namespace WikiApp.Models
 		{
 			m_db.SaveChanges();
 		}
-	}
+	*/}
 }

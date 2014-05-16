@@ -17,5 +17,11 @@ namespace WikiApp.Models
 
         public int SubtitleFileID { get; set; }
         public virtual SubtitleFile SubtitleFile { get; set; }
+
+        public SubtitleComment()
+        {
+            commentDate= DateTime.Now;
+            
+        }
     }
 }

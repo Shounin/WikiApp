@@ -31,26 +31,26 @@
 
 
         @foreach (var item in Model)
-        {
-            <tr>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>*@
-                <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.upvote)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dateAdded)
-                </td>
-            </tr>
-        }
+{
+    <tr class="ContentofFile">
+        @*<td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>*@
+        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.upvote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateAdded)
+        </td>
+    </tr>
+}
     </table>
 </div>
 
