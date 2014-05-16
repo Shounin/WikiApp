@@ -132,3 +132,9 @@ div.jumptron {
 #ContactInfoRequest {
     height: 10em;
 }
+
+#downloadbutton
+{
+    font-size: 20px;
+    font-weight: normal;
+}
