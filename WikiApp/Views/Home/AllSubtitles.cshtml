@@ -47,7 +47,7 @@
                 @foreach (var item in @Model.allFiles)
                 {
                     <tr class="ContentofFile">
-                        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
+                        <td>@Html.ActionLink(item.name, "SubtitleInfo", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
                         <td>@item.dateAdded</td>
@@ -70,7 +70,7 @@
                     @foreach (var item in letterGroup)
                 {
                         <tr class="ContentofFile">
-                        <td>@Html.ActionLink(item.name, "View3", new { id = item.ID })</td>
+                        <td>@Html.ActionLink(item.name, "SubtitleInfo", new { id = item.ID })</td>
                         <td>@item.upvote</td>
                         <td>@item.category</td>
                         <td>@item.dateAdded</td>

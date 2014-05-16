@@ -138,7 +138,7 @@ namespace WikiApp.Controllers
         }
 
 
-        public ActionResult View3(int? id)
+        public ActionResult SubtitleInfo(int? id)
         {
             
             CommentVM comment1 = new CommentVM();
@@ -158,7 +158,7 @@ namespace WikiApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult View3(FormCollection formData, SubtitleFile file)
+        public ActionResult SubtitleInfo(FormCollection formData, SubtitleFile file)
         {
             String strComment = formData["CommentText"];
             if (!String.IsNullOrEmpty(strComment))
@@ -183,7 +183,7 @@ namespace WikiApp.Controllers
                 {
                     c.username = "Unknown user";
                 }
-                return RedirectToAction("View3");
+                return RedirectToAction("SubtitleInfo");
             }
             else
             {
@@ -412,7 +412,7 @@ namespace WikiApp.Controllers
 				});
 			}
 
-			return RedirectToAction("View3");
+			return RedirectToAction("SubtitleInfo");
 		}
 
         static byte[] GetBytes(string str)
