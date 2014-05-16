@@ -183,14 +183,12 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CommentRepository.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\SubtitleComment.cs" />
     <Compile Include="Models\SubtitleRepository.cs" />
     <Compile Include="Models\SubtitleFile.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Upvote.cs" />
-    <Compile Include="Models\UpvoteRepository.cs" />
     <Compile Include="Models\View Models\CommentVM.cs" />
     <Compile Include="Models\View Models\SubtitlesVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -250,10 +248,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Requests.cshtml" />
-    <Content Include="Views\Home\SubtitleView.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Downloader.cshtml" />
-    <Content Include="Views\Home\View3.cshtml" />
+    <Content Include="Views\Home\SubtitleInfo.cshtml" />
     <Content Include="Views\Home\AddRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>

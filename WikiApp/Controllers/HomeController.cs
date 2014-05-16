@@ -32,7 +32,7 @@ namespace WikiApp.Controllers
 			categoryList.AddRange(categoryQry.Distinct());
 			ViewBag.movieGenre = new SelectList(categoryList);
 			// Drop-down data completed
-            
+            // Categorize the dota to fit the description (Top rated,Newest)
 			SubtitlesVM vm = new SubtitlesVM();
             vm.NewestMovies = (from item in repo.GetAllSubtitles()
                             where item.state == State.Edit && item.category != "Þættir"
@@ -71,7 +71,7 @@ namespace WikiApp.Controllers
 
             return View(movies);
         }
-        /// Show all the Subtitles as well as orginized ///
+        /// Show all the Subtitles as well as orginized in to alphabetical order ///
 		public ActionResult AllSubtitles() 
 		{
 			ViewBag.Message = "Listi yfir alla skjátexta.";
@@ -88,7 +88,7 @@ namespace WikiApp.Controllers
 
             return View(vm2);
 		}
-                   
+
         /// Add a new SubtitleFile to the database ///
 		[Authorize]
         [HttpGet]
@@ -99,6 +99,7 @@ namespace WikiApp.Controllers
             {
                 return RedirectToAction("Index");
             }
+                //the diffrent types of intertainments
             else
             {
                 List<SelectListItem> subtitleCategory = new List<SelectListItem>();
@@ -134,7 +135,7 @@ namespace WikiApp.Controllers
         }
 
 
-        public ActionResult View3(int? id)
+        public ActionResult SubtitleInfo(int? id)
         {
             
             CommentVM comment1 = new CommentVM();
@@ -154,7 +155,7 @@ namespace WikiApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult View3(FormCollection formData, SubtitleFile file)
+        public ActionResult SubtitleInfo(FormCollection formData, SubtitleFile file)
         {
             String strComment = formData["CommentText"];
             if (!String.IsNullOrEmpty(strComment))
@@ -179,7 +180,7 @@ namespace WikiApp.Controllers
                 {
                     c.username = "Unknown user";
                 }
-                return RedirectToAction("View3");
+                return RedirectToAction("SubtitleInfo");
             }
             else
             {
@@ -355,13 +356,13 @@ namespace WikiApp.Controllers
 			}
 			   
 			if (!string.IsNullOrEmpty(movieGenre))
-			{
+		{
 				allSubtitles = allSubtitles.Where(x => x.category == movieGenre);
-			}
+		}
 
 
 			return View(allSubtitles); 
-		}
+	}
 
 		public ActionResult RequestSearch(string searchString, string movieGenre)
 		{
@@ -393,6 +394,7 @@ namespace WikiApp.Controllers
 
 		public ActionResult UpvoteSubtitle(int subtitleFileID)
 		{
+			Debug.WriteLine(subtitleFileID);
 			Upvote u = SubtitleRepository.Instance.GetUpvoteByID(subtitleFileID);
 			SubtitleFile subtitle = SubtitleRepository.Instance.GetSubtitleByID(subtitleFileID);
 
